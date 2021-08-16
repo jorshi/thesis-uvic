@@ -123,36 +123,36 @@ Currently, implementations for a Multi-Layer Perceptron (\mintinline{python}{MLP
 
 To save training and validation progress, the \mintinline{python}{TFEpochLogger} class can be passed in as a callback during model training. \mintinline{python}{TFEpochLogger} stores training accuracy and loss, and validation accuracy and loss over training epochs in a dictionary object which can be plotted after training.
 
-%%Example code listing
-%\begin{figure}[t]
-%\centering
-%\caption{Example of \mintinline{python}{spiegelib} performing a sound match from a target WAV file on a VST synthesizer. A pre-trained LSTM deep learning model is used with MFCC input.}
-%\footnotesize
-%\begin{minted}{python}
-%import spiegelib as spgl
-%import spiegelib.estimator.TFEstimatorBase
-%
-%# Load VST and set parameters from JSON file
-%synth = spgl.synth.SynthVST('./Dexed.vst')
-%synth.load_state('./dexed_simple_fm.json')
-%
-%# MFCC Audio Feature Extractor
-%ftrs = spgl.features.MFCC(normalize=True)
-%
-%# Load saved normalization parameters
-%ftrs.load_normalizers('./normalizers.pkl')
-%
-%# Load LSTM model from saved model file
-%lstm = TFEstimatorBase.load('./fm_lstm.h5')
-%
-%matcher = spgl.SoundMatch(synth, lstm, ftrs)
-%
-%target = spgl.AudioBuffer('./target.wav')
-%output = matcher.match(target)
-%output.save('./lstm_predicted_audio.wav')
-%\end{minted}
-%\label{fig:lstm_code}
-%\end{figure} 
+%Example code listing
+\begin{figure}[t]
+\centering
+\caption{Example of \mintinline{python}{spiegelib} performing a sound match from a target WAV file on a VST synthesizer. A pre-trained LSTM deep learning model is used with MFCC input.}
+\footnotesize
+\begin{minted}{python}
+import spiegelib as spgl
+import spiegelib.estimator.TFEstimatorBase
+
+# Load VST and set parameters from JSON file
+synth = spgl.synth.SynthVST('./Dexed.vst')
+synth.load_state('./dexed_simple_fm.json')
+
+# MFCC Audio Feature Extractor
+ftrs = spgl.features.MFCC(normalize=True)
+
+# Load saved normalization parameters
+ftrs.load_normalizers('./normalizers.pkl')
+
+# Load LSTM model from saved model file
+lstm = TFEstimatorBase.load('./fm_lstm.h5')
+
+matcher = spgl.SoundMatch(synth, lstm, ftrs)
+
+target = spgl.AudioBuffer('./target.wav')
+output = matcher.match(target)
+output.save('./lstm_predicted_audio.wav')
+\end{minted}
+\label{fig:lstm_code}
+\end{figure} 
 
 \subsubsection{Optimization Estimators}
 Two optimization estimators are currently implemented and utilize the DEAP python library \cite{fortin2012deap}. A basic GA (\mintinline{python}{BasicGA}) is included as well as a multi-objective non-dominated sorting genetic algorithm III (\mintinline{python}{NSGA3}). Both GAs require feature extraction objects, or a list of feature extraction objects in the case of the multi-objective algorithm, which are used in the GA evaluation function. 
@@ -225,7 +225,7 @@ $NSGA III$ & \textbf{0.81} & \textbf{0.89} & \textbf{0.001} & \textbf{3.06} \\
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.98\columnwidth]{hist_group_v3.png}
+\includegraphics[width=0.75\textwidth]{hist_group_v3.png}
 \caption{Histogram shows the MAE values resulting from MFCC evaluation run on a set of 25 sound targets for all estimators. Lower MAE values indicate a closer sound match.}
 \label{fig:group_hist}
 \end{center}
@@ -233,7 +233,7 @@ $NSGA III$ & \textbf{0.81} & \textbf{0.89} & \textbf{0.001} & \textbf{3.06} \\
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=1.0\columnwidth]{spect_group_v1.png}
+\includegraphics[width=0.75\textwidth]{spect_group_v1.png}
 \caption{Spectrogram plots of a target sound and sound match predictions made by each estimator. The value next to the estimator name is the MAE value from MFCC evaluation for that prediction (lower MAE values indicate a closer match).}
 \label{fig:group_spect}
 \end{center}
