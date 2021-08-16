@@ -1,0 +1,75 @@
+
+\begin{table}[th]
+    \centering
+    \begin{tabular}{r|r|ll}
+MMD & std & corpus 1 & corpus 2 \\
+\hline
+4.396 & 0.123 & white & white \\
+21.409 & 4.729 & dx7 & dx7 \\
+23.732 & 3.615 & FSD50K & FSD50K \\
+24.130 & 5.251 & torchsynth & torchsynth \\
+27.824 & 9.821 & surge & surge \\
+2751.519 & 80.955 & torchsynth & surge \\
+2884.843 & 67.264 & surge & dx7 \\
+3001.857 & 71.888 & torchsynth & FSD50K \\
+3637.845 & 79.265 & torchsynth & dx7 \\
+4756.952 & 112.705 & surge & FSD50K \\
+7413.105 & 111.897 & dx7 & FSD50K \\
+13202.202 & 61.558 & white & FSD50K \\
+16985.319 & 92.992 & white & torchsynth \\
+18488.926 & 67.277 & white & surge \\
+20374.929 & 78.886 & white & dx7 \\
+\end{tabular}
+    \caption{MMD results comparing different audio sets, including the stddev of the MMD over the 1000 trials.}
+    \label{tbl:corpora-mmd}
+\end{table}
+
+\iffalse
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{r|r|ll}
+MMD & std & corpus 1 & corpus 2 \\
+\hline
+75.631 & 1.032 & white & white \\
+242.773 & 53.653 & dx7 & dx7 \\
+270.787 & 37.008 & FSD50K & FSD50K \\
+279.554 & 85.973 & surge & surge \\
+285.322 & 64.507 & torchsynth & torchsynth \\
+18935.366 & 498.315 & torchsynth & surge \\
+23621.233 & 643.370 & surge & dx7 \\
+27763.655 & 699.799 & torchsynth & dx7 \\
+32907.268 & 875.941 & torchsynth & FSD50K \\
+37907.643 & 891.741 & surge & FSD50K \\
+68831.634 & 1071.538 & dx7 & FSD50K \\
+134643.313 & 988.875 & white & FSD50K \\
+189336.626 & 1406.814 & white & torchsynth \\
+190260.499 & 945.127 & white & surge \\
+234607.035 & 1155.182 & white & dx7 \\
+\end{tabular}
+    \caption{env mel256 6144}
+    \label{tbl:corpora-mmd2}
+\end{table}
+\fi
+
+
+\iffalse
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{r|ll}
+MMD & corpus 1 & corpus 2 \\
+\hline
+4.477 & white & white \\
+17.607 & DX7 & DX7 \\
+18.229 & Surge & Surge \\
+26.438 & FSD50K & FSD50K \\
+2847.637 & Surge & DX7 \\
+4692.223 & Surge & FSD50K \\
+7303.703 & DX7 & FSD50K \\
+13257.964 & white & FSD50K \\
+18540.486 & white & Surge \\
+20266.055 & white & DX7 \\
+\end{tabular}
+    \caption{MMD results comparing different audio sets.}
+    \label{tbl:corpora-mmd}
+\end{table}
+\fi
