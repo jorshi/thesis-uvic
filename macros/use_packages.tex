@@ -20,6 +20,30 @@
 
 % Additional required
 \usepackage{url}
+\usepackage{hyperref}           % clickable references and URLs
 \usepackage{threeparttable}
-\usepackage{minted}
 \usepackage{booktabs}
+
+% Setup for code listings
+\usepackage{minted}
+\usepackage{xcolor}
+
+\definecolor{bg_minted}{rgb}{0.95,0.95,0.95}
+\definecolor{bg_inline}{rgb}{1.0,1.0,1.0}
+\setminted[python]{xleftmargin=2pt, linenos, tabsize=4}
+\setmintedinline[python]{bgcolor={}}
+
+% Framing around code blocks
+\usepackage{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=black,
+    outerlinewidth=2pt,
+    innertopmargin=6pt,
+    innerbottommargin=6pt,
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    backgroundcolor=bg_minted,
+    leftline=false,
+    rightline=false
+}
+\surroundwithmdframed[style=MyFrame]{minted}
