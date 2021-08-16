@@ -1,0 +1,1 @@
+check.double.delete = on
