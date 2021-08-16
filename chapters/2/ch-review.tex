@@ -1,0 +1,142 @@
+\chapter{Related Work}
+
+\section{Creativity Support Tools}
+Theory of cognitive support from my final project in Sowmya's class
+
+\section{Timbre Search}
+
+\section{Intelligent Music Production}
+
+
+\section{Synthesizer Programming}
+Pull text from SpiegeLib here.
+
+
+\begin{itemize}
+	\item \cite{zloof1977query} Early example of querying sounds (need to read)
+	\item \cite{justice1979analytic} Coarse parameter matching by analyzing input audio - goal was to get in the ballpark and allow for parameter tweaking afterwards. FM (Single carrier with nested modulators). Hilbert Transform. Objective evaluation.
+	\item \cite{wessel1979timbre} Not specifically for synthesis methods but classic paper. This should come much earlier in this section.
+	\item \cite{beauchamp1982synthesis} Matching of alto sax/cornet sounds using an analytic method for FM synthesis. Looked at spectral centroid and RMS. Objective evaluation.
+	\item \cite{ashley1986knowledge} A knowledge-based approach to assistance in timbral design (need to read still)
+	\item \cite{payne1987microcomputer} Hilbert Transform (time domain). Also introduced FFT version with autocorrelation on spectrum. Periodic sampled sounds, FM DX7, objective evaluation.
+	\item \cite{delprat1990parameter} Parameter estimation for non-linear resynthesis methods with the help of a time-frequency analysis of natural sounds.
+	\item \cite{horner1993machine} Genetic algorithms for inverse synthesis of instrumental sounds on FM synthesis engine.
+	\item \cite{horner1993methods} Wavetable
+	\item \cite{vuori1993parameter} Parameter estimation of non-linear physical models by simulated evolution-application to the flute model
+	\item \cite{takala1993using} Using Physically-Based Models and Genetic Algorithms for Functional Composition of Sound Signals
+	\item \cite{fujinaga1994genetic} Genetic algorithms as a method for granular synthesis regulation
+	\item \cite{ethington1994seawave} Semantic search -- this is an good one, as far as I can tell so far this is the first semantic search for synthesizer sounds.
+	\item \cite{miranda1995artificial} An artificial intelligence approach to sound design
+	\item \cite{horner1995wavetable} Updated version of wavetable matching. Used multiple pitches of instrumental tones and a genetic algorithm.
+	\item \cite{horner1995envelope} Envelope matching with genetic algorithms
+	\item \cite{horner1996computation} Computation and memory tradeoffs with multiple wavetable interpolation
+	\item \cite{horner1996piecewise} Piecewise-linear approximation of additive synthesis envelopes: a comparison of various methods
+	\item \cite{cheung1996group} Group synthesis (wavetable) with genetic algorithms
+	\item \cite{horner1996double} Double-modulator FM matching of instrument tones
+\end{itemize}
+
+\section{Automatic Synthesizer Programming}
+Automatic synthesizer programming can be viewed as a retrieval task as well as an optimization problem. Viewed as a retrieval task, the problem is similar to the MIR query tasks such as Query-by-example \cite{zloof1977query}, Query-by-vocal-imitation \cite{blancas2014sound}, and query-by-beat-boxing \cite{kapur2004query}. Query problems generally build up a model of the synthesis parameter space and then return a parameter setting based on a classification that attempts to match the input with the best parameter setting. The optimization approach is similar to the retrieval task in that the goal of the system is to return a synthesizer parameter setting that represents the input query as closely as possible. In contrast to the retrieval approach, instead of modelling the synthesizer parameter space, optimization algorithms will incrementally and automatically "turn the knobs" on a given synthesizer until an appropriate setting has been found. Genetic algorithms have been found to be particularly useful in this field and have been used in many studies. Other approaches such as Particle Swarm Optimization and Evaluation Strategies have also been implemented. 
+
+ Most studies have focussed on the sound matching programming task, in which an example sound is provided to the system with the goal of reproducing that sound on the target synthesizer. Others have focussed on using a semantic description of the goal sound as input to the programming interface. It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches.
+
+\subsection{Synthesis Type}
+An overview of synthesis type that was the focus of automatic synthesizer programming studies.
+
+\subsubsection{FM}
+\cite{justice1979analytic}\cite{beauchamp1982synthesis}\cite{payne1987microcomputer}\cite{horner1993machine}\cite{horner1996double}\cite{tan1996automated}\cite{delprat1997global}\cite{lim1999performance}\cite{tan2003automated}
+\cite{mitchell2005frequency}\cite{mitchell2007evolutionary}\cite{clement2011automatic}\cite{roth2011comparison}\cite{macret2012automatic}\cite{hamadicharef2012intelligent}\cite{barkan2019deep}
+
+\subsubsection{Non-linear}
+\cite{beauchamp1982synthesis}\cite{delprat1990parameter}
+
+\subsubsection{Wavetable / Group Synthesis}
+\cite{horner1993methods}\cite{horner1995wavetable}\cite{horner1995envelope}\cite{horner1996computation}\cite{horner1996piecewise}\cite{cheung1996group}\cite{oates1997analytical}\cite{horner1998modeling}\cite{lee1999modeling}\cite{so2002wavetable}
+
+\subsubsection{Physical Modelling}
+\cite{vuori1993parameter}\cite{erkut2000extraction}\cite{liang2000recurrent}\cite{nackaerts2001parameter}\cite{riionheimo2003parameter}
+
+\subsubsection{Granular}
+\cite{fujinaga1994genetic}\cite{johnson1999exploring}
+
+\subsubsection{Additive}
+\cite{ethington1994seawave}\cite{horner1995envelope}\cite{horner1996piecewise}\cite{johnson2006timbre}\cite{mintz2007toward}
+
+\subsubsection{Subtractive}
+\cite{roth2011comparison}
+
+\subsubsection{Generic VST}
+\cite{yee2008synthbot}\cite{heise2009automatic}
+
+\subsubsection{Other}
+Noise-band \cite{chinen2007genesynth}
+Concatenative \cite{stowell2010making}
+Teenage Engineering OP-1 (Multiple Synthesis Engines) \cite{macret2013automatic}
+
+\subsection{Estimation Method}
+An overview of the method used to select a synthesizer parameter setting based on input.
+
+\subsubsection{Analytic / Signal Processing}
+\cite{justice1979analytic}\cite{beauchamp1982synthesis}\cite{payne1987microcomputer}\cite{ethington1994seawave}
+
+\subsubsection{Genetic}
+\cite{horner1993machine}\cite{fujinaga1994genetic}\cite{horner1995envelope}\cite{horner1995wavetable}\cite{riionheimo2003parameter}\cite{mandelis2003musical}\cite{mitchell2005frequency}\cite{mitchell2007evolutionary}
+\cite{chinen2007genesynth}\cite{yee2008synthbot}\cite{roth2011comparison}\cite{macret2012automatic}\cite{hamadicharef2012intelligent}\cite{macret2013automatic}
+
+\subsubsection{Interactive Genetic}
+\cite{johnson1999exploring}
+
+\subsubsection{Neural Network}
+\cite{johnson2006timbre}\cite{roth2011comparison}\cite{zhang2018visualization}\cite{barkan2019deep}
+
+\subsubsection{Data-driven}
+\cite{roth2011comparison}\cite{mcartwright2014}
+
+\subsubsection{Other}
+Linear coding \cite{mintz2007toward}
+Particle Swarm Optimization \cite{heise2009automatic}\cite{munoz2011opposition}
+Regression Tree \cite{stowell2010making}
+Semantic Clustering \cite{clement2011automatic}
+Hill-Climber \cite{roth2011comparison}
+
+\subsection{Unsorted}
+These references have not been reviewed or sorted yet!
+
+\cite{takala1993using}
+\cite{hourdin1997sound}
+\cite{horner1998nested}
+\cite{wehn1998using}
+\cite{garcia2001automatic}
+\cite{dahlstedt2001creating}
+\cite{garcia2001growing}
+\cite{jehan2001perceptual}
+\cite{su2002class}
+\cite{le2002neural}
+\cite{arfib2002strategies}
+\cite{miranda2004crossroads}
+\cite{schatter2005synaesthetic}
+\cite{gounaropoulos2006synthesising}
+\cite{lai2006automated}
+\cite{mcdermott2007evolutionary}
+\cite{yee2007automated}
+\cite{yee2007evolving}
+\cite{howard2007timbral}
+\cite{mcdermott2008evolutionary}
+\cite{yee2011automatic}
+\cite{mitchell2012automated}
+\cite{povscic2013controlling}
+\cite{seago2013new}
+\cite{krekovic2014intelligent}
+\cite{macret2014automatic}
+\cite{itoyama2014parameter}
+\cite{huang2014active}
+\cite{fasciani2016tsam}
+\cite{krekovic2016algorithm}
+\cite{tatar2016automatic}
+\cite{yee2016use}
+\cite{smith2017play}
+\cite{yee2018automatic}
+\cite{luke2019stochastic}
+
+\subsection{Tools}
+jvsthost\footnote{\url{https://github.com/mhroth/jvsthost}}

@@ -1,0 +1,41 @@
+\chapter{Introduction}
+
+My main statement about the introduction is:
+\textit{"keep it short and write it last".} The main features should be as follows:
+\begin{enumerate}
+\item {3-4 pages at most;}
+\item {Start with a VERY short statement of the problem (2-3 sentences) - the problem should be stated, not described, as there will be a whole chapter for that;}
+\item {State why the problem is important, its impact, how well it has been studied recently, its application (3 sentences) - this should be again a brief motivation, leaving a full impact description to later in the document;}
+\item {Give a sketch of the new approach - there will be a whole chapter with all the details, now just impress the reader about what is the new approach, just as you would do if your boss asked you at work during an elevator ride;}
+\item {Sketch the main new ideas of the new approach - again briefly, just get the reader interested;}
+\item {Give a short statement regarding the results, nothing too elaborate, but certainly you should blow your horn and make sure that the reader is intrigued;}
+\item {Interspersed in all the writing above do not forget the marketing angle, trying to suggest forcefully why the reader should keep reading;}
+\item {Give an outline of what is to come in the organization of the thesis overall - you will find one below for this document.}
+
+\end{enumerate}
+
+Finally the strong suggestion is write the introduction chapter last. It will be faster, you will know what to say as the rest is already there, and the abstract, introduction and conclusion will be a mirror and complement of each other. You may well ask where to start writing your thesis. My view is included in the organization below.
+
+
+Automated methods for music production -- why do we need it? The main thread here is looking at methods for exploring sound spaces. How can we improve this approach? Potentially need a bit on timbre -- the timbre space article could be really good.
+
+General introduction. Distinction between creative mir, intelligent music production, automatic synthesizer programming.
+
+Democratization of sound \cite{tavana2015democracy}
+
+Moffat and Sandler examine approaches to intelligent music production \cite{moffat2019approaches}.
+
+\cite{krekovic2019insights} user study examined synthesizer user habits and pointing to need for further work in automatic synthesizer programming
+
+\section{Automating Synthesizers}
+Introduce automatic synthesizer programming. Tie it to intelligent music production \cite{moffat2019approaches} \cite{de2017ten} and creative MIR \cite{humphrey2013brief}.
+
+\subsection{History}
+DX7 plays an important role here - made synthesizers more widely available but programming them was notoriously difficult. 9 out of 10 DX7s that went in for service had factory presets intact (Reference needed). Almost immediately researchers became interested in learning how to estimate synthesizer presets for FM algorithms which spread into non-linear synthesis methods, then wavetable synthesis, then physical modelling, granular, additive. (References needed for synthesis types). 
+
+Justice 1979 \cite{justice1979analytic}  - Automatic FM matching. Early example of looking try to find a coarse match of FM generated tone to the parameters (ie examples were FM generated). Beauchamp 1982 \cite{beauchamp1982synthesis} - Frequency domain matching of FM tones. Included in a larger study involving spectral centroid matching in nonlinear synthesis. Early automatic spectral match. Also looked at non-linear and filter model. Found that non-linear/filter model worked better. Payne 1987 \cite{payne1987microcomputer} Looked at automatic FM tone matching to the acoustic sounds - using DX7 and hilbert transform as well. Delprat et al. 1990 \cite{delprat1990parameter} using wavelets for non-linear synthesis parameter estimation. Horner at al. early example of automatic synthesizer preset generation in 1993 \cite{horner1993machine}. Attempted to match FM parameters with a harmonic signal using a genetic algorithm. Horner et al. then applied denetic algorithm applied to wavetable synthesis \cite{horner1993methods}. Vouri and V{\"a}lim{\"a}ki on parameter estimation for physical modelling of flute tones \cite{vuori1993parameter}. Fujinaga and Vantomme 1994 Genetic Algorithms applied to granular synthesis \cite{fujinaga1994genetic}. SeaWave by Ethington and Punch, a synthesizer that can be controlled using vocabulary. Has a pre-defined set of descriptors \cite{ethington1994seawave}. Miranda 1995 paper proposing a system utilizing AI to automatically program a generic synth using vocabulary \cite{miranda1995artificial}. Horner 2003 paper reviews FM and wavetable synthesis as well as approaches to automatic parameter matching \cite{horner2003auto}.
+
+
+\section{User Interface Design}
+\subsection{Synthesizer Programming}
+Seago identified disconnect between the language of users and the language used in synthesizer interfaces \cite{seago2004critical}. Recent work focussed on synthesizer UIs \cite{rasmussen2018evaluating}. Krekovic in a 2019 study of 112 synthesizer users, reported most participants reported feeling like the process of modifying or creating new synthesizer patches was a challenging process and not intuitive \cite{krekovic2019insights}. A majority of users' felt like more intuitive interfaces was the area that would be most beneficial in helping them during the process of programming a synth. Users also felt that sound matching would be helpful. Krekovic identifies that relatively little research has been completed in the area of synthesizer user interfaces. This is reflective of recent research focussed on human computer interface and ui design for music applications \cite{pardo2019learning}\cite{knees2019intelligent}.
