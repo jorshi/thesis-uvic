@@ -1,0 +1,178 @@
+\startappendix{GAN Architecture Details}
+
+In Tables \ref{wavegan_gen} and \ref{wavegan_gen_resize} we present our architectures for the Transpose Convolution and Resize-based 1-dimensional generators. In Table \ref{wavegan_disc} we present our architecture for the 1-dimensional discriminator. In Tables \ref{melgan_gen} and \ref{melgan_disc} we present the architectures for the MelGAN generator and discriminator. In Table \ref{param_table} we present parameters relevant to both GANs.
+
+Layers with a (*) refer to `optional' layers which we experimented with keeping or removing. The batch size is referred to as $n$ and $k$ is the kernel size, which is either 5, 15, or 25.
+
+\begin{table}[H]
+\caption{Transpose Convolution Waveform Generator}\label{wavegan_gen}
+\centering
+\begin{tabular}{l|l|l}
+Operation & Kernel Size & Output Shape \\ \hline
+Input $\sim$ Uniform(-1,1) & \  & (n,100)\\
+Dense 1 & (100,16384) & (n,16384)\\
+Reshape & \ & (n,16,1024)\\
+Leaky ReLU & \ & (n,16,1024)\\
+(*) Dropout (50\%) & \ & (n,16,1024)\\
+Trans Conv1D (Stride=4) & (25,1024,512) & (n,64,512)\\
+Leaky ReLU & \  & (n,64,512)\\
+(*) Dropout (50\%) & \  & (n,64,512)\\
+Trans Conv1D (Stride=4) & (25,512,256) & (n,256,256)\\
+Leaky ReLU & \  & (n,256,256)\\
+(*) Dropout (50\%) & \  & (n,256,256)\\
+Trans Conv1D (Stride=4) & (25,256,128) & (n,1024,128)\\
+Leaky ReLU & \  & (n,1024,128)\\
+(*) Dropout (50\%) & \  & (n,1024,128)\\
+Trans Conv1D (Stride=4) & (25,128,64) & (n,4096,64)\\
+Leaky ReLU & \  & (n,4096,64)\\
+(*) Dropout (50\%) & \  & (n,4096,64)\\
+Trans Conv1D (Stride=4) & (25,64,1) & (n,16384,1)\\
+Tanh & \  & (n,16384,1)\\
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{Resize Convolution Waveform Generator}\label{wavegan_gen_resize}
+\centering
+\begin{tabular}{l|l|l}
+Operation & Kernel Size & Output Shape \\ \hline
+Input $\sim$ Uniform(-1,1) & \  & (n,100)\\
+Dense 1 & (100,16384) & (n,16384)\\
+Reshape & \ & (n,16,1024)\\
+Leaky ReLU & \ & (n,16,1024)\\
+(*) Dropout (50\%) & \ & (n,16,1024)\\
+Resize (Factor=4) & \ & (n,64,1024)\\
+Conv1D (Stride=1) & (25,1024,512) & (n,64,512)\\
+Leaky ReLU & \  & (n,64,512)\\
+(*) Dropout (50\%) & \  & (n,64,512)\\
+Resize (Factor=4) & \ & (n,256,512)\\
+Conv1D (Stride=1) & (25,512,256) & (n,256,256)\\
+Leaky ReLU & \  & (n,256,256)\\
+(*) Dropout (50\%) & \  & (n,256,256)\\
+Resize (Factor=4) & \ & (n,1024,256)\\
+Conv1D (Stride=1) & (25,256,128) & (n,1024,128)\\
+Leaky ReLU & \  & (n,1024,128)\\
+(*) Dropout (50\%) & \  & (n,1024,128)\\
+Resize (Factor=4) & \ & (n,4096,128)\\
+Conv1D (Stride=1) & (25,128,64) & (n,4096,64)\\
+Leaky ReLU & \  & (n,4096,64)\\
+(*) Dropout (50\%) & \  & (n,4096,64)\\
+Resize (Factor=4) & \ & (n,16384,64)\\
+Conv1D (Stride=1) & (25,64,1) & (n,16384,1)\\
+Tanh & \  & (n,16384,1)\\
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Waveform Discriminator}\label{wavegan_disc}
+\centering
+\begin{tabular}{l|l|l}
+Operation & Kernel Size & Output Shape \\ \hline
+Input $\boldsymbol{x}$ or $G(\boldsymbol z)$ & \  & (n,16384,1)\\
+Conv1D (Stride=4) & (k,1,64) & (n,4096,64)\\
+Leaky ReLU & \ & (n,4096,64) \\
+Dropout (30\%) & \ & (n,4096,64)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,4096,64)\\
+Conv1D (Stride=4) & (k,64,128) & (n,1024,128)\\
+Leaky ReLU & \ & (n,1024,128) \\
+Dropout (30\%) & \ & (n,1024,128)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,1024,128)\\
+Conv1D (Stride=4) & (k,128,256) & (n,256,256)\\
+Leaky ReLU & \ & (n,256,256) \\
+Dropout (30\%) & \ & (n,256,256)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,256,256)\\
+Conv1D (Stride=4) & (k,256,512) & (n,64,512)\\
+Leaky ReLU & \ & (n,64,512) \\
+Dropout (30\%) & \ & (n,64,512)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,64,512)\\
+Conv1D (Stride=4) & (k,512,1024) & (n,16,1024)\\
+Leaky ReLU & \ & (n,16,1024) \\
+Dropout (30\%) & \ & (n,16,1024)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,16,1024)\\
+Reshape &\ & (n,16384)\\
+Dense &\ (16384,1) & (n,1)
+\end{tabular}
+\end{table}
+
+
+
+
+
+\begin{table}[H]
+\caption{Resize Convolution MelGAN Generator}\label{melgan_gen}
+\centering
+\begin{tabular}{l|l|l}
+Operation & Kernel Size & Output Shape \\ \hline
+Input $\sim$ Uniform(-1,1) & \  & (n,100)\\
+Dense 1 & (100,16384) & (n,16384)\\
+Reshape & \ & (n,4,4,1024)\\
+Leaky ReLU & \ & (n,4,4,1024)\\
+(*) Dropout (50\%) & \ & (n,4,4,1024)\\
+Resize (Factor=2) & \ & (n,8,8,1024)\\
+Conv2D (Stride=1) & (5,5,1024,512) & (n,8,8,512)\\
+Leaky ReLU & \  & (n,8,8,512)\\
+(*) Dropout (50\%) & \  & (n,8,8,512)\\
+Resize (Factor=2) & \ & (n,16,16,512)\\
+Conv2D (Stride=1) & (5,5,512,256) & (n,16,16,256)\\
+Leaky ReLU & \  & (n,16,16,256)\\
+(*) Dropout (50\%) & \  & (n,16,16,256)\\
+Resize (Factor=2) & \ & (n,32,32,256)\\
+Conv2D (Stride=1) & (25,25,256,128) & (n,32,32,128)\\
+Leaky ReLU & \  & (n,32,32,128)\\
+(*) Dropout (50\%) & \  & (n,32,32,128)\\
+Resize (Factor=2) & \ & (n,64,64,128)\\
+Conv2D (Stride=1) & (5,5,128,64) & (n,64,64,64)\\
+Leaky ReLU & \  & (n,64,64,64)\\
+(*) Dropout (50\%) & \  & (n,64,64,64)\\
+Resize (Factor=2) & \ & (n,128,128,64)\\
+Conv2D (Stride=1) & (5,5,64,1) & (n,128,128,1)\\
+Tanh & \  & (n,128,128,1)\\
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\caption{MelGAN Discriminator}\label{melgan_disc}
+\centering
+\begin{tabular}{l|l|l}
+Operation & Kernel Size & Output Shape \\ \hline
+Input $\boldsymbol{x}$ or $G(\boldsymbol z)$ & \  & (n,128,128,1)\\
+Conv2D (Stride=2) & (5,5,1,64) & (n,64,64,64)\\
+Leaky ReLU & \ & (n,64,64,64) \\
+Dropout (30\%) & \ & (n,64,64,64)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,64,64,64)\\
+Conv2D (Stride=2) & (5,5,64,128) & (n,1024,128)\\
+Leaky ReLU & \ & (n,32,32,128) \\
+Dropout (30\%) & \ & (n,32,32,128)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,32,32,128)\\
+Conv2D (Stride=2) & (5,5,128,256) & (n,16,16,256)\\
+Leaky ReLU & \ & (n,16,16,256) \\
+Dropout (30\%) & \ & (n,16,16,256)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,16,16,256)\\
+Conv2D (Stride=2) & (5,5,256,512) & (n,8,8,512)\\
+Leaky ReLU & \ & (n,8,8,512) \\
+Dropout (30\%) & \ & (n,64,512)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,64,512)\\
+Conv2D (Stride=2) & (5,5,512,1024) & (n,4,4,1024)\\
+Leaky ReLU & \ & (n,4,4,1024) \\
+Dropout (30\%) & \ & (n,4,4,1024)\\
+(*) Phase Shuffle ($N$=2) & \ & (n,4,4,1024)\\
+Reshape &\ & (n,16384)\\
+Dense &\ (16384,1) & (n,1)
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Parameters}\label{param_table}
+\centering
+\begin{tabular}{l|l}
+Name & Value \\ \hline
+Input data type & 16-bit PCM (requantized to 32-bit float)\\
+Model data type & 32-bit floating point\\
+Batch size & 64, 32\\
+Loss & WGAN-GP \cite{gulrajani2017improved}\\
+WGAN-GP $\lambda$ & 10\\
+D updates per G update & 4\\
+Optimizer & Adam ($\alpha$= 1e--4, $\beta_1$= 0.9, $\beta_2$= 0.999)
+\end{tabular}
+\end{table}
