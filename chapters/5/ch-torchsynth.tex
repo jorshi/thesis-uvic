@@ -1,4 +1,4 @@
-\graphicspath{{./}{./figures/}{./figures/6/}}
+\graphicspath{{./}{./figures/}{./figures/torchsynth/}}
 
 \chapter{GPU Enabled Synthesis}
 
@@ -208,7 +208,7 @@ Auditory distances typically involve computing some multidimensional representat
 To perform a controlled evaluation of auditory distances, we devised two experiments using two new datasets.
 Sounds in each dataset are RMS-level normalized using the \href{https://github.com/kklobe/normalize}{normalize} package.
 
-\input{tables/6/representation-table}
+\input{tables/torchsynth/representation-table}
 
 \subsection{DX7 Timbre Dataset}
 \label{sec:dx7}
@@ -291,7 +291,7 @@ MMD allows us to use our chosen distance measure---OpenL3 (music, mel256, 512) $
 \fi
 
 % We should re-run this with the new noise setting
-\input{tables/6/mmd-table}
+\input{tables/torchsynth/mmd-table}
 
 For Surge and DX7, we selected sounds with midi pitch 69 and velocity 64. We also generated a set of 4-second samples of white-noise, and used excerpts from the FSD50K evaluation set \cite{fonseca2020fsd50k}, which is broad-domain audio, trimmed to 4 seconds. From each corpus, we randomly sampled 2000 sounds, to match the size of the smallest corpus (Surge). We performed 1000 MMD trials, each time comparing $n=1000$ sounds from one corpus to $n=1000$ sounds from another,  randomly sampled each trial. To estimate the diversity within a particular corpus, we evaluated MMD over 1000 distinct 50/50 partitions of the corpus.
 
