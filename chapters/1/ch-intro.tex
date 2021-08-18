@@ -1,21 +1,34 @@
 \startfirstchapter{Introduction}
-\label{chapter:introduction}
 
-My main statement about the introduction is:
-\textit{"keep it short and write it last".} The main features should be as follows:
 \begin{enumerate}
-\item {3-4 pages at most;}
-\item {Start with a VERY short statement of the problem (2-3 sentences) - the problem should be stated, not described, as there will be a whole chapter for that;}
-\item {State why the problem is important, its impact, how well it has been studied recently, its application (3 sentences) - this should be again a brief motivation, leaving a full impact description to later in the document;}
-\item {Give a sketch of the new approach - there will be a whole chapter with all the details, now just impress the reader about what is the new approach, just as you would do if your boss asked you at work during an elevator ride;}
-\item {Sketch the main new ideas of the new approach - again briefly, just get the reader interested;}
-\item {Give a short statement regarding the results, nothing too elaborate, but certainly you should blow your horn and make sure that the reader is intrigued;}
-\item {Interspersed in all the writing above do not forget the marketing angle, trying to suggest forcefully why the reader should keep reading;}
-\item {Give an outline of what is to come in the organization of the thesis overall - you will find one below for this document.}
-
+    \item Introduction to the problem of programming synthesizers
+    \item overview of some of the various techniques that have been taken. Break the problem down into a couple of different components: the backend problem and the frontend. A lot of resources have been placed in the backend and deep learning / neural networks have played a large role in this.
+    \item We look at a couple different approaches to the backend problem: inverse synthesis, neural synthesis (what does wavenet do?)
+    \item Introduce DDSP and present torchsynth, a synthesizer built to support future machine learning work in this area.
+    \item Inverse synthesizer experiment using torchsynth -> Even if it is just a genetic algorithm or something like that. Is there a way to explore the GAN approach for this too?
+    \item Single knob attachment to torchsynth? UMAP style?
+    \item Sound exploration interface for torchsynth (or any other synthesizer really)
+    \item Conclusion (what have we learned from this? What are the next steps)
+    
 \end{enumerate}
 
-Finally the strong suggestion is write the introduction chapter last. It will be faster, you will know what to say as the rest is already there, and the abstract, introduction and conclusion will be a mirror and complement of each other. You may well ask where to start writing your thesis. My view is included in the organization below.
+\label{chapter:introduction}
+
+% My main statement about the introduction is:
+% \textit{"keep it short and write it last".} The main features should be as follows:
+% \begin{enumerate}
+% \item {3-4 pages at most;}
+% \item {Start with a VERY short statement of the problem (2-3 sentences) - the problem should be stated, not described, as there will be a whole chapter for that;}
+% \item {State why the problem is important, its impact, how well it has been studied recently, its application (3 sentences) - this should be again a brief motivation, leaving a full impact description to later in the document;}
+% \item {Give a sketch of the new approach - there will be a whole chapter with all the details, now just impress the reader about what is the new approach, just as you would do if your boss asked you at work during an elevator ride;}
+% \item {Sketch the main new ideas of the new approach - again briefly, just get the reader interested;}
+% \item {Give a short statement regarding the results, nothing too elaborate, but certainly you should blow your horn and make sure that the reader is intrigued;}
+% \item {Interspersed in all the writing above do not forget the marketing angle, trying to suggest forcefully why the reader should keep reading;}
+% \item {Give an outline of what is to come in the organization of the thesis overall - you will find one below for this document.}
+
+% \end{enumerate}
+
+% Finally the strong suggestion is write the introduction chapter last. It will be faster, you will know what to say as the rest is already there, and the abstract, introduction and conclusion will be a mirror and complement of each other. You may well ask where to start writing your thesis. My view is included in the organization below.
 
 
 Automated methods for music production -- why do we need it? The main thread here is looking at methods for exploring sound spaces. How can we improve this approach? Potentially need a bit on timbre -- the timbre space article could be really good.
