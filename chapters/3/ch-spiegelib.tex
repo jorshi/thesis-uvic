@@ -1,123 +1,101 @@
 \graphicspath{{./}{./figures/}{./figures/spiegelib/}}
 
+% \section{Goals}
+% \begin{enumerate}
+%     \item Main contributions: spiegelib software, initial experiments using Dexed.
+%     \item Goal is to explore some of the main recent approaches to inverse synthesis and compare them in the task of finding parameters to match a target sound
+%     \item Expand on the experimental research -- provide a bit more background on the specific methods that we are trying to emulate. Specifically: the genetic algorithm approaches and the deep learning approaches.
+%     \item Identify some of the challenges faced with this approach: rendering from VSTs is slow. Recent techniques SPSA could allow for VSTs to be inserted directly into the pipeline. Leads us to an area for future work: torchsynth
+% \end{enumerate}
+
+% Will have given a bit of a history by this point in the background -- something similar to Brecht's paper, but for automatic synthesizer programming. Here we want to focus on the main techniques that we want to use.
+
+% \section{Plan}
+% \begin{enumerate}
+%     \item This chapter explores the inverse synthesis problem. This is based on work I completed under the supervision of my supervisors and was published at AES ...
+%     \item Contributes SpiegeLib software and demonstrates the steps of conducting an inverse synthesis experiment through some experiments.
+%     \item Software in Inverse Synthesis -- overview the available software. Give some motivation based on reproducible research. Maybe add a figure that outlines the experimental process and how each of the library components fit together to help with this.
+%     \item SpiegeLib
+%     \item Experiment -- Go into more detail on the specific algorithms and methods that are being used here. Can give some code detail as well if that would be helpful.
+%     \item Evaluation -- How are the results evaluated and list the results
+%     \item Conclusion
+% \end{enumerate}
+
 \chapter{Inverse Synthesis}
+\label{chapter:inverse_synth}
 
-\section{Goals}
-\begin{enumerate}
-    \item Main contributions: spiegelib software, initial experiments using Dexed.
-    \item Goal is to explore some of the main recent approaches to inverse synthesis and compare them in the task of finding parameters to match a target sound
-    \item Expand on the experimental research -- provide a bit more background on the specific methods that we are trying to emulate. Specifically: the genetic algorithm approaches and the deep learning approaches.
-    \item Identify some of the challenges faced with this approach: rendering from VSTs is slow. Recent techniques SPSA could allow for VSTs to be inserted directly into the pipeline. Leads us to an area for future work: torchsynth
-\end{enumerate}
+% Can maybe split this out into two chapters? Maybe SpiegeLib should be it's own chapter? Then experiments can be another separate chapter?
 
-Will have given a bit of a history by this point in the background -- something similar to Brecht's paper, but for automatic synthesizer programming. Here we want to focus on the main techniques that we want to use.
+This chapter explores the inverse synthesis problem and is based on work I completed under the supervision of my supervisors and was published at the 148th Audio Engineering Society (AES) Convention in 2020 \cite{shier2020spiegelib}.
 
-\section{Plan}
-\begin{enumerate}
-    \item This chapter explores the inverse synthesis problem. This is based on work I completed under the supervision of my supervisors and was published at AES ...
-    \item Contributes SpiegeLib software and demonstrates the steps of conducting an inverse synthesis experiment through some experiments.
-    \item Software in Inverse Synthesis -- overview the available software. Give some motivation based on reproducible research. Maybe add a figure that outlines the experimental process and how each of the library components fit together to help with this.
-    \item SpiegeLib
-    \item Experiment -- Go into more detail on the specific algorithms and methods that are being used here. Can give some code detail as well if that would be helpful.
-    \item Evaluation -- How are the results evaluated and list the results
-    \item Conclusion
-\end{enumerate}
+- Contributes SpiegeLib, introduces a few of the leading techniques and algorithms used, overview of the inverse synthesis problem with experiments
 
-\section{Introduction}
-The use of sound synthesizers in the fields of music composition, production, and performance is widespread, but the task of programming a synthesizer is complex and requires a thorough understanding of technical details. It is not uncommon for a software synthesizer to have 30+ parameters displayed on a user interface (UI) and labelled using technical names \cite{rasmussen2018evaluating}. Manually programming sounds using such a large set of parameters is a daunting task. Synthesizer programming is further complicated by the fact that modifications to parameters are often not intuitively reflected in the end sonic result. This disconnect can be disruptive to the creative process. Automatic synthesizer programming (ASP) is the field of research focused on addressing these challenges in programming synthesizers.
+% Rework
+- The work presented in this chapter attempts to continue the development of, and promote collaboration and reproducibility in ASP research through the introduction of \mintinline{python}{spiegelib}, an open-source library written in the Python programming language. 
 
- Early ASP research emerged in the late 1970s with work that focused on the use of analytic methods to estimate the parameters for frequency modulation (FM) synthesis \cite{justice1979analytic}. That work was an example of synthesizer sound matching in which a system estimates synthesizer parameters to replicate a target sound. Since then a large volume of work on synthesizer sound matching has been published and has explored a variety of synthesis techniques and algorithmic methods. One popular approach is the use of evolutionary algorithms \cite{horner1993machine, mitchell2007evolutionary, yee2007evolving, yee2008synthbot, heise2009automatic, roth2011comparison, tatar2016automatic, smith2017play}. More recently, deep learning techniques have been explored \cite{yee2018automatic, barkan2019inversynth, esling2020flow}. Other methods that have been studied include semantic descriptions \cite{ethington1994seawave, johnson2006timbre, krekovic2016algorithm}, interactive methods \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}, and sound matching with vocal imitations \cite{mcartwright2014, zhang2018visualization}.
- 
- A recent user study conducted by Krekovi{\'c} et al. confirmed the desire among synthesizer users for improved means of working with their synthesizers \cite{krekovic2019insights}. 
- %Users identified approaches they felt would be particularly beneficial, which included automatic sound matching and improvements to user interface design. 
- While recent research has produced promising results, automatically programming a modern software synthesizer still presents challenges. Current evolutionary techniques face issues including time complexity \cite{tatar2016automatic}, while recent deep learning approaches have challenges in consistently producing accurate reproductions \cite{yee2018automatic}. The desires expressed by the users in Krekovi{\'c} et al.'s study, coupled with the need for further research and improvement noted in the existing body of work, point to the need for further development in ASP.
- 
- The work presented here attempts to continue this development, and promote collaboration and reproducibility in ASP research through the introduction of \mintinline{python}{spiegelib}, an open-source library written in the Python programming language. Vandewalle et al. argue that reproducibility in computational science research increases the impact of a work and they provide a framework for evaluating the quality of reproducibility \cite{vandewalle2009reproducible}. The aim of \mintinline{python}{spiegelib} is to provide a platform for researchers of automatic synthesizer programming to develop, test, and share implementations in a way that promotes reproducibility at the highest level. \mintinline{python}{spiegelib} stands for Synthesizer Programming with Intelligent Exploration, Generation, and Evaluation Library. The name \mintinline{python}{spiegelib} was chosen to pay homage to Laurie Spiegel, an early pioneer in electronic music composition. Laurie Spiegel is known for utilizing synthesizers and software to automate certain aspects of the music composition process. Her philosophy for using technology in music serves as a motivation for the \mintinline{python}{spiegelib} software library: "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." \cite{hinkle2006women}
- 
- The remainder of this paper is structured as follows: Section \ref{sec:2} presents a survey of related work to provide background for the algorithmic techniques included in \mintinline{python}{spiegelib} as well as an overview of available open-access ASP software, Section \ref{sec:3} provides an overview of the \mintinline{python}{spiegelib} software library. An example case illustrating the use of \mintinline{python}{spiegelib} in a research context is presented in Section \ref{sec:4}.
+Vandewalle et al. argue that reproducibility in computational science research increases the impact of a work and they provide a framework for evaluating the quality of reproducibility \cite{vandewalle2009reproducible}. The aim of \mintinline{python}{spiegelib} is to provide a platform for researchers of automatic synthesizer programming to develop, test, and share implementations in a way that promotes reproducibility at the highest level. \mintinline{python}{spiegelib} stands for Synthesizer Programming with Intelligent Exploration, Generation, and Evaluation Library. The name \mintinline{python}{spiegelib} was chosen to pay homage to Laurie Spiegel, an early pioneer in electronic music composition. Laurie Spiegel is known for utilizing synthesizers and software to automate certain aspects of the music composition process. Her philosophy for using technology in music serves as a motivation for the \mintinline{python}{spiegelib} software library: "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." \cite{hinkle2006women}
 
-\section{Related Work}\label{sec:2}
-This section provides a brief summary of the main algorithmic methodologies that have been used in previous ASP research, namely, optimization and deep learning techniques. Other methods that have been used in ASP research that are beyond the scope of this paper include  include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}. An  informal survey of open-access software that supports reproducibility is also included at the end of the section.
+\section{Related Work}
+- Go over the three specific papers that SpiegeLib and the experiments are based on.
+- Deep learning: Fully connected and recursive nets: \cite{yee2018automatic}, Convolutional Nets: \cite{barkan2019inversynth}, Genetic Algorithms: \cite{tatar2016automatic}
 
-\subsection{Optimization}
-The optimization approach was first introduced in 1993 with Horner et al.'s work on sound matching for FM synthesis using genetic algorithms \cite{horner1993machine}. A genetic algorithm (GA) is a method for solving an optimization problem using techniques based on the principles of Darwinian evolution, and is part of a broader class of evolutionary algorithms \cite{whitley1994genetic}. In a GA, a potential solution (an individual) is represented as an array of bits. An initial set of individuals is randomly generated, and then iteratively evolved using biologically inspired processes including selection, breeding, and mutation. Individuals are ranked using an evaluation function that measures the $fitness$ of a given solution. The objective of a GA is to minimize that value (or maximize it, depending on the problem definition). The best candidates are selected for further evolution until either an optimal solution is found or a set number of evolutions has been completed.
+\subsection{Recurrent Neural Networks}
+One of the first works on the application of deep learning to the inverse synthesis problem was published by Matthew Yee-King et al. \cite{yee2018automatic} in 2018. The main contribution of their work was an experiment that showed the effectiveness of a type of recurrent neural networks (RNN) called long short-term memory (LSTM) networks at sound matching on an FM synthesizer audio plugin. RNNs were developed to handle time-series data and receive ordered data which is successively fed into the network architecture. As data is fed into the networks, activation states are stored internally and help to provide temporal context in latter stages of computation. RNNs have been particularly successful for audio generation problems \cite{oord2016wavenet, engel2017neural}. 
 
-In the case of sound matching, the \textit{fitness} of a potential solution is determined by measuring the error between a target sound and a candidate. Typically, an audio transform or audio feature extraction is performed prior to calculating \textit{fitness}. The first works on synthesizer sound matching with GAs used the Short Time Fourier Transform (STFT) in the evaluation function \cite{horner1993machine, horner1995wavetable}. Mel-frequency Cepstral Coefficients (MFCCs), an audio representation using a non-linear frequency scaling that is more relevant to human hearing, have also been used \cite{yee2008synthbot, roth2011comparison, macret2014automatic, smith2017play}. Tatar et al. introduced the use of a multi-objective GA for synthesizer sound matching that used three different methods for calculating $fitness$ values: the STFT, Fast Fourier Transform (FFT), and signal envelope \cite{tatar2016automatic}. Alternatives to GAs that have been used for sound matching include Particle Swarm Optimization (PSO) \cite{heise2009automatic} and Hill-Climbing \cite{roth2011comparison, luke2019stochastic}.
+Yee-King er al. also experimented with additional machine learning techniques including genetic algorithm (GA), Hill-climber, and  multi-layer perceptron (MLP) methods. They also compared two RNN models: a regular LSTM network as well as a modified LSTM network that had a bi-directional LSTM layer as well as several highway layers, they called this network an LSTM++. Their methodology compared a set of algorithms on a series of successfully more challenging problems on the open-source FM synthesizer Dexed\footnote{\url{https://asb2m10.github.io/dexed/}}. Each problem was focused on programming a subset of the parameters in Dexed; a larger subset was used for each successive problem. A dataset of audio samples paired with the parameters used to generate the audio was created for training each of the deep learning models. Mel-frequency Cepstral Coefficients (MFCCs) were used as input for each of the models. The results were evaluated by looking at the error between MFCCs from target sound and a predicted sound. Results showed that the hill-climber algorithm and the LSTM++ model performed the best. The LSTM++ model showed significant improvements over the other deep learning methods, however the hill-climber performed the best on a majority of the tasks.
 
-Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
 
-Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
+Their methodology and software provided a basis for the work presented in the chapter and in the development of SpiegeLib.
 
-\subsection{Deep Learning}
-Deep learning is subset of machine learning that utilizes artificial neural networks to learn patterns in data and make predictions based on those patterns \cite{lecun2015deep}. Deep learning architectures contain multiple layers comprised of simple non-linear modules. Through iterative training, the layers are able to extract features from raw input data and learn intricate patterns in high-dimensional data. These multi-layer architectures have enabled deep learning models to excel at complex tasks including image recognition, speech recognition, and music related tasks such as audio source separation \cite{spleeter2019}.
 
-In the context of an ASP sound matching experiment, a deep learning model accepts an audio signal as input and predicts synthesizer parameter settings to replicate that audio signal. Audio signals are often preprocessed using audio feature extraction or an audio transform. Models are trained using a large set of example sounds generated from a synthesizer and use the parameter settings that generated a particular sound as the ground truth. During training, the error between predicted parameter settings and the actual parameter settings (the ground truth) are used to evaluate how well the model is learning and to iteratively update variables within the model to improve performance. 
 
-Several researchers have explored the use of deep learning for ASP. Yee-King et al. reviewed several deep learning architectures for FM synthesizer sound matcing [11]. In their work, they compared multi-layer perceptron (MLP), Long Short Term Memory (LSTM), and LSTM++ networks. Barkan et al. explored sound matching using convolutional neural networks (CNNs) [12]. They framed the problem as an image classification task and used the STFT to create spectrogram images of target sounds to use as input to the CNNs. Esling et al. recently presented a novel application called $FlowSynth$ that uses a generative model based on Variational Auto-Encoders and Normalizing Flows [13]. In addition to performing well on sound matching tasks, they also showed that their approach supported novel interactions including macro-control of synthesizer parameters.
+\subsection{Convolutional Neural Networks}
+Barkan et al. explored convolutional neural networks (CNNs) applied to the inverse synthesis problem in their work which presenting InverSynth \cite{barkan2019deep}. The CNN has been used extensively for image related deep learning tasks and has recently been used successfully in music and audio related tasks including music genre classification \cite{choi2016automatic} and neural audio generation \cite{donahue2018adversarial}. A key feature of CNNs is the use of shared filters that perform convolutions and produce representations at various levels of specificity. The shared filters has allowed them to process large input data such as images and audio with relatively few parameters compared to their fully connected counterparts. 
 
-\subsection{Software in ASP Research}
+In their work, Barkan et al. experiment with several different CNN architectures and compare them to a few different fully-connected networks. The focus of their research is performing inverse synthesis on a custom built four oscillator FM synthesizer. They frame the inverse synthesis problem as a classification problem and quantize each of the 23 continuous synthesizer parameters into 16 discrete states. As input they experiment with both STFT as well as raw time-domain audio. Because of the size of these input they created different input representations for the fully-connected networks, for these they used a selection of hand-picked audio features defined in work by Itoyama et al. \cite{itoyama2014parameter}.
+
+Results were evaluated using four different objective methods which evaluate both the ability of the model to match the parameters as well as to reconstruct the target audio. The evaluation metrics used are:
+1) Mean Percentile Rank (MPR): ranked position of the correct class measured against predicted classes in the output. Computed independently on each of the 23 synthesizer parameters, each parameter has 16 classes.
+2) Top-k Mean Accuracy: measures whether the correct class is among the top-k predicted classes for each parameter.
+3) Mean Absolute Error (MAE): this measures the error of the predicted class for each parameter.
+4) Spectral Reconstruction Quality: predicted parameters are used to synthesize a predicted audio. The predicted audio is compared against the target audio using error metrics calculated on the STFT and FT representations.
+
+They also conducted a subjective listening experiment which measured the quality of the target audio to the predicted audio for a selection of the methods. Results from the objective and subjective evaluation showed that the depth of the convolutional network played an important role in the quality of the estimator and the best performing networks were two different networks with 6-layers.
+
+\section{Software in ASP Research}
  In Vandewalle et al.'s paper on reproducibility in computational sciences, they advocate providing other researchers with "all the information (code, data, schemes, etc.) that was used to produce the presented results"\cite{vandewalle2009reproducible}. Several authors of ASP research have started to make their work open-access with source code available online. 
  
  Martin Roth and Matthew Yee-King developed $JVstHost$, a Java-based Virtural Studio Technology (VST) plugin host that was published by Matthew Yee-King \cite{yee2011automatic} and was a component of $SynthBot$ \cite{yee2008synthbot}. However, the code for $SynthBot$ itself was not released. Matthew Yee-King also shared the source code for $EvoSynth$, an application for interactive synthesizer patch exploration \cite{yee2016use}. A version of $EvoSynth$ is hosted online allowing for immediate experimentation\footnote{\url{http://www.yeeking.net/evosynth/}}. Krekovi{\'c} et al. released source code for their $MightyKnob$ system \cite{krekovic2016algorithm}. Esling et al. released open-source code and a Max4Live\footnote{\url{https://www.ableton.com/en/live/max-for-live/}} application for $FlowSynth$ \cite{esling2020flow}. Yee-King et al. recently took initial steps towards a software framework for ASP research with the release of source code that provides functionality for generating research datasets and a set of algorithms for parameter estimation \cite{yee2018automatic}. Along with that work they released the $RenderMan$\footnote{\url{https://github.com/fedden/RenderMan}} library for programmatically interacting with VST synthesizers using the Python programming language.
  
  \mintinline{python}{spiegelib} builds upon this work with the goal of supporting and encouraging reproducibility within the ASP research community. \mintinline{python}{spiegelib} is inspired by the steps that Yee-King et al. took towards creating a software library for ASP research and extends that work with the inclusion of: an object-oriented API, base classes for customization, more robust evolutionary techniques, basic subjective evaluation, complete documentation, and packaging and delivery. It provides a framework for authors to share implementations in an open-access way that allows other researchers to quickly recreate results using a clearly documented set of freely-available tools.
- 
-% Updated table if necassary
-%\begin{table*}[t]
-%\centering\small
-%\begin{threeparttable}
-%	\caption{Algorithms currently implemented as classes in \mintinline{python}{spiegelib}}
-%	\label{table:spiegel_algorithms}
-%	\begin{tabular}{|c|c|c|c|}
-%	\hline
-%	\multicolumn{4}{|c|}{\textbf{Algorithms in \mintinline{python}{spiegelib}}} \\
-%	\hline
-%	\hline
-%	\textbf{Feature Extraction} & \textbf{Deep Learning Estimators} & \textbf{Optimization Estimators} & \textbf{Evaluation} \\
-%	\hline
-%	FFT 		& MLP \cite{yee2018automatic} 		& Basic GA  	& MFCC Evaluation \\
-%	STFT 		& LSTM \cite{yee2018automatic} 		& NSGA III \cite{tatar2016automatic} & Basic Subjective \\\cline{3-4}
-%	MFCC		& LSTM++ \cite{yee2018automatic} \\
-%	Spectral\tnote{1}	& Conv6 \cite{barkan2019inversynth} \\\cline{1-2}
-%	\end{tabular}
-%	\begin{tablenotes}[para, flushleft]
-%			\footnotesize
-%			\item[1] Spectral bandwidth, centroid, contrast, flatness, and rolloff.
-%	\end{tablenotes}
-%\end{threeparttable}
-%\end{table*}
 
-\begin{table*}[t]
-\centering\small
-\begin{threeparttable}
-	\caption{Algorithms currently implemented as classes in \mintinline{python}{spiegelib}}
-	\label{table:spiegel_algorithms}
-	\begin{tabular}{|c|c|c|}
-	\hline
-	\multicolumn{3}{|c|}{\textbf{Algorithms in \mintinline{python}{spiegelib}}} \\
-	\hline
-	\hline
-	\textbf{Feature Extraction} & \textbf{Deep Learning Estimators} & \textbf{Optimization Estimators} \\
-	\hline
-	FFT 		& MLP \cite{yee2018automatic} 		& Basic GA   			\\
-	STFT 		& LSTM \cite{yee2018automatic} 		& NSGA III \cite{tatar2016automatic}				\\\cline{3-3}
-	MFCC		& LSTM++ \cite{yee2018automatic} 	& \textbf{Objective Evaluation} 	\\\cline{3-3}
-	Spectral\tnote{1}	& Conv6 \cite{barkan2019inversynth} 	& MFCC Evaluation 		\\
-	\hline
-	\end{tabular}
-	\begin{tablenotes}[para, flushleft]
-			\footnotesize
-			\item[1] Spectral bandwidth, centroid, contrast, flatness, and rolloff.
-	\end{tablenotes}
-\end{threeparttable}
-\end{table*}
  
-\section{Design of SpiegeLib}\label{sec:3}
-\mintinline{python}{spiegelib} is designed to be as extensible as possible to allow researchers to develop and test new implementations of components for conducting ASP research. Base classes with functionality for interacting with software synthesizers, audio feature extraction, parameter estimation, and evaluation provide an API to support development of custom implementations that will work with other components of the library. A number of utility classes are also provided for handling audio signals, generating datasets, and running experiments.
+\section{Design of SpiegeLib}
+\label{chapter:inverse_synth;section:spiegelib}
+
+\mintinline{python}{spiegelib} is designed to be as extensible as possible to allow researchers to develop and test new implementations of components for conducting ASP research. There are several stages in a typical ASP experiment:
+
+\textbf{1) Synthesizer configuration}: a synthesizer is selected and a subset of the parameters may be selected for estimation. For example, in work by Yee-King et al. \cite{yee2018automatic}, several different experiments were conducted using successively larger parameter subsets to increase the difficulty.
+
+\textbf{2) Dataset generation}: for experiments requiring training, such as learning deep learning models, a dataset of synthesized audio and parameter pairs must be generated. Audio features may be extracted at this point too, which will be used as input to a model.
+
+\textbf{3) Training models}: deep learning models are trained using the generated dataset.
+
+\textbf{4) Sound matching}: this is the stage where parameters are estimated to match a target sound. In the case of deep learning models this means just inferring parameters using the trained model. For search techniques, the algorithm is run using the target audio as input.
+
+\textbf{5 Evaluation}: results of the sound matching are evaluated here. Objective evaluation can be performed directly on the parameters as was the case in work by Barkan et al. \cite{barkan2019inversynth},  or audio can be rendered using the predicted parameters and evaluation carried out on the audio, which was done by both Barkan et al. and Yee-King et al. \cite{yee2018automatic}. Subjective evaluation can also be carried out at this point with a user listening experiment.
+
+- Figure for the research pipeline?
+
+\subsection{Library Implementation}
+
+Base classes with functionality for interacting with software synthesizers, audio feature extraction, parameter estimation, and evaluation provide an API to support development of custom implementations that will work with other components of the library. A number of utility classes are also provided for handling audio signals, generating datasets, and running experiments.
 
  \mintinline{python}{spiegelib} is written in the Python programming language and utilizes Python packages common in research including \mintinline{python}{numpy}, \mintinline{python}{scipy}, \mintinline{python}{tensorflow}, and \mintinline{python}{librosa}. \mintinline{python}{spiegelib} itself is a python package and is available through the Python Package Index (PyPI) with pip\footnote{\url{https://pypi.org/}}. All dependencies, except for \mintinline{python}{librenderman}, are python packages available through the PyPI and will be automatically installed by pip. For more information on installation, system requirements, and detailed library documentation, please refer to the  online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/}}
  
  A summary of the currently implemented algorithms is shown in table \ref{table:spiegel_algorithms}. A brief overview of these components and the main classes and functionalities of \mintinline{python}{spiegelib} is provided in the following sections.
+ 
+ \input{tables/spiegelib/speigelib_software}
  
 \subsection{AudioBuffer}
 The \mintinline{python}{AudioBuffer} class is used to pass audio signal signals throughout the library. It holds an array of audio samples and sample rate information. Methods of the \mintinline{python}{AudioBuffer} class provide functionality for loading audio from a variety of file formats, resampling, normalizing, time segmenting, plotting spectrograms, and saving audio as WAV files.
@@ -134,13 +112,18 @@ The \mintinline{python}{SynthBase} class is an abstract base class that provides
 The abstract base class \mintinline{python}{FeaturesBase} provides an interface for audio feature extraction tasks. 
 The \mintinline{python}{getFeatures()} abstract method must be overridden in inheriting classes and is where feature extraction algorithms are run.  \mintinline{python}{FeatureBase} also includes functionality for normalizing results from feature extraction. By default, data is normalized by removing the mean and scaling to unit variance. Settings for normalization can be saved from a set of data, reloaded, and applied to new feature extraction results to ensure that normalization is carried out using the same parameters. Currently, implemented feature extraction classes utilize the \mintinline{python}{librosa} library \cite{mcfee2015librosa} and include Mel Frequency Cepstral Coefficients (\mintinline{python}{MFCC}), Short Time Fourier Transform (\mintinline{python}{STFT}), Fast Fourier Transform (\mintinline{python}{FFT}), and a set of time summarized spectral features (\mintinline{python}{SpectralSummarized}).
 
-\subsection{Estimators}
-All parameter estimation classes implement the \mintinline{python}{EstimatorBase} abstract base class. \mintinline{python}{EstimatorBase} is a minimal base class with one abstract method, \mintinline{python}{predict()}, that has an optional input argument. Implementations of estimators are split into deep learning approaches and other approaches including evolutionary algorithms.  The included algorithms do not represent a comprehensive set of methods for ASP research but are meant to cover common methods informed by previous work. Six estimators are currently implemented and the authors plan to add 5 more in the near future: a hill climbing optimizer \cite{yee2018automatic}, a particle swarm optimizer \cite{heise2009automatic}, additional configurations of 2D CNNs \cite{barkan2019inversynth}, a 1D CNN for raw audio input \cite{barkan2019inversynth}, and a recent generative approach \cite{esling2020flow}. The authors hope that other researchers will add their new algorithms to the library as well.
+\subsection{Datasets}
+The \mintinline{python}{DatasetGenerator} class provides functionality for creating datasets of audio samples, feature vectors, and associated parameter settings from a synthesizer. An implementation of \mintinline{python}{SynthBase} and \mintinline{python}{FeaturesBase} are passed in as arguments to the \mintinline{python}{DatasetGenerator} constructor. To generate a dataset, random patches for the synthesizer are created and feature extraction is performed on the resulting audio. In this way, datasets for training and validating deep learning models, as well as datasets for evaluating sound matching experiments can be automatically generated. 
+%The term contrived in the context of ASP research refers to the use of audio samples produced by the synthesizer being studied as a target for sound matching \cite{justice1979analytic}. The benefit of using a contrived sound for evaluation is that it minimizes the uncertainty regarding whether the synthesizer in question is capable of producing the target sound. 
+External datasets can also be used within \mintinline{python}{spiegelib} and the \mintinline{python}{AudioBuffer} class provides support for loading folders of audio samples for processing.
 
-\subsubsection{Deep Learning Estimators}
+\subsection{Estimators}
+All parameter estimation classes implement the \mintinline{python}{EstimatorBase} abstract base class. \mintinline{python}{EstimatorBase} is a minimal base class with one abstract method, \mintinline{python}{predict()}, that has an optional input argument. Implementations of estimators are split into deep learning approaches and other approaches including evolutionary algorithms.  The included algorithms do not represent a comprehensive set of methods for ASP research but are meant to cover common methods informed by previous work. Six estimators are currently implemented and I plan to add 5 more in the near future: a hill climbing optimizer \cite{yee2018automatic}, a particle swarm optimizer \cite{heise2009automatic}, additional configurations of 2D CNNs \cite{barkan2019inversynth}, a 1D CNN for raw audio input \cite{barkan2019inversynth}, and a recent generative approach \cite{esling2020flow}.
+
+\subsection{Deep Learning Estimators}
 All deep learning models are implementations of the \mintinline{python}{TFEstimatorBase} abstract base class which utilizes the \mintinline{python}{tensorflow}\footnote{\url{https://www.tensorflow.org}} and \mintinline{python}{keras}\footnote{\url{https://www.tensorflow.org/guide/keras}} machine learning libraries. \mintinline{python}{TFEstimatorBase} implements \mintinline{python}{EstimatorBase} and provides wrapper functions for setting up data for training and validation, training models, running predictions, and saving and loading model weights. While these methods are designed to help in handling of data typical to a synthesizer parameter estimation problem, all methods for a \mintinline{python}{tf.keras.Model} can be accessed directly from the \mintinline{python}{model} class member. Classes that inherit from \mintinline{python}{TFEstimatorBase} define models in an implementation of the \mintinline{python}{buildModel()} method which is automatically called during construction in the base class. This allows new models to be quickly designed, switched out, and compared with minimal effort.
 
-Currently, implementations for a Multi-Layer Perceptron (\mintinline{python}{MLP}), Long Short Term Memory (\mintinline{python}{LSTM}), Bi-directional Long Short Term Memory with Highway Layers (\mintinline{python}{HwyBLSTM}), and a convolution network with 6-layers (\mintinline{python}{Conv6}) are included. An example code listing of sound matching using a trained LSTM model is shown in figure \ref{fig:lstm_code}.
+The currently implemented deep learning models are based on prior work, specifically on work on Recurrent Neural Networks by Yee-King et al. \cite{yee2018automatic} and work on Convolutional Neural Networks by Barkan et al. \cite{barkan2019inversynth}. For these works implementations for a Multi-Layer Perceptron (\mintinline{python}{MLP}), Long Short Term Memory (\mintinline{python}{LSTM}), Bi-directional Long Short Term Memory with Highway Layers (\mintinline{python}{HwyBLSTM}), and a convolution network with 6-layers (\mintinline{python}{Conv6}) are included. An example code listing of sound matching using a trained LSTM model is shown in figure \ref{fig:lstm_code}.
 
 To save training and validation progress, the \mintinline{python}{TFEpochLogger} class can be passed in as a callback during model training. \mintinline{python}{TFEpochLogger} stores training accuracy and loss, and validation accuracy and loss over training epochs in a dictionary object which can be plotted after training.
 
@@ -175,47 +158,88 @@ output.save('./lstm_predicted_audio.wav')
 \label{fig:lstm_code}
 \end{figure} 
 
-\subsubsection{Optimization Estimators}
+\subsection{Optimization Estimators}
 Two optimization estimators are currently implemented and utilize the DEAP python library \cite{fortin2012deap}. A basic GA (\mintinline{python}{BasicGA}) is included as well as a multi-objective non-dominated sorting genetic algorithm III (\mintinline{python}{NSGA3}). Both GAs require feature extraction objects, or a list of feature extraction objects in the case of the multi-objective algorithm, which are used in the GA evaluation function. 
-
-\subsection{Datasets}
-The \mintinline{python}{DatasetGenerator} class provides functionality for creating datasets of audio samples, feature vectors, and associated parameter settings from a synthesizer. An implementation of \mintinline{python}{SynthBase} and \mintinline{python}{FeaturesBase} are passed in as arguments to the \mintinline{python}{DatasetGenerator} constructor. To generate a dataset, random patches for the synthesizer are created and feature extraction is performed on the resulting audio. In this way, datasets for training and validating deep learning models, as well as datasets for evaluating sound matching experiments can be automatically generated. 
-%The term contrived in the context of ASP research refers to the use of audio samples produced by the synthesizer being studied as a target for sound matching \cite{justice1979analytic}. The benefit of using a contrived sound for evaluation is that it minimizes the uncertainty regarding whether the synthesizer in question is capable of producing the target sound. 
-External datasets can also be used within \mintinline{python}{spiegelib} and the \mintinline{python}{AudioBuffer} class provides support for loading folders of audio samples for processing.
 
 \subsection{Evaluation}
 Objective evaluation of results can be carried out by measuring error between audio samples. \mintinline{python}{EvaluationBase} is an abstract base class for calculating evaluation metrics on a set of target and prediction data. A list of target values and lists of predictions for each target are passed into the constructor. \mintinline{python}{EvaluationBase} provides functionality for calculating statistics on results, saving results as a JSON file, plotting results in histograms, and calculating metrics including mean absolute error, mean squared error, euclidian distance, and manhattan distance. Inheriting classes must implement the \mintinline{python}{evaluate_target()} method which is called for each target and associated estimations and is expected to return a dictionary of metrics for each estimation. The \mintinline{python}{MFCCEval} class implements \mintinline{python}{EvaluationBase} and calculates metrics on MFCC vectors for targets and estimations.
 
 Functionality for conducting subjective evaluation of results is provided in the \mintinline{python}{BasicSubjective} class. This class accepts a set of audio files and runs a locally hosted server that generates a simple web interface for listening to and ranking audio files in terms of similarity or preference. For sound matching experiments, audio targets can be passed in along with a set of predictions for each target, and a sound similarity test will be generated with options for randomizing the ordering of targets and predictions. Results can then be saved as a JSON file.
 
-\section{Example Case}\label{sec:4}
-\subsection{Dexed: FM Sound Matching}
-To illustrate the use of \mintinline{python}{spiegelib} in the context of an ASP sound matching experiment, we present an example study that compares six different parameter estimators acting on $Dexed$\footnote{\url{https://asb2m10.github.io/dexed/}}, a VST software emulation of the Yamaha DX7 FM synthesizer. The methodology used for this experiment is modelled after Yee-King et al.'s study on deep learning for automatic synthesizer programming \cite{yee2018automatic}, but with a simplified synthesizer configuration and a unique set of estimators. In alignment with Vandewalle et al.'s criteria for reproducible research, implementation details, code, and datasets are all available on the \mintinline{python}{spiegelib} online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match.html}}
+\section{Experiment}
+\label{chapter:inverse_synth;section:experiment}
 
-The first step is defining the synthesizer setup and creating data for training deep learning models. $Dexed$ has 155 parameters controllable through the \mintinline{python}{SynthVST} class. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-oscillator FM synthesizer. The \mintinline{python}{SynthVST} class provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files.
+- Goal is inverse synthesis using Dexed. Would be great to replicate Yee-King's results, atleast for some of the more basic results. But that can be something to do afterwards.
+- Synthesizer configuration (maybe include a table?)
+- Dataset generation. Uniform sampling of synthesizer parameter space. Audio feature extraction.
+- Training of the deep learning estimators (loss plots)
+- Estimations
 
-The \mintinline{python}{DatasetGenerator} class was then used to create datasets for deep learning training. All deep learning models, except for the CNN, used a 13-band MFCC calculated with a frame size of 2048 samples and a hop size of 1024 samples. The input of the CNN was the magnitude spectrum from a STFT, calculated using an FFT with 512 bins and a hop size of 256 samples. Using an instance of \mintinline{python}{DatasetGenerator}, 50,000 training examples and 10,000 validation examples were generated by randomly sampling the nine parameters from $Dexed$. Resulting feature vectors were normalized by removing the mean and scaling to unit variance using methods within the \mintinline{python}{FeatureBase} base class. Datasets and settings for normalization were then stored as NumPy\footnote{\url{https://numpy.org/}} files for later use.
+To compare the various estimators implemented in SpiegeLib an inverse synthesis experiment was conducted. An additional goal of this experiment is to provide an example of SpiegeLib being used for inverse synthesis. The methodology used for this experiment is modelled after Yee-King et al.'s study on deep learning for automatic synthesizer programming \cite{yee2018automatic}, but with a simplified synthesizer configuration and a unique set of estimators. A VST software emulation of the Yamaha DX7 FM synthesizer was used and six different techniques were compared. The experimental design is outlined in this section and evaluation of results is provided in the following section. In alignment with Vandewalle et al.'s criteria for reproducible research, implementation details, code, and datasets are all available on the \mintinline{python}{spiegelib} online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match.html}}
+
+\subsection{Synthesizer Configuration}
+The first step is defining the synthesizer setup and creating data for training deep learning models. $Dexed$ has 155 parameters controllable through the \mintinline{python}{SynthVST} class. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-oscillator FM synthesizer. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. In this configuration the second operator modulates the frequency of the first operator. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. Each operator in $Dexed$ has a complex envelope generator (EG) that can be used to modulate the amplitude of that operator. A diagram of the EG is shown in figure 
+
+The remainder of the available parameters in $Dexed$ are locked at specific 
+
+The \mintinline{python}{SynthVST} class provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/spiegelib/dexed.png}
+    \caption{The Dexed synthesizer interface. Dexed is an open-source emulation of the Yamaha DX7 FM synthesizer and it was used in the experiments in this chapter/}
+    \label{fig:dexed}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/spiegelib/two_op_fm_block.png}
+    \caption{}
+    \label{fig:two_op_fm_block}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/spiegelib/Yamaha DX7 Envelope.png}
+    \caption{Diagram of an envelope generator in the Yamaha DX7 and Dexed. The envelope has five independent stages. During the first three stages the envelope moves linearly from level 4 to level 1, then to level 2, then to level 3. Each of these levels is controllable and the length of time taken to move to each level is also definable. This movement is triggered by a key-on event. Once the envelope has progressed to level 3 it stays at that level until a key-off event is received, at which point the envelope progresses back to level 4.}
+    \label{fig:dx7_envelope}
+\end{figure}
+
+% \begin{table}[]
+%     \centering
+%     \begin{tabular}{c|c}
+%          &  \\
+%          & 
+%     \end{tabular}
+%     \caption{Caption}
+%     \label{tab:my_label}
+% \end{table}
+
+
+The \mintinline{python}{DatasetGenerator} class was then used to create datasets for deep learning training. All deep learning models, except for the CNN, used a 13-band MFCC calculated with a frame size of 2048 samples and a hop size of 1024 samples. The input of the CNN was the magnitude spectrum from a STFT, calculated using an FFT with 512 bins and a hop size of 256 samples. Using an instance of \mintinline{python}{DatasetGenerator}, 50,000 training examples and 10,000 validation examples were generated by randomly sampling the nine parameters from $Dexed$. Resulting feature vectors were normalized by removing the mean and scaling to unit variance using methods within the \mintinline{python}{FeatureBase} base class. Datasets and settings for normalization were then stored as NumPy files for later use.
 
 All deep learning models are defined in classes within \mintinline{python}{spiegelib} and all inherit from \mintinline{python}{TFEstimatorBase}. Models were trained using an $Adam$ optimizer \cite{kingma2014adam}, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. The loss function in all models measure the RMS error between ground truth parameter settings and prediction parameter settings. 
-%Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. Trained models are then saved for future use.
+Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. Trained models are then saved for future use.
 
-%\begin{figure}[]
-%\begin{center}
-%\includegraphics[width=0.95\columnwidth]{nsga_target_15_FFT.png}
-%\caption{Minimum FFT MAE in the population at each generation to target sound 15 for NSGA III estimator.}
-%\label{fig:nsga_fitness}
-%\end{center}
-%\end{figure}
+\begin{figure}[]
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{nsga_target_15_FFT.png}
+\caption{Minimum FFT MAE in the population at each generation to target sound 15 for NSGA III estimator.}
+\label{fig:nsga_fitness}
+\end{center}
+\end{figure}
 
 Two GAs were used: a basic single-objective GA (\mintinline{python}{BasicGA}) and a multi-objective NSGA III (\mintinline{python}{NSGA3}). Evaluation functions for the GAs use audio feature extraction and measure the mean absolute error (MAE) between the target and individuals to calculate $fitness$. The \mintinline{python}{BasicGA} used a 13-band MFCC in the evaluation function and the \mintinline{python}{NSGA3} used three different extractors: a 13-band MFCC, STFT, and five spectral features. Both genetic algorithms were run for 100 generations for each sound target.
 
-%\begin{figure}[t]
-%\begin{center}
-%\includegraphics[width=0.95\columnwidth]{blstm_training.png}
-%\caption{Traing and validation accuracy and loss over epochs for LSTM++ model training.}
-%\label{fig:lstm_bi_train}
-%\end{center}
-%\end{figure}
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{blstm_training.png}
+\caption{Traing and validation accuracy and loss over epochs for LSTM++ model training.}
+\label{fig:lstm_bi_train}
+\end{center}
+\end{figure}
+
+\section{Evaluation}
 
 An evaluation dataset containing 25 random sounds from the same nine-parameter $Dexed$ configuration was generated using the \mintinline{python}{DatasetGenerator} class. All estimators were run on each one of the 25 target sounds using the \mintinline{python}{SoundMatch} class. \mintinline{python}{SoundMatch} is a functional class that uses an estimator to predict synthesizer parameter settings for an implementation of \mintinline{python}{SynthBase} in order to match a target sound. This resulted in a set of audio files generated from $Dexed$ using the estimated parameters from each estimator run on each of the 25 target sounds. These audio files were then used for objective evaluation.
 

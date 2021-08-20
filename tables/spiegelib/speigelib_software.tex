@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering\small
+\begin{threeparttable}
+	\caption{Algorithms currently implemented as classes in \mintinline{python}{spiegelib}}
+	\label{table:spiegel_algorithms}
+	\begin{tabular}{|c|c|c|}
+	\hline
+	\multicolumn{3}{|c|}{\textbf{Algorithms in \mintinline{python}{spiegelib}}} \\
+	\hline
+	\hline
+	\textbf{Feature Extraction} & \textbf{Deep Learning Estimators} & \textbf{Optimization Estimators} \\
+	\hline
+	FFT 		& MLP \cite{yee2018automatic} 		& Basic GA   			\\
+	STFT 		& LSTM \cite{yee2018automatic} 		& NSGA III \cite{tatar2016automatic}				\\\cline{3-3}
+	MFCC		& LSTM++ \cite{yee2018automatic} 	& \textbf{Objective Evaluation} 	\\\cline{3-3}
+	Spectral\tnote{1}	& Conv6 \cite{barkan2019inversynth} 	& MFCC Evaluation 		\\
+	\hline
+	\end{tabular}
+	\begin{tablenotes}[para, flushleft]
+			\footnotesize
+			\item[1] Spectral bandwidth, centroid, contrast, flatness, and rolloff.
+	\end{tablenotes}
+\end{threeparttable}
+\end{table*}
