@@ -6,6 +6,15 @@ August 18th
 August 20th
 - Currently working through the SpiegeLib work. Want to finish that chapter while do as little additionally work as possible. i.e. don't do additional research. 
 
+August 21st
+- Continuing to finish up the SpiegeLib chapter. Have moved onto the evaluation portion of the experiment.
+- Still need to finish off the evaluation, probably reproduce the results to get all the figures.
+
 TODO:
 
-Input size for the spiegelib architectures
+- Input size for the spiegelib architectures
+- Render out all the loss plots for spiegelib experiments
+- Render out all the iteration plots for the GAs (with labels on the axes)
+- Split out the Chapter 3 into 2 chapters: SpiegeLib and the experiment
+- Informal listening on MAE to comment on the quality of each result.
+
