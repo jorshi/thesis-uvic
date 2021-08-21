@@ -2,3 +2,10 @@ August 18th
 
 - Go through all the chapters and start to list what I need to do in order to complete them
 - Start with the SpiegeLib work, and be precise
+
+August 20th
+- Currently working through the SpiegeLib work. Want to finish that chapter while do as little additionally work as possible. i.e. don't do additional research. 
+
+TODO:
+
+Input size for the spiegelib architectures

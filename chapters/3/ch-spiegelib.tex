@@ -178,11 +178,7 @@ Functionality for conducting subjective evaluation of results is provided in the
 To compare the various estimators implemented in SpiegeLib an inverse synthesis experiment was conducted. An additional goal of this experiment is to provide an example of SpiegeLib being used for inverse synthesis. The methodology used for this experiment is modelled after Yee-King et al.'s study on deep learning for automatic synthesizer programming \cite{yee2018automatic}, but with a simplified synthesizer configuration and a unique set of estimators. A VST software emulation of the Yamaha DX7 FM synthesizer was used and six different techniques were compared. The experimental design is outlined in this section and evaluation of results is provided in the following section. In alignment with Vandewalle et al.'s criteria for reproducible research, implementation details, code, and datasets are all available on the \mintinline{python}{spiegelib} online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match.html}}
 
 \subsection{Synthesizer Configuration}
-The first step is defining the synthesizer setup and creating data for training deep learning models. $Dexed$ has 155 parameters controllable through the \mintinline{python}{SynthVST} class. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-oscillator FM synthesizer. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. In this configuration the second operator modulates the frequency of the first operator. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. Each operator in $Dexed$ has a complex envelope generator (EG) that can be used to modulate the amplitude of that operator. A diagram of the EG is shown in figure 
-
-The remainder of the available parameters in $Dexed$ are locked at specific 
-
-The \mintinline{python}{SynthVST} class provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
+The first step is defining the synthesizer setup and creating data for training deep learning models. $Dexed$ has 155 parameters controllable through the \mintinline{python}{SynthVST} class. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-oscillator FM synthesizer. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. In this configuration the second operator modulates the frequency of the first operator. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. Each operator in $Dexed$ has a complex envelope generator (EG) that can be used to modulate the amplitude of that operator; a diagram and description of the EG is shown in figure \ref{fig:dx7_envelope}. The complex envelope generator has five independent stages that are controlled by a set of parameters that control the length and amplitude of each stage. For this experiment only the EG for the second operator had parameters for estimation: $LEVEL 2-4$ and $RATE 2-4$. The $RATE 1$ and $LEVEL 1$ parameters were locked to the minmimum rate and highest level, effectively turning off the initial rise portion of the envelope. Three parameters controlling the pitch and tuning of the second operator were also open for estimation. All parameters have a normalized range from $[0-1]$. The remainder of the available parameters in $Dexed$ are locked at values to create a simple sine wave generator that is being frequency modulated by the second operator. The \mintinline{python}{SynthVST} class provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
 
 \begin{figure}[ht]
     \centering
@@ -194,7 +190,7 @@ The \mintinline{python}{SynthVST} class provides methods for overriding and free
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/spiegelib/two_op_fm_block.png}
-    \caption{}
+    \caption{Block diagram of a two operator FM synthesizer. Dexed has six independent operators that can be configured in various ways, however for the experiments conducted here only the first two operators were used and were setup in this configuration.}
     \label{fig:two_op_fm_block}
 \end{figure}
 
@@ -215,10 +211,19 @@ The \mintinline{python}{SynthVST} class provides methods for overriding and free
 %     \label{tab:my_label}
 % \end{table}
 
-
+\subsection{Dataset}
 The \mintinline{python}{DatasetGenerator} class was then used to create datasets for deep learning training. All deep learning models, except for the CNN, used a 13-band MFCC calculated with a frame size of 2048 samples and a hop size of 1024 samples. The input of the CNN was the magnitude spectrum from a STFT, calculated using an FFT with 512 bins and a hop size of 256 samples. Using an instance of \mintinline{python}{DatasetGenerator}, 50,000 training examples and 10,000 validation examples were generated by randomly sampling the nine parameters from $Dexed$. Resulting feature vectors were normalized by removing the mean and scaling to unit variance using methods within the \mintinline{python}{FeatureBase} base class. Datasets and settings for normalization were then stored as NumPy files for later use.
 
-All deep learning models are defined in classes within \mintinline{python}{spiegelib} and all inherit from \mintinline{python}{TFEstimatorBase}. Models were trained using an $Adam$ optimizer \cite{kingma2014adam}, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. The loss function in all models measure the RMS error between ground truth parameter settings and prediction parameter settings. 
+\subsection{Models}
+All deep learning models are defined in classes within \mintinline{python}{spiegelib} and all inherit from \mintinline{python}{TFEstimatorBase}. Three models derived from work by Yee-King et al. \cite{yee2018automatic} were used: 1) A simple multi-layer perceptron with three hidden layers, all with a ReLu activation, 2) a LSTM recurrent network with three layers and dense output, and 3) a LSTM++ networks which contains a single bidirectional LSTM node followed by a dense layer with an elu activation, six highway layers, and a dense output. One convolutional neural network (CNN) derived from work by Barkan et al. \cite{barkan2019inversynth} was also included: this network featured six layers of strided convolutions followed by a dropout layer and a dense output. Specific details of all these models is provided in appendx \ref{appendix:spiegelib_models}.
+
+Models were trained using an $Adam$ optimizer \cite{kingma2014adam} with a learning rate of 0.001, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. The loss function used was the RMS error between the target parameter values and the predicted parameter values, which is given by the following formula where $N$ is the number parameters, $y$ is the true parameter values, and $\hat{y}$ is the predicted parameter values:
+
+\begin{equation}
+    \ell(y, \hat{y}) = \sqrt{\frac{\sum_{i \in N}{(y_i - \hat{y_i})^2}}{N}} 
+\end{equation}
+
+Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. The loss function in all models measure the RMS error between ground truth parameter settings and prediction parameter settings. 
 Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. Trained models are then saved for future use.
 
 \begin{figure}[]

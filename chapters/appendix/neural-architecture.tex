@@ -1,10 +1,10 @@
-\startappendix{GAN Architecture Details}
+\chapter{GAN Architecture Details}
 
 In Tables \ref{wavegan_gen} and \ref{wavegan_gen_resize} we present our architectures for the Transpose Convolution and Resize-based 1-dimensional generators. In Table \ref{wavegan_disc} we present our architecture for the 1-dimensional discriminator. In Tables \ref{melgan_gen} and \ref{melgan_disc} we present the architectures for the MelGAN generator and discriminator. In Table \ref{param_table} we present parameters relevant to both GANs.
 
 Layers with a (*) refer to `optional' layers which we experimented with keeping or removing. The batch size is referred to as $n$ and $k$ is the kernel size, which is either 5, 15, or 25.
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{Transpose Convolution Waveform Generator}\label{wavegan_gen}
 \centering
 \begin{tabular}{l|l|l}
@@ -31,7 +31,7 @@ Tanh & \  & (n,16384,1)\\
 \end{tabular}
 \end{table}
 
-\begin{table}
+\begin{table}[h]
 \caption{Resize Convolution Waveform Generator}\label{wavegan_gen_resize}
 \centering
 \begin{tabular}{l|l|l}
@@ -63,7 +63,7 @@ Tanh & \  & (n,16384,1)\\
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{Waveform Discriminator}\label{wavegan_disc}
 \centering
 \begin{tabular}{l|l|l}
@@ -98,7 +98,7 @@ Dense &\ (16384,1) & (n,1)
 
 
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{Resize Convolution MelGAN Generator}\label{melgan_gen}
 \centering
 \begin{tabular}{l|l|l}
@@ -131,7 +131,7 @@ Tanh & \  & (n,128,128,1)\\
 \end{table}
 
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{MelGAN Discriminator}\label{melgan_disc}
 \centering
 \begin{tabular}{l|l|l}
@@ -162,7 +162,7 @@ Dense &\ (16384,1) & (n,1)
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{Parameters}\label{param_table}
 \centering
 \begin{tabular}{l|l}
