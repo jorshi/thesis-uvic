@@ -10,11 +10,22 @@ August 21st
 - Continuing to finish up the SpiegeLib chapter. Have moved onto the evaluation portion of the experiment.
 - Still need to finish off the evaluation, probably reproduce the results to get all the figures.
 
+August 23rd
+- Goals:
+    - Finish up the evaluation section of spiegelib
+    - Split out the two chapters
+    - Start filling out the introduction sections for both of those chapters (starting with an outline)
+
 TODO:
 
+SpiegeLib:
+- Create a research pipeline figure?
+
+SpiegeLib Experiment:
 - Input size for the spiegelib architectures
 - Render out all the loss plots for spiegelib experiments
 - Render out all the iteration plots for the GAs (with labels on the axes)
 - Split out the Chapter 3 into 2 chapters: SpiegeLib and the experiment
 - Informal listening on MAE to comment on the quality of each result.
+- Double check the spectrogram plots for the GA and CNN
 
