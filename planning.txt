@@ -16,16 +16,54 @@ August 23rd
     - Split out the two chapters
     - Start filling out the introduction sections for both of those chapters (starting with an outline)
 
+August 24th
+- Goals:
+    - Outline for the background section
+    - Move background sections from other chapters in background
+    - Continue to fill out outline
+
 TODO:
 
 SpiegeLib:
 - Create a research pipeline figure?
+- Fill out other aspects of the library
+- Add some more code examples
+- Add a figure for the subjective evaluation
 
 SpiegeLib Experiment:
 - Input size for the spiegelib architectures
 - Render out all the loss plots for spiegelib experiments
 - Render out all the iteration plots for the GAs (with labels on the axes)
-- Split out the Chapter 3 into 2 chapters: SpiegeLib and the experiment
 - Informal listening on MAE to comment on the quality of each result.
 - Double check the spectrogram plots for the GA and CNN
+
+
+Schedule:
+
+Week 2: August 23rd
+- Work on background chapter
+
+Week 3: August 30th
+- Finish background chapter
+
+Week 4: September 6th
+- Redo and finish inverse synthesis experiment chapter
+
+Week 5: September 13th
+- Conduct inverse synthesis experiments using torchsynth
+- Write torchsynth 
+
+Week 5: September 20th
+- Finish and write on inverse synthesis experiments with torchsynth
+
+Week 6: September 27th
+- Synth visualization chapter (maybe slot this earlier?)
+
+Week 7: October 4th
+- introduction, conclusion, spiegelib chapter
+
+Week 8: October 11th
+- editing for each chapter
+
+October 15th - Thesis submission
 

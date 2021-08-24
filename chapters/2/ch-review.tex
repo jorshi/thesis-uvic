@@ -1,35 +1,54 @@
 \chapter{Background}
 \label{chapter:background}
+- Research in this field is inherently interdisciplinary background covers many different areas including HCI, DSP, Machine learning
+- What is the main goal? Reiterate here perhaps: "We want to develop a method for improving the user interface for synthesizer users" -- 
+- In the field of HCI the study of creativity support tools is related to this:
 
-\begin{enumerate}
-    \item Provide background on creativity support tools -- what is the goal?
-    \item Introduce creativity support in the context of music production, related fields of MIR and IMP
-    \item Representing Audio (earlier in the process - not meant to be exhaustive by any means, but probably need to start by explaining that we need a way to represent audio digitally -- and that this is very much an open question)
-    \item Distinguish between the backend and frontend for these devices 
-    \item Synthesizers -- what is the purpose of synthesizers in music production. Early automatic synthesizer programming work
-    \item Inverse Synthesis - Genetic Algorithms and Deep Learning
-    \item Neural Synthesis
-    \item Differentiable Digital Signal Processing
-    \item Perhaps an organization diagram of the various approaches to synthesizer programming? Could use a diagram similar to Brecht: \url{https://www.overleaf.com/learn/latex/TikZ_package}
-    \item User interface designs
-\end{enumerate}
+The field of creativity support is focused on the development of tools to enable and enhance the creative output of an individual or group, both in novice and expert users. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. In their paper on the topic Schneiderman asks the question: "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?". They outline a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}.
 
-\section{Creativity Support Tools}
+- More directly related to music the fields of MIR (creative MIR) as well as intelligent music production. - automatic mixing ref, other topics (hit up some references and expand on this)
 
-\section{Timbre Search}
+% Segway much??
+A common tool in audio production, and the focus of this work, is the audio synthesizer.
 
-\section{Intelligent Music Production}
+\section{Synthesizers}
+- What are synthesizers?
+- Why are they useful? What do we use them for?
+- Sound design
+- Give a brief history on synthesizers (like a couple sentences) east coast vs. west coast synthesis. FM synthesizers.
+- Distinguish between hardware synthesizers and software synthesizers
+- Introduce audio plugins and software synthesizers
+- Neural Synthesis
+- DDSP
+- Touch on programming synthesizers and the challenges involved.
 
+\section{Digital Audio}
+- how do we represent audio digitally?
+- That tutorial by that ableton author was helpful -- maybe can link to that.
+- Don't go into too much depth here.
+
+\subsection{Audio Representations}
+- What is a perceptually relevant method for representing audio?
+- Spectral features
+- STFT
+
+\subsection{Audio Machine Learning}
+- Introduce machine learning
+- self-supervised learning
+- Learned audio representations
+- Give a brief plug for HEAR 2021 and the need for perceptual audio representations
 
 \section{Synthesizer Programming}
+- What is automatic synthesizer programming? Surely I have some good material
+- Distinguish between the user interface and the algorithm (frontend vs. backend)
+- Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
 
-
-\subsubsection{Search vs. Modelling}
+\section{Inverse Synthesis}
+- inverse synthesis is the problem of estimating parameters for a synthesizer to match a target sound.
+\subsection{Search vs. Modelling}
 
 % Add something abouth the search vs. modelling approach
 These two methods, the hill-climber and the LSTM++, represent two different methods for inverse synthesis; the hill-climber is a search algorithm and the LSTM++ is a modelling algorithm. Search algorithms (which include genetic algorithms) have been used extensively in the body of automatic synthesizer programming research and modelling with deep learning has been becoming more popular. Search algorithms are presented with a target sound and then begin an iterative search for the parameter settings, attempting to move closer to the target at each iteration.
-
-
 
 % What's this text from?
 Automatic synthesizer programming can be viewed as a retrieval task as well as an optimization problem. Viewed as a retrieval task, the problem is similar to the MIR query tasks such as Query-by-example \cite{zloof1977query}, Query-by-vocal-imitation \cite{blancas2014sound}, and query-by-beat-boxing \cite{kapur2004query}. Query problems generally build up a model of the synthesis parameter space and then return a parameter setting based on a classification that attempts to match the input with the best parameter setting. The optimization approach is similar to the retrieval task in that the goal of the system is to return a synthesizer parameter setting that represents the input query as closely as possible. In contrast to the retrieval approach, instead of modelling the synthesizer parameter space, optimization algorithms will incrementally and automatically "turn the knobs" on a given synthesizer until an appropriate setting has been found. Genetic algorithms have been found to be particularly useful in this field and have been used in many studies. Other approaches such as Particle Swarm Optimization and Evaluation Strategies have also been implemented. 
@@ -54,8 +73,21 @@ Deep learning is subset of machine learning that utilizes artificial neural netw
 In the context of an ASP sound matching experiment, a deep learning model accepts an audio signal as input and predicts synthesizer parameter settings to replicate that audio signal. Audio signals are often preprocessed using audio feature extraction or an audio transform. Models are trained using a large set of example sounds generated from a synthesizer and use the parameter settings that generated a particular sound as the ground truth. During training, the error between predicted parameter settings and the actual parameter settings (the ground truth) are used to evaluate how well the model is learning and to iteratively update variables within the model to improve performance. 
 
 Several researchers have explored the use of deep learning for ASP. Yee-King et al. reviewed several deep learning architectures for FM synthesizer sound matcing [11]. In their work, they compared multi-layer perceptron (MLP), Long Short Term Memory (LSTM), and LSTM++ networks. Barkan et al. explored sound matching using convolutional neural networks (CNNs) [12]. They framed the problem as an image classification task and used the STFT to create spectrogram images of target sounds to use as input to the CNNs. Esling et al. recently presented a novel application called $FlowSynth$ that uses a generative model based on Variational Auto-Encoders and Normalizing Flows [13]. In addition to performing well on sound matching tasks, they also showed that their approach supported novel interactions including macro-control of synthesizer parameters.
- 
 
+\subsection{Evaluation Methods}
+% Maybe? A brief review of qualitative vs. quantiative methods?
+ 
+\section{User Interface Design}
+- What types of user interfaces have been developed that are interesting?
+- Include some screenshots here
+- Vocal imitations
+- Interactive IGAs
+- VocalSketch
+- Semantic queries
+ 
+\section{Forty Years of Automatic Synthesizer Programming}
+- organized time of all the related work. Organized based on: synthesis type and method.
+- Also include a separate table for evaluation methods (maybe not totally necessary).
 
 \begin{itemize}
 	\item \cite{zloof1977query} Early example of querying sounds (need to read)
@@ -178,6 +210,3 @@ These references have not been reviewed or sorted yet!
 \cite{smith2017play}
 \cite{yee2018automatic}
 \cite{luke2019stochastic}
-
-\subsection{Tools}
-jvsthost\footnote{\url{https://github.com/mhroth/jvsthost}}
