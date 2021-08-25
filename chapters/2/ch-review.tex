@@ -4,9 +4,18 @@
 - What is the main goal? Reiterate here perhaps: "We want to develop a method for improving the user interface for synthesizer users" -- 
 - In the field of HCI the study of creativity support tools is related to this:
 
+\section{Creativity Support}
 The field of creativity support is focused on the development of tools to enable and enhance the creative output of an individual or group, both in novice and expert users. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. In their paper on the topic Schneiderman asks the question: "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?". They outline a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}.
 
 - More directly related to music the fields of MIR (creative MIR) as well as intelligent music production. - automatic mixing ref, other topics (hit up some references and expand on this)
+- Overview of approaches in intelligent music production \cite{moffat2019approaches}
+
+- Creative music information retrieval \cite{humphrey2013brief}. 
+- Querying audio is an important aspect of human computer interaction for creative domains. GiantSteps conversations
+- MIR audio querying: Automatic synthesizer programming can be viewed as a retrieval task as well as an optimization problem. Viewed as a retrieval task, the problem is similar to the MIR query tasks such as Query-by-example \cite{zloof1977query}, Query-by-vocal-imitation \cite{blancas2014sound}, and query-by-beat-boxing \cite{kapur2004query}. Query problems generally build up a model of the synthesis parameter space and then return a parameter setting based on a classification that attempts to match the input with the best parameter setting.
+- Visualizing sounds: \cite{wessel1979timbre} (Potentially add the George citation on visualizing sounds).
+
+- \cite{pardo2019learning} "Learning to build natural audio production interfaces" -> Rather than force nonintuitive interactions, or remove control altogether, we reframe the controls to work within the interaction paradigms identified by research done on how audio engineers and musicians communicate auditory concepts to each other: evaluative feedback, natural language, vocal imitation, and exploration
 
 % Segway much??
 A common tool in audio production, and the focus of this work, is the audio synthesizer.
@@ -18,54 +27,86 @@ A common tool in audio production, and the focus of this work, is the audio synt
 - Give a brief history on synthesizers (like a couple sentences) east coast vs. west coast synthesis. FM synthesizers.
 - Distinguish between hardware synthesizers and software synthesizers
 - Introduce audio plugins and software synthesizers
-- Neural Synthesis
-- DDSP
+
+\subsection{Programming Synthesizers}
+- When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
+- Talk about the nature of this task. I think in that krekovic study there was something about this process? That this can be done in an exploratory way that ppl enjoy that process.
+- Even so, it can still be quite a challenging task.
+
+Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
+
+\subsection{Neural Synthesis}
+In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
+One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
+
+% GANs for synthesis
+In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
+
+This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
+
 - Touch on programming synthesizers and the challenges involved.
 
-\section{Digital Audio}
+% This could potentially be its own section
+\section{Audio Representations}
 - how do we represent audio digitally?
 - That tutorial by that ableton author was helpful -- maybe can link to that.
 - Don't go into too much depth here.
-
-\subsection{Audio Representations}
 - What is a perceptually relevant method for representing audio?
 - Spectral features
 - STFT
 
-\subsection{Audio Machine Learning}
+% Not totally sure how to incorporate these sections?
+\subsection{Learned Audio Representations}
+- Representation learning \cite{bengio2013representation}
 - Introduce machine learning
 - self-supervised learning
 - Learned audio representations
 - Give a brief plug for HEAR 2021 and the need for perceptual audio representations
 
-\section{Synthesizer Programming}
-- What is automatic synthesizer programming? Surely I have some good material
-- Distinguish between the user interface and the algorithm (frontend vs. backend)
+\section{Automatic Synthesizer Programming}
+Early ASP research emerged in the late 1970s with work that focused on the use of analytic methods to estimate the parameters for frequency modulation (FM) synthesis \cite{justice1979analytic}. That work was an example of synthesizer sound matching in which a system estimates synthesizer parameters to replicate a target sound. Since then a large volume of work on synthesizer sound matching has been published and has explored a variety of synthesis techniques and algorithmic methods.
+- other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
+
 - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+
+Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
+
+- In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
+- Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
+- This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
+
+\subsection{User Interaction}
+- This is really a user interface problem. Programming synthesizers is hard!
+- What are some of the different approaches that have been taken by people?
+- Interactive methods (IGAs)
+- Semantic search
+- That interesting paper on sketching sounds visually
+- Pardo look at how we can build more natural interfaces for audio production tools \cite{pardo2019learning} 
+
+\subsubsection{Interactive Searches}
+Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
+
+ \subsubsection{Vocal Imitations}
+ It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches. 
+ 
+ \subsubsection{Semantic}
+ Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
+ - Check the seago cite?
 
 \section{Inverse Synthesis}
 - inverse synthesis is the problem of estimating parameters for a synthesizer to match a target sound.
-\subsection{Search vs. Modelling}
+- This is the main issue that has been explored in the literature and is a big component of the research that is conducted here
+ 
+This section provides a brief summary of the main algorithmic methodologies that have been used in previous ASP research, namely, optimization and deep learning techniques. Other methods that have been used in ASP research that are beyond the scope of this paper include  include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}.
 
+\subsection{Search vs. Modelling}
 % Add something abouth the search vs. modelling approach
 These two methods, the hill-climber and the LSTM++, represent two different methods for inverse synthesis; the hill-climber is a search algorithm and the LSTM++ is a modelling algorithm. Search algorithms (which include genetic algorithms) have been used extensively in the body of automatic synthesizer programming research and modelling with deep learning has been becoming more popular. Search algorithms are presented with a target sound and then begin an iterative search for the parameter settings, attempting to move closer to the target at each iteration.
-
-% What's this text from?
-Automatic synthesizer programming can be viewed as a retrieval task as well as an optimization problem. Viewed as a retrieval task, the problem is similar to the MIR query tasks such as Query-by-example \cite{zloof1977query}, Query-by-vocal-imitation \cite{blancas2014sound}, and query-by-beat-boxing \cite{kapur2004query}. Query problems generally build up a model of the synthesis parameter space and then return a parameter setting based on a classification that attempts to match the input with the best parameter setting. The optimization approach is similar to the retrieval task in that the goal of the system is to return a synthesizer parameter setting that represents the input query as closely as possible. In contrast to the retrieval approach, instead of modelling the synthesizer parameter space, optimization algorithms will incrementally and automatically "turn the knobs" on a given synthesizer until an appropriate setting has been found. Genetic algorithms have been found to be particularly useful in this field and have been used in many studies. Other approaches such as Particle Swarm Optimization and Evaluation Strategies have also been implemented. 
-
- Most studies have focussed on the sound matching programming task, in which an example sound is provided to the system with the goal of reproducing that sound on the target synthesizer. Others have focussed on using a semantic description of the goal sound as input to the programming interface. It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches.
- 
- % SpiegeLib Text
-This section provides a brief summary of the main algorithmic methodologies that have been used in previous ASP research, namely, optimization and deep learning techniques. Other methods that have been used in ASP research that are beyond the scope of this paper include  include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}. An  informal survey of open-access software that supports reproducibility is also included at the end of the section.
 
 \subsection{Optimization}
 The optimization approach was first introduced in 1993 with Horner et al.'s work on sound matching for FM synthesis using genetic algorithms \cite{horner1993machine}. A genetic algorithm (GA) is a method for solving an optimization problem using techniques based on the principles of Darwinian evolution, and is part of a broader class of evolutionary algorithms \cite{whitley1994genetic}. In a GA, a potential solution (an individual) is represented as an array of bits. An initial set of individuals is randomly generated, and then iteratively evolved using biologically inspired processes including selection, breeding, and mutation. Individuals are ranked using an evaluation function that measures the $fitness$ of a given solution. The objective of a GA is to minimize that value (or maximize it, depending on the problem definition). The best candidates are selected for further evolution until either an optimal solution is found or a set number of evolutions has been completed.
 
 In the case of sound matching, the \textit{fitness} of a potential solution is determined by measuring the error between a target sound and a candidate. Typically, an audio transform or audio feature extraction is performed prior to calculating \textit{fitness}. The first works on synthesizer sound matching with GAs used the Short Time Fourier Transform (STFT) in the evaluation function \cite{horner1993machine, horner1995wavetable}. Mel-frequency Cepstral Coefficients (MFCCs), an audio representation using a non-linear frequency scaling that is more relevant to human hearing, have also been used \cite{yee2008synthbot, roth2011comparison, macret2014automatic, smith2017play}. Tatar et al. introduced the use of a multi-objective GA for synthesizer sound matching that used three different methods for calculating $fitness$ values: the STFT, Fast Fourier Transform (FFT), and signal envelope \cite{tatar2016automatic}. Alternatives to GAs that have been used for sound matching include Particle Swarm Optimization (PSO) \cite{heise2009automatic} and Hill-Climbing \cite{roth2011comparison, luke2019stochastic}.
-
-Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
-
-Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
 
 \subsection{Deep Learning}
 Deep learning is subset of machine learning that utilizes artificial neural networks to learn patterns in data and make predictions based on those patterns \cite{lecun2015deep}. Deep learning architectures contain multiple layers comprised of simple non-linear modules. Through iterative training, the layers are able to extract features from raw input data and learn intricate patterns in high-dimensional data. These multi-layer architectures have enabled deep learning models to excel at complex tasks including image recognition, speech recognition, and music related tasks such as audio source separation \cite{spleeter2019}.
@@ -76,14 +117,6 @@ Several researchers have explored the use of deep learning for ASP. Yee-King et 
 
 \subsection{Evaluation Methods}
 % Maybe? A brief review of qualitative vs. quantiative methods?
- 
-\section{User Interface Design}
-- What types of user interfaces have been developed that are interesting?
-- Include some screenshots here
-- Vocal imitations
-- Interactive IGAs
-- VocalSketch
-- Semantic queries
  
 \section{Forty Years of Automatic Synthesizer Programming}
 - organized time of all the related work. Organized based on: synthesis type and method.

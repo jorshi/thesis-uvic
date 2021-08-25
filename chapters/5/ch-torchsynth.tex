@@ -48,16 +48,17 @@ Constrastive audio learning approaches like \cite{saeed2020contrastive} can be u
 % Later, cite BYOL-A if their paper is selected
 However, training such models is limited by small corpora and/or the relatively slow synthesis speed of traditional CPU-based synths (Niizumi, p.c.).
 
-\subsubsection{Software Synthesizers}
+% Going to pull out some of this to the 
+% \subsubsection{Software Synthesizers}
 
-Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
+% Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
 
-Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
+% Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
 
-\subsubsection{Neural Synthesis}
+% \subsubsection{Neural Synthesis}
 
-In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
-One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known. We combine the ideas of traditional DSP and neural synthesis, yielding a greater level of simplicity and speed by building a GPU-optional modular synthesizer. Our default voice has 78 latent parameters, which model traditional synthesizer parameters. 
+% In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
+% One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known. We combine the ideas of traditional DSP and neural synthesis, yielding a greater level of simplicity and speed by building a GPU-optional modular synthesizer. Our default voice has 78 latent parameters, which model traditional synthesizer parameters. 
 
 \section{Main Contributions}
 \label{sec:contributions}
