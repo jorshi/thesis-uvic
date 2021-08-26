@@ -37,3 +37,7 @@
 \renewcommand\cftfigpresnum{Figure\ }
 \renewcommand\cftfignumwidth{0.80in}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Block quotes
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\par\singlespacing\small}
