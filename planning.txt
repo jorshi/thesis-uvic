@@ -28,7 +28,16 @@ August 25th
     - Start to organize any necessary citations into the correct sections.
     - Continue to build out the outline with shorter bullet point type sentences
 
+August 26th
+- Goals:
+    - Read some parts of the Russ textbook 
+    - Write the synthesizer background section
+
 TODO:
+
+Background:
+    - Figures: skeumorphism for example
+    - 
 
 SpiegeLib:
 - Create a research pipeline figure?

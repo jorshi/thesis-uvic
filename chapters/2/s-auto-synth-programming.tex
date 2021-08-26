@@ -1,0 +1,33 @@
+\section{Automatic Synthesizer Programming}
+Early ASP research emerged in the late 1970s with work that focused on the use of analytic methods to estimate the parameters for frequency modulation (FM) synthesis \cite{justice1979analytic}. That work was an example of synthesizer sound matching in which a system estimates synthesizer parameters to replicate a target sound. Since then a large volume of work on synthesizer sound matching has been published and has explored a variety of synthesis techniques and algorithmic methods.
+- other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
+
+- Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+
+Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
+
+- In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
+- Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
+- This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
+
+\subsection{User Interaction}
+- This is really a user interface problem. Programming synthesizers is hard!
+- What are some of the different approaches that have been taken by people?
+- Interactive methods (IGAs)
+- Semantic search
+- That interesting paper on sketching sounds visually
+- Pardo look at how we can build more natural interfaces for audio production tools \cite{pardo2019learning} 
+
+\cite{holland2013music} HCI and music interaction.
+
+\subsubsection{Interactive Searches}
+Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
+
+Reinforcement Learning and interaction \cite{scurto2021designing}
+
+ \subsubsection{Vocal Imitations}
+ It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches. 
+ 
+ \subsubsection{Semantic}
+ Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
+ - Check the seago cite?

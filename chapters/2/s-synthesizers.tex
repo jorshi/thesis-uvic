@@ -1,0 +1,44 @@
+\section{Audio Synthesizers}
+In the context of audio production, a synthesizer refers to a device that generates sound or music. A synthesizer may do this through the playback and recombination of pre-existing audio material or through the generation of raw audio waveforms. There are numerous types of synthesis techniques that are capable of producing a huge variety of different sounds that fall broadly into two different categories: `imitative` or `synthetic`. Imitative sounds attempt to emulate a sound that exists in the natural world such as a physical musical instrument or a sound effect such as an explosion. Electric pianos are examples of imitative synthesizers. Synthetic sounds are those that have no relation to a sound in the physical world. The distinction between imitative and synthetic sounds is blurry and most sounds fall somewhere in the middle; synth-brass sounds, which were a staple of synths such as Roland's popular Jupiter-8, are an example of sounds that are based on an imitation of a brass sound but extend into the synthetic realm. 
+
+\subsection{Types of synthesizers}
+- Talk about the modular nature of synthesis? While there are many different types synthesis techniques, in audio processing it is common to talk about blocks, where each block is responsible for a unit of processing. Synthesizers can be thought of containing individual processing blocks as well that can be linked together in various configurations to build up a synthesis engine. Regardless of the type of synthesizer, there are several blocks that are common found in many synthesizers. [Listing of different types of synthesizer components]
+\subsubsection{Analog}
+The original synthesizers were purely analog. Analog synthesizers are built using electric components ... [potentially say something about the sound of analog?]
+
+\subsubsection{Digital}
+Digital synthesis ...
+
+\subsubsection{Hardware vs. Software}
+Hardware synthesizers are physical devices purpose built for the task of audio synthesis. There come in many forms, but generally their is a distinction made between performance synthesizers and modular synthesizers. Performance synthesizers are contained units with predefined components that are linked together into a particular synth architecture.
+
+\subsubsection{Audio Plugins}
+
+\subsection{Historical Context}
+
+
+\subsection{Components of a Synthesizer}
+Synthesizers can be viewed as comprising two major components: the synthesis engine, which is where sounds is generated, and a control interface which allows a user to control the synthesis engine. Audio synthesis can be a complex process so there is usually a high-level of abstraction between the synthesis engine and the control interface. The control interface presents a conceptual model of the synthesizer to the user and maps this model to the underlying engine. A control interface has a set of parameters that can be altered to modify the nature of the sound being generated. A skilled sound designer is able to interact with the control interface and craft sounds to fit the needs of their creative project. This process is referred to as programming a synthesizer. A well-designed synthesizer control interfaces allow users to build up a conceptual model that allows them to easily interact with the synthesizer in a way that allows them to be expressive. [Is their a citation here regarding flow?]. The nature of the control interface is guided by the synthesis method being used by the engine. Synthesis methods like subtractive synthesis which involve a clear linear signal flow that starts with a complex waveform that is progressively shaped can lead to a more simple conceptual model. Moog synthesizers are examples of subtractive synthesizers that have clear control interface that maps to the synthesis engine. More complex synthesis methods such as Frequency Modulation (FM) synthesis are more challenging to create clear control maps for. Interestingly, the most commercially successful synthesizer, the Yamaha DX7, had a notoriously difficult control interface, although shipped with an extensive high-quality set of factory presets (pre-defined control interface parameter settings).
+
+\subsection{Synthesizer Programming}
+- Russ describes the programming component intrinsically creative.
+- When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
+- Talk about the nature of this task. I think in that krekovic study there was something about this process? That this can be done in an exploratory way that ppl enjoy that process.
+- Even so, it can still be quite a challenging task.
+
+Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
+
+Give an image of the complex synth UI.
+
+\subsection{Synthesis Techniques}
+- Sound Synthesis and Sampling provides a thorough overview of both analog and digital synthesizers and the various methods. \cite{russ2012sound}
+
+\subsubsection{Neural Synthesis}
+In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
+One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
+
+% GANs for synthesis
+In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
+
+This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
+
