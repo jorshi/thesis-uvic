@@ -6,29 +6,22 @@ Synthesizers have become ubiquitous in audio production and entire genres of mus
 
 
 \subsection{Evolution of Synthesizers}
-The Telharmonium instrument was developed by Thaddeus Cahill in the early 1900s and was the first, and largest, sound synthesizer \cite{roads1996computer}. On September 26, 1906, an audience of 900 individuals came to view the massive electronic instrument that was capable of producing pure sinusoidal waves in at frequencies in integer ratios. 
-
+- A brief history of synthesizers is provided here for historical context.
+- Check out \cite{roads1996computer}, \cite{mcguire2015musical}, \cite{jenkins2019analog}, \cite{russ2012sound} for more detailed historical context. 
 \subsubsection{Analog}
-Until the late 1950s all synthesizers were analog. All analog synthesizers are defined by their use of continuous-time signals, as opposed to digital systems which operate in discrete chunks of information, or discrete-time signals. Early analog synthesizers can be broken down into two broad categories: (1) sounds that are generated directly by electric circuits by oscillating vaccuum tubes, or (2) rotating or vibrating physical systems that are controlled by electronic sources. 
-- Theremin, Ondes Martenot,
-- Hammond Novachord was the first fully polyphonic commercial synthesizer. 
-- Buchla / Moog
-- Some of the 
+Until the late 1950s all synthesizers were analog. All analog synthesizers are defined by their use of continuous-time signals, as opposed to digital systems which operate in discrete chunks of information, or discrete-time signals. Early analog synthesizers can be broken down into two broad categories: (1) sounds that are generated directly by electric circuits by oscillating vaccuum tubes, or (2) rotating or vibrating physical systems that are controlled by electronic sources \cite{roads1996computer}. The first, as well as the largest sound synthesizer ever built was developed in the early 1900s by Thaddeus Cahill. On September 26, 1906, an audience of 900 individuals came to view the massive electronic instrument called the Telharmonium that was capable of producing pure sinusoidal waves in at frequencies in integer ratios. Other early synthesizers include the Theremin, built by Leon Theremin in 1920, which produced a pure tone with a varying pitch and amplitude that was controlled by a performer moving their arms in relation to two antennas. The sound produced by the theremin has an eery feel to it, well-suited for sci-fi film scores. Versions of the theremin have been used in popular music by musicians including The Beach Boys, Led Zeppelin, and The Rolling Stones (citations? check out wikpedia).  The Ondes Martenot, developed in 1928 by Maurice Martenot and Ondes, had a similar sound to the theremin and also was one of the first synthesizers to include a piano-like keyboard interface.
 
-- Wendy Carlos (1968) Switched on Bach, used a Moog Modular synthesizer to orchestrate and record a selection of Johann Sebastian Bach pieces. The counterpoint
+In the 1960s two companies emerged on opposite sides of America and released synthesizers that have shaped the landscape of audio synthesis. Around 1964 Don Buchla, who lived in the San Francisco area, released the the Buchla 100 Series Modular Electronic Music System and Robert Moog, who lived in the New York area, released the R.A. Moog Modular System \cite{mcguire2015musical}. Both synthesizers were modular systems that had individual processing units called \textit{modules} that could be interconnected using patch cables, connecting together synthesizer modules is known as creating a "synth patch", or simply a "patch". Both systems also include Voltage-Controlled Oscillators (VCOs) which create electronic waveforms at stable musical pitches, and the pitch can be controlled via an input signal. The Moog Modular System also featured a Voltage Controlled Filter (VCF) that was an early version of Moog's famous ladder filter design that would resonate at a controllable center frequency, creating some of the most iconic synthesizer sounds that are still used today.
 
+There were some important philosophical differences between Moog and Buchla Synthesizers that have lead to two different schools of thought: East Coast and West Coast synthesis. The development of the Buchla synthesizer by Don Buchla was guided by Morton Subotnick and other experimental composers working out the San Francisco Tape Music Center. Subotnick explicitly requested that the synthesizer was not controlled by a traditional keyboard interface as he was worried that it would trap him into created tonal music. Instead, Buchla synthesizers are controlled using a set of touch plates and sequencers. At the same time on East coast Robert Moog was developing the Moog Modular and building a traditional keyboard interface to control the pitch of his VCOs. This feature, which allowed the Moog Modular Systems to be integrated more easily with Western music, was one of the reasons that Moog synthesizers became much more popular and commercially successful compared to Buchla. 
 
-
-
-- \cite{mcguire2015musical} provides a good overview of the historical context for synthesizers 
-- \cite{jenkins2019analog} provides an amazing overview of the history of a bunch of different manufacturers
-- Buchla / Moog
-- Waveforms
+Another reason that Moog synthesizers were launched into the public eye is because of their use in recorded music. In 1968 Wendy Carlos used a Moog Modular synthesizer to orchestrate, perform, and record a selection of Johann Sebastian Bach pieces. The collection of music, called \textit{Switched On Bach}, went on to become the best selling classical recording of all time. Other musicians had created recreations of classical music pieces on synthesizers, but none had reached the same level as \textit{Switch On Bach}. Jenkins \cite{jenkins2019analog} credits the nature of the counterpoint in Bach's pieces as being particularly well suited to synthesizers, as well as Carlos' ability to design sounds that brought that performance alive, to the success of the release. Building on this success Carlos went on to score synthesized soundtracks for movies including Stanley Kubrick's \textit{A Clockwork Orange}. Another exceptional example of classical music recreated using Moog synthesizers worth mentioning is Japanese composer Isao Tomita's \textit{Snowflakes Are Dancing}, which was released in 1974. The use of synthesizers in music and film extends into almost all genres of music and was the cornerstone in the development of new genres including techno and other electronic music genres. [Also note something about the historical context and other synthesizer manufacturers] -> Mark Jenkins provides an excellent overview of the use of synthesizers in various genres of music over the years in his book \textit{Analog Synthesizers: Understanding, Performing, Buying} \cite{jenkins2019analog}.
 
 \subsubsection{Digital}
 The first experiments with digit synthesis were conducted by Max Mathews on an IBM 704 computer in 1957 \cite{roads1980interview}. These experiments consisted of programming and synthesizing melodies using triangle waves, Mathew's program was able to accept the note pitch, amplitude, and duration. The Music III program was developed by Mathew's in 1960 and introduced an important concept called the \textit{unit generator}, which defined basic components of a synthesizer in programmatic units that a user was able to link together to create a full synthesizer architecture. Mathew's describes these concepts as being developed in parallel, but separately, to similar synthesis concepts (e.g. modular synthesizers) being developed in the analog world. He described this as "an advantage because a musician who knew who to patch together Moog synthesizer units would have a pretty good idea how to put together unit generators in the computer." 
 - FM Synthesis - \cite{chowning1973synthesis}, lead to DX7
 - anything else to note here?
+- DAWs
 
 \subsubsection{Hardware vs. Software}
 Hardware synthesizers are physical devices purpose built for the task of audio synthesis. There come in many forms, but generally their is a distinction made between performance synthesizers and modular synthesizers. Performance synthesizers are contained units with predefined components that are linked together into a particular synth architecture.
@@ -46,7 +39,18 @@ Synthesizers can be viewed as comprising two major components: the synthesis eng
 \subsection{Synthesis Techniques}
 - Sound Synthesis and Sampling provides a thorough overview of both analog and digital synthesizers and the various methods. \cite{russ2012sound}
 
+\subsubsection{Neural Synthesis}
+In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
+One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
+
+% GANs for synthesis
+In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
+
+This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
+
 \subsection{Synthesizer Programming}
+Both Carlos and Tomita excelled at patching synthesizer modules together and tuning the parameters of individual modules to create new sounds to orchestrate their performances. This process ... it's art! Blah blah blah. But also these folks are artists and virtuosos.
+
 - Context on synthesizer programming \cite{jenkins2019analog}
 - Russ describes the programming component intrinsically creative.
 - When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
@@ -56,13 +60,4 @@ Synthesizers can be viewed as comprising two major components: the synthesis eng
 Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
 
 Give an image of the complex synth UI.
-
-\subsubsection{Neural Synthesis}
-In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
-One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
-
-% GANs for synthesis
-In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
-
-This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
 

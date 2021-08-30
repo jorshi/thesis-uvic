@@ -1,3 +1,9 @@
+Thesis Planning, TODO, and timeline
+===================================
+
+Week 1:
+-------
+
 August 18th
 
 - Go through all the chapters and start to list what I need to do in order to complete them
@@ -9,6 +15,9 @@ August 20th
 August 21st
 - Continuing to finish up the SpiegeLib chapter. Have moved onto the evaluation portion of the experiment.
 - Still need to finish off the evaluation, probably reproduce the results to get all the figures.
+
+Week 2:
+-------
 
 August 23rd
 - Goals:
@@ -32,6 +41,10 @@ August 26th
 - Goals:
     - Read some parts of the Russ textbook 
     - Write the synthesizer background section
+
+Week 3:
+-------
+
 
 TODO:
 
