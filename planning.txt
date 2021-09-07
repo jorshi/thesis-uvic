@@ -51,6 +51,25 @@ September 1st
 - Goals:
     - Finish up first draft on the synthesizer section
 
+September 5th
+- Lol background section. Working on the Synthesizer Programming section
+
+Week 4:
+-------
+Last week was challenging. Rachel and I got sick and I have been struggling with quite a bit of stress. Looking forward to getting back on a track a bit this week.
+
+Goals:
+- Continue to work on background section two hours every day and get closer to having a complete draft of that section. Continue to work through the writing of synthesizer programming and the opportunities.
+- Spend some time reworking / recreating results for the inverse synthesizer experiments and see if I can get the RenderMan library working on Ubuntu.
+- Read some more papers on the inverse synthesis problem for the related work section -- want to understand the autoencoder approaches better.
+
+September 7th
+Goals:
+- Get all references in place for the synthesizer programming chapter
+- First draft written of synthesizer programming section.
+- Start compiling a "to read" section of the inverse synthesizer chapter
+- Explore RenderMan in Linux for a work block
+
 
 
 TODO:
@@ -88,16 +107,16 @@ Week 5: September 13th
 - Conduct inverse synthesis experiments using torchsynth
 - Write torchsynth 
 
-Week 5: September 20th
+Week 6: September 20th
 - Finish and write on inverse synthesis experiments with torchsynth
 
-Week 6: September 27th
+Week 7: September 27th
 - Synth visualization chapter (maybe slot this earlier?)
 
-Week 7: October 4th
+Week 8: October 4th
 - introduction, conclusion, spiegelib chapter
 
-Week 8: October 11th
+Week 9: October 11th
 - editing for each chapter
 
 October 15th - Thesis submission

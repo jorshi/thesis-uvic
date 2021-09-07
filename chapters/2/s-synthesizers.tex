@@ -68,7 +68,14 @@ Parameter selection interfaces present the user with an organization of paramete
 
 Architecture specification interfaces allow the user to wire together synthesizer modules in whatever way they want. Modular synthesizers are a good example of these types of interfaces. Software like VCV Rack\footnote{\url{https://vcvrack.com/}} provides emulations of Eurorack \cite{intellijel2019} hardware modular synthesizer modules in software. Cycling 74's Max/MSP\footnote{\url{https://cycling74.com/products/max}} and Native Instrument's Reaktor\footnote{\url{https://www.native-instruments.com/en/products/komplete/synths/reaktor-6/}} are other examples of architecture specification interfaces implemented in software.
 
-Direct specification interfaces make an attempt to allow the user to interact with the sound object itself, as opposed to interacting with a conceptual model of a sound engine. A visual representation of sonic material is presented, typically as the time-domain waveform or a representation of the frequencies. Users are able to draw-in and shape the output sound through this visual interface.  
+Direct specification interfaces make an attempt to allow the user to interact with the sound object itself, as opposed to interacting with a conceptual model of a sound engine. A visual representation of sonic material is presented, typically as the time-domain waveform or a representation of the frequencies. Users are able to draw-in and shape the output sound through this visual interface. This type of interaction can be challenging due to the complex relationship between the visual representation of a sound and its perceptual quality. Some software synthesizes provide users a form of direct specification within a larger more traditional architecture: Xfer Records Serum\footnote{\url{https://xferrecords.com/products/serum}} allows users to draw in custom waveforms for wavetables and Izotope Iris\footnote{\url{https://www.izotope.com/en/products/iris.html}} has a visual interface to draw in the frequencies of a spectral filter, shown in \ref{fig:izotope_iris}. \cite{knees2016searching} -- mental images. (this maybe goes into the automatic synthesizer programming section on academic work.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.80\textwidth]{figures/background/izotope_iris.jpg}
+    \caption{Izotope Iris. A sample-playback synthesizer plugin with a visual interface that allows users to draw in frequencies.}
+    \label{fig:izotope_iris}
+\end{figure}
 
 \subsubsection{Skeumorphism}
 Skeumorphism describes computer user interfaces that attempt to directly mimic their real-world counterpoint, and has become extremely common in audio software, including synthesizers; user interface researchers have begun to question whether or not these skeumorphic interfaces enhance usability of not \cite{lindh2018beyond}. [include an image of minimoogs both in hardware and in software]. Not all software synthesizers utilize skeumorphism and many have introduced new structured methods for organizing the UI onto different pages or subsections that would not be possible on a physical device. One aspect of all control interfaces that is almost universal between hardware and software synthesizers is the use of "knobs", "faders", and other physical controls as parameters. Even though turning a knob with a mouse is quite an awkward interaction, this paradigm is pervasive.
@@ -76,22 +83,6 @@ Skeumorphism describes computer user interfaces that attempt to directly mimic t
 % Not so sure about this section.
 % The nature of the control interface is guided by the synthesis method being used by the engine. Synthesis methods like subtractive synthesis which involve a clear linear signal flow that starts with a complex waveform that is progressively shaped can lead to a more simple conceptual model. Moog synthesizers are examples of subtractive synthesizers that have clear control interface that maps to the synthesis engine. More complex synthesis methods such as Frequency Modulation (FM) synthesis are more challenging to create clear control maps for. Interestingly, the most commercially successful synthesizer, the Yamaha DX7, had a notoriously difficult control interface, although shipped with an extensive high-quality set of factory presets (pre-defined control interface parameter settings).
 
-\subsection{Synthesizer Programming}
- A skilled sound designer is able to interact with the control interface and craft sounds to fit the needs of their creative project. This process is referred to as programming a synthesizer. 
-
-Both Carlos and Tomita excelled at patching synthesizer modules together and tuning the parameters of individual modules to create new sounds to orchestrate their performances. This process ... it's art! Blah blah blah. But also these folks are artists and virtuosos.
-
-- Challenges with synthesizer programming UI design: \cite{seago2013new}. -- "Some, like subtractive synthesis, offer controllers which are broadly intuitive, in that changes to the parameter values produce a proportional and predictable change in the generated sound. Other methods, however, are less easily understood. FM synthesis, for example, is a synthesis method that may be viewed as essentially an exploration of a mathematical expression, but whose parameters have little to do with real-world sound production mechanisms, or with perceived attributes of sound." -- There are some other really good bits about navigating the timbre space and non-linearities.
-- \cite{seago2004critical} Thus, under most current systems, the user is obliged to express directives for sound specification in system terminology, rather than in language derived from the user domain. Three types of synthesizer interfaces: parameter selection in a fixed architecture, architecture specification and configuration, and direct specification of physical characteristics of sound.
-- Context on synthesizer programming \cite{jenkins2019analog}
-- Russ describes the programming component intrinsically creative.
-- When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
-- Talk about the nature of this task. I think in that krekovic study there was something about this process? That this can be done in an exploratory way that ppl enjoy that process.
-- Even so, it can still be quite a challenging task.
-
-Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
-
-Give an image of the complex synth UI.
 
 % Bounce this out to another section I think. This could sit in creativity support potentially?
 % \subsubsection{Neural Synthesis}
