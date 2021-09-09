@@ -1,4 +1,13 @@
 \section{Synthesizer Programming}
+Users generally have two options when trying to generate a desired sound on a synthesizer: they can build up the sound from scratch by adjusting parameters, or they can use a preset parameter setting designed by someone else. Many users also use presets as a starting point and manually adjust parameters to tune the sound \cite{krekovic2019insights}. Synthesizer programming refers to the process of manually adjusting parameters, whether starting from scratch or a preset. Programming a rich sound is considered an art \cite{russ2012sound}, and the quality of the sounds designed by Carlos and Tomita are one of the reasons their work achieved critical acclaim \cite{jenkins2019analog}. Specific techniques for programming synthesizers have lead to the production of sounds that define genres of music, especially electronic music, such as the "wobble bass" sound characteristic of dubstep. [What else can I add here to describe the importance of sound design? Is there anything else?]
+
+\subsection{Challenges}
+\subsubsection{Timbre}
+In the previous section on synthesizer control interfaces, \S\ref{sec:control_interfaces}, three different dimensions of sound were introduced: pitch, loudness, and timbre. Pitch and loudness are uni-dimensional and have relatively simple mappings to parameters \cite{seago2004critical}. The remaining parameters on a synthesizer, which is the vast majority of them, are used to specify the timbre of the resulting sound. Musical timbre, unlike pitch and loudness, is multidimensional and challenging to understand \cite{krumhansl1989musical}. The ANSI definition of timbre is that it is the attribute of auditory sensation that allows it to be distinguished from other sounds at the same pitch and loudness \cite{american1973american}. This definition doesn't tell us very much about what timbre is, as opposed to what it is not. Risset and Wessel \cite{risset1999exploration} explore timbre in the context of audio synthesizers ... [what does this add?]
+
+The artistry in synthesizer programming lies in the specification of parameters to create new musical timbre.
+
+- Seago defines the procress of programming a synthesizer as selecting the timbre. \cite{seago2004critical}
 
 - Synthesizer programming is essentially like trying to navigate the space of timbre.
 - Risset and Wessel \cite{risset1999exploration} on timbre and synthesis.
@@ -10,7 +19,6 @@ A skilled sound designer is able to interact with the control interface and craf
 
 Both Carlos and Tomita excelled at patching synthesizer modules together and tuning the parameters of individual modules to create new sounds to orchestrate their performances. This process ... it's art! Blah blah blah. But also these folks are artists and virtuosos.
 
-\subsection{Challenges}
 - Challenges identified in \cite{ethington1994seawave}: Timbre is most commonly specified by a large collection of numerical parameters peculiar to a particular synthesis technique."
 - Challenges with synthesizer programming UI design: \cite{seago2013new}. -- "Some, like subtractive synthesis, offer controllers which are broadly intuitive, in that changes to the parameter values produce a proportional and predictable change in the generated sound. Other methods, however, are less easily understood. FM synthesis, for example, is a synthesis method that may be viewed as essentially an exploration of a mathematical expression, but whose parameters have little to do with real-world sound production mechanisms, or with perceived attributes of sound." -- There are some other really good bits about navigating the timbre space and non-linearities.
 - \cite{seago2004critical} Thus, under most current systems, the user is obliged to express directives for sound specification in system terminology, rather than in language derived from the user domain. Three types of synthesizer interfaces: parameter selection in a fixed architecture, architecture specification and configuration, and direct specification of physical characteristics of sound.
@@ -24,6 +32,7 @@ Both Carlos and Tomita excelled at patching synthesizer modules together and tun
 
 - Even so, it can still be quite a challenging task.
 
+% Potentially introduction material
 Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
 
 \subsection{Opportunities}

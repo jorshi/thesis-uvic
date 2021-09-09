@@ -70,6 +70,16 @@ Goals:
 - Start compiling a "to read" section of the inverse synthesizer chapter
 - Explore RenderMan in Linux for a work block
 
+September 8th
+Tough day. Was not mentally in it.
+
+September 9th
+Goals:
+- Try to ease back into this work.
+- 30min writing block on synth programming
+- 1hr research block on more recent inverse synthesis problems
+- 30min writing block on background
+
 
 
 TODO:
