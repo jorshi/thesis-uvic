@@ -14,66 +14,41 @@ Synthesizer control interfaces provide the means for navigating this space. Most
     Some [synthesis techniques], like subtractive synthesis, offer controllers which are broadly intuitive, in that changes to the parameter values produce a proportional and predictable change in the generated sound. Other methods, however, are less easily understood. FM synthesis, for example, is a synthesis method that may be viewed as essentially an exploration of a mathematical expression, but whose parameters have little to do with real-world sound production mechanisms, or with perceived attributes of sound.
 \end{quote}
 
-Both Wendy Carlos and Isao Tomita were both masters at programming synthesizers. They learned the connection between the parameters of the synthesizers and how to interconnect modules to create the rich timbres that made their music so special. This involved developing a deep understanding of the technical details of the synthesis engine, how the parameters affected synthesis, and how to proficiently navigate the timbre space of their synthesizers. A recent study conducted by Gordan Krekevi\'{c} sought to elucidate how a more general population of synthesizer users \cite{krekovic2019insights}. 
+Both Wendy Carlos and Isao Tomita were both masters at programming synthesizers. They learned the connection between the parameters of the synthesizers and how to interconnect modules to create the rich timbres that made their music so special. This involved developing a deep understanding of the technical details of the synthesis engine, how the parameters affected synthesis, and how to proficiently navigate the timbre space of their synthesizers. A recent study conducted by Gordan Krekevi\'{c} sought to elucidate how a more general population of synthesizer users \cite{krekovic2019insights}. 122 individuals participated in that study, which consisted of an online survey with questions regarding their experience with synthesizers. A majority of users were very experienced with synthesizers, 71\% had ten or more years of experience, and only 2.7\% were novice users, having less then a few months of experience. Additionally, a majority of users had some formal training as musicians, although having formal musical training was only a weak indicator of experience using synthesizers. When asked about how they engaged with their synthesizers users claimed that they would most often program sounds from scratch or modify a preset as opposed to using a preset with no modification. Interestingly, there was no correlation with experience or level of music education; all users, regardless of their background experience, most often engaged in the manually tweaking parameters of their synthesizers to create sounds. 
 
-.
+Krekov\'{c} identified four impediments to manually programming a synthesizer:
+\begin{enumerate}
+    \item it can be time consuming,
+    \item it can be a distraction from focusing on music,
+    \item it can be difficult and non-intuitive to learn to use a particular instrument,
+    \item it rarely leads to desirable results.
+\end{enumerate}
 
+Most participants agreed with statements 1-3 and disagreed with statement 4, however, participants with less experience were more likely to agree with statement 4 and participants who more often programmed from scratch were less likely to agree. This indicates that users with more experience programming synthesizers more often felt that they were able to achieve desirable results. When given the opportunity to write about their experiences in a more open-ended manor participants generally reported on difficulties with user-interfaces, learning specific synthesizers, limited features, and the creative process. One participants' comments highlight some of the challenges and commitment associated with learning to use synthesizer.
 
-Most traditional synthesizer interfaces avoid venturing into the vague territory of defining timbre and provide control that 
-
-
-% McAdams \cite{McAdams2019} identifies timbre as a perceptual property of sound and overviews two common conceptions of timbre. The first is a spectrotemporal conception which identifies 
-
-% - Introduce perceptual representation. 
-
-% A perceptual representation of timbre is thoug
-
-% McAdams \cite{McAdams2019} identifies timbre 
-
-
-% Early work on musical timbre focused on the periodic nature of tones and concluded that the frequency spectrum, derived from Fourier analysis, was the sole contributor to timbre [cites]. A spectrotemporal conception of timbre was then introduced, which identified the temporal aspects and evolution of a spectrum as being critical. The idea of timbre space was proposed by Grey \cite{grey1977multidimensional} which introduced a multidimensional conception of timbre. Risset and Wessel \cite{risset1999exploration} explore musical timbre in the context of various audio synthesis algorithms.
-
-% - Introduces a challenges -- timbre is challenging to define. Perceptual attribute of sound.
-
-% Musical timbre is a complex perceptual property of sound \cite{McAdams2019} and has been 
-
-% and challenging to understand \cite{krumhansl1989musical}. The ANSI definition of timbre is that it is the attribute of auditory sensation that allows it to be distinguished from other sounds at the same pitch and loudness \cite{american1973american}. This definition doesn't tell us very much about what timbre is, as opposed to what it is not. A significant body of research has been dedicated to 
-
-
-
-% \cite{McAdams2019} Perceptual representations of timbre.
-
-% - This looks interesting: https://link.springer.com/chapter/10.1007%2F978-3-030-14832-4_2
-
-The artistry in synthesizer programming lies in the specification of parameters to create new musical timbre.
-
-- Seago defines the procress of programming a synthesizer as selecting the timbre. \cite{seago2004critical}
-
-- Synthesizer programming is essentially like trying to navigate the space of timbre.
-- Risset and Wessel \cite{risset1999exploration} on timbre and synthesis.
-- What can we say about timbre space? How can we define timbre? \cite{grey1977multidimensional}. Grey created a three-dimensional representation of timbre.
-- \cite{bates2021interface} - looks at interfaces of modular synthesizers (maybe better in control interfaces?) 
-- \cite{d2016interface} interface of software synthesizers and smart phones?
-
-A skilled sound designer is able to interact with the control interface and craft sounds to fit the needs of their creative project. This process is referred to as programming a synthesizer. 
-
-Both Carlos and Tomita excelled at patching synthesizer modules together and tuning the parameters of individual modules to create new sounds to orchestrate their performances. This process ... it's art! Blah blah blah. But also these folks are artists and virtuosos.
-
-- Challenges identified in \cite{ethington1994seawave}: Timbre is most commonly specified by a large collection of numerical parameters peculiar to a particular synthesis technique."
-- Challenges with synthesizer programming UI design: \cite{seago2013new}. -- "Some, like subtractive synthesis, offer controllers which are broadly intuitive, in that changes to the parameter values produce a proportional and predictable change in the generated sound. Other methods, however, are less easily understood. FM synthesis, for example, is a synthesis method that may be viewed as essentially an exploration of a mathematical expression, but whose parameters have little to do with real-world sound production mechanisms, or with perceived attributes of sound." -- There are some other really good bits about navigating the timbre space and non-linearities.
-- \cite{seago2004critical} Thus, under most current systems, the user is obliged to express directives for sound specification in system terminology, rather than in language derived from the user domain. Three types of synthesizer interfaces: parameter selection in a fixed architecture, architecture specification and configuration, and direct specification of physical characteristics of sound.
-- Context on synthesizer programming \cite{jenkins2019analog}
-- Russ describes the programming component intrinsically creative.
-- When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
-
-- Talk about the nature of this task. I think in that krekovic study there was something about this process? That this can be done in an exploratory way that ppl enjoy that process. \cite{krekovic2019insights}
-- 122 participants. 71\% had ten or more years of experience using synthesizers and only 2.7\% claimed they were novice users. Also, a majority of users had some formal training as musicians. So this study has quite a high representation of users who are experienced, as opposed to studying individuals who are novices. Musical training was only a weak indicator of experience using synthesizers. Most users most often create a synth patch from scratch or modify an existing one and only sometimes use presets with no modification. Interestingly there was no correlation with experience or music education. All users, regardless of experience or musical knowledge most often tweak the parameters of synthesizers.
-- Four impediments to manually programming a synthesizer: 1) It can be time consuming, 2) it can distract them from focusing on music, 3) it can be difficult and non-intuitive to learn how to use a particular instrument, and 4) it rarely leads to desirable results. Participants agreed with the first three statements. Most participants disagreed with the fourth statement, but users with less experience were more likely to agree. Considering the average experience level of the group, these results highlight the challenges with synthesizer programming in the context of creating music.
-
-- Even so, it can still be quite a challenging task.
-
-% Potentially introduction material
-Programming audio synthesizers is challenging and requires a technical understanding of sound design to fully realize their expressive power. Traditional synthesizers can have over 100 parameters that affect audio generation in complex, non-linear ways. One of the most commercially successful audio synthesizers, the Yamaha DX7, was notoriously challenging to program. Allegedly nine out of ten DX7s coming into workshops for servicing still had their factory presets intact \cite{seago2004critical}.
+\begin{quote}
+    Different sorts of synthesis require different background knowledge, most of which have steep learning curves that are at least partially exclusive. In other words, there is an enormous investment of time to deeply learn how the different forms of synthesis work. This learning is a prerequisite to effective use of synthesizers.
+\end{quote}
 
 \subsection{Opportunities}
-Krekovi\'{c} \cite{krekovic2019insights} participants were also asked to rate the perceived helpfulness of improvements to synthesizer  interfaces. Four different systems were proposed: 1) random presets are generated within a category, 2) a user provides a description of a the desired sound and a preset is generated for them, 3) a user provides an example sound and the system generates a presets to sound similar, and 4) more intuitive interactive user interface. Participants thought that proposed systems 3 and 4 would be helpful and systems 1 and 2 would be slightly helpful.
+Considering that well over half of the participants in Krekovi\'{c}'s study had over ten years of experience, the results highlight the degree of difficulty associated with programming synthesizers and the opportunity for improvements. Finding alternative and assistive methods for synthesizer programming has been an active field of study for over 40 years and will be reviewed in detail in the following chapter. Based on a review of some of the methods from previous research, Krekovi\'{c} selected four different methods and asked participants to rate the perceived helpfulness of each system. The systems proposed were: 1) a system that generates random presets within a category, 2) a user provides a description of a the desired sound and a preset is generated for them, 3) a user provides an example sound and the system generates a presets to sound similar, and 4) more intuitive interactive user interface. Participants thought that proposed systems 3 and 4 would be helpful and systems 1 and 2 would be slightly helpful. 
+
+Due to the limited number of novices included the study, it is challenging to to say with certainty how these results would generalize to users in that category, and this would be a good area for future work. However, based on the results that showed a correlation between experience and satisfaction with results of programming, there is likely a good opportunity to improve the experience of novice users.
+
+\subsection{Enjoyment}
+When conducting a critical analysis on the usability of synthesizers and the affect that has on synthesizer programming, it is easy to take on the perspective that it is a strictly negative trait that synthesizers are challenging to use and that is something that must be improved. There is, however, some indication that users enjoy the complexity of synthesizer interfaces and the challenge that provides in their programming. This is illustrated by the recent resurgence in hardware modular synthesizers \cite{bates2021interface}. Modular synthesizers are more complicated and time-consuming to use than software synthesizers for a number of number of reasons, and are more likely to lead to unsatisfactory results, yet the demand for them has shot up in recent years. This points to realization that programming a synthesizer, despite it being challenging and time-consuming, is an enjoyable experience and something worth doing regardless of the quality of the final result. Results from Krekovi\'{c}'s study point to this conclusion as well, despite the fact that participants agreed with three out of four of the impediments, they still chose to manually program more often than not, and most had for many years. This conclusion could of course be drawn based on survivor bias, the users who participated in the study hadn't given up with synthesizer programming in the face of the challenges; they either enjoyed it enough, or had another good reason, to keep going despite the impediments. How many potential synthesizer users are not represented because they never made it past the initial learning curve? While it is arguable whether using a musical instrument should be easy \cite{mcdermott2013should}, and that long term enjoyment may depend on the existence of challenges and idiosyncrasies, there is most certainly an opportunity to improve and support the enjoyment of synthesizer programming at all stages of a users' process.
+
+
+% - \cite{bates2021interface} - looks at interfaces of modular synthesizers (maybe better in control interfaces?) 
+% - \cite{d2016interface} interface of software synthesizers and smart phones?
+
+% A skilled sound designer is able to interact with the control interface and craft sounds to fit the needs of their creative project. This process is referred to as programming a synthesizer. 
+
+% Both Carlos and Tomita excelled at patching synthesizer modules together and tuning the parameters of individual modules to create new sounds to orchestrate their performances. This process ... it's art! Blah blah blah. But also these folks are artists and virtuosos.
+
+% - Challenges identified in \cite{ethington1994seawave}: Timbre is most commonly specified by a large collection of numerical parameters peculiar to a particular synthesis technique."
+% - Challenges with synthesizer programming UI design: \cite{seago2013new}. -- "Some, like subtractive synthesis, offer controllers which are broadly intuitive, in that changes to the parameter values produce a proportional and predictable change in the generated sound. Other methods, however, are less easily understood. FM synthesis, for example, is a synthesis method that may be viewed as essentially an exploration of a mathematical expression, but whose parameters have little to do with real-world sound production mechanisms, or with perceived attributes of sound." -- There are some other really good bits about navigating the timbre space and non-linearities.
+% - \cite{seago2004critical} Thus, under most current systems, the user is obliged to express directives for sound specification in system terminology, rather than in language derived from the user domain. Three types of synthesizer interfaces: parameter selection in a fixed architecture, architecture specification and configuration, and direct specification of physical characteristics of sound.
+% - Context on synthesizer programming \cite{jenkins2019analog}
+% - Russ describes the programming component intrinsically creative.
+% - When we talk about programming synthesizers we are referring to the task of selecting parameter settings for a synthesizer in order to achieve a desired sound
