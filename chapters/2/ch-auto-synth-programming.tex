@@ -21,49 +21,62 @@ This chapter provides a brief overview and survey of the field of ASP with an em
 
 %--------------------------------------------------------------------
 
-\section{Creativity Support}
+\section{Background}
+Automatic synthesizer programming is an inherently interdisciplinary field. Previous research has focused on both the algorithmic and technical aspects of the problem, as well as the human interaction aspects of the problem. Depending on the focus a solution may draw from fields including human-computer interaction, digital signal processing (DSP), machine learning and artificial intelligence, to name a few. Insights can also be gleaned from related fields including music information retrieval and intelligent music production. To provide context and situate automatic synthesizer programming in a wider body of research, a brief introduction to these fields and how they relate to the synthesizer programming problem is provided in this section.
+
+\subsection{Human Computer Interaction}
+\subsubsection{Creative Support Tools}
 Automatic synthesizer programming can be viewed from the perspective of trying to solve a human computer interaction (HCI) problem. How can a synthesizer user more effectively communicate their creative ideas to a synthesizer? Currently users are expected to learn the domain language from the perspective of whatever synthesis algorithm they are using. Can a user instead communicate their ideas to a synthesizer in a way that fits their creative needs? Creativity support is an emerging field of study that is interested in answering questions similar to this. It is focused on the development of tools that enable and enhance the creative output of an individual or group, both novices and experts. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. A central question that CSTs ask is: 
 \begin{quote}
     "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?"
 \end{quote}
 
-
 Shneiderman \cite{shneiderman2007creativity} outlines a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. In their work, the authors identify two types of novice users: domain novices and tool novices. Domain novices are new to both the creative domain as well as using the creativity support tool. Tool novices have experience with the creative domain, but are novices at using a particular tool. To help evaluate and promote the development of creativity support tools for novices, they also propose a theory of creativity support based on cognitive theory.
 
-- How does the music interaction work fit into this?? Leman had some stuff about flow? Designing 
+These concepts provide an important platform for beginning to develop tools to support users of synthesizers. Both types of novices described by Davis \textit{et al.} are common and serve to benefit from the development of improved methods for interacting with them; domain novices are both new to sound design / music production as well as to using a specific synthesizer, whereas a tool novices would likely have experience with sound design / music production, but would be a novice with using a specific synthesizer.
 
+\subsubsection{Music Interaction}
 Music and Human-Computer Interaction \cite{holland2013music}, or Music Interaction. Research related to the use of interactive systems that involve computes for any kind of musical activity. Music interaction draws heavily from other areas of HCI research, but also responds to the needs and desires of the music community. There are unique considerations in the context of musical applications that makes music interaction different from other fields of HCI. A musical instrument is not a utilitarian tool whose development should be ever-improved to make it more efficient. Musical instruments are played, and sometimes that is the only goal. Tomaka [cite me!] identifies that imperfections and limitations of a musical instrument give an instrument character. McDermott \cite{mcdermott2013should} identifies the importance of engagement in musical interaction and the relation that bears to the concept of \textit{flow} \cite{csikszentmihalyi1990flow}. The learning curve plays is crucial to the level of engagement that a player experiences when playing a musical instrument, both in the short-term and long-term.
 
 \begin{quote}
     In order to remain engaging, consuming and flow-like, activities that involve musical instruments must offer continued challenges at appropriate levels of difficulty: not too difficult, and not too easy. 
 \end{quote}
 
-These concepts provide an important platform for beginning to develop tools to support users of synthesizers. Both types of novices described by Davis \textit{et al.} are common and serve to benefit from the development of improved methods for interacting with them; domain novices are both new to sound design / music production as well as to using a specific synthesizer, whereas a tool novices would likely have experience with sound design / music production, but would be a novice with using a specific synthesizer. 
-
-- This is a bit of a problem formulation.
-
 The inverse synthesis approach seeks to completely abstract the process of programming a sound. Creating a new sound with a synthesizer is seen as a hindrance to the process of creating music. But people enjoy using synthesizers and being involved in the process of designing new sounds. They already support long-term engagement to the dedicated users. The question arises, how can we support creativity and engagement for users of all experience levels? Can interfaces be designed that offer continued challenges at the appropriate level of difficulty? Can these interfaces adapt to the correct level of difficultly for a particular user?
 
-
-\section{Related Fields}
 \subsection{Music Information Retrieval}
 The field of music information retrieval (MIR) is a growing research area that was born out of the need to navigate increasingly large collections of digital music. Creative MIR is a subset of the field that is focused on applying the techniques from MIR towards creative applications including music production \cite{humphrey2013brief}.
-
-- Conversations with music producers: \cite{andersen2016conversations}
-
-- More directly related to music the fields of MIR (creative MIR) as well as intelligent music production. - automatic mixing ref, other topics (hit up some references and expand on this)
-
-- Overview of approaches in intelligent music production \cite{moffat2019approaches}, automatic mixing \cite{de2017ten}.
 
 - MIR audio querying: Automatic synthesizer programming can be viewed as a retrieval task as well as an optimization problem. Viewed as a retrieval task, the problem is similar to the MIR query tasks such as Query-by-example \cite{zloof1977query}, Query-by-vocal-imitation \cite{blancas2014sound}, and query-by-beat-boxing \cite{kapur2004query}. Query problems generally build up a model of the synthesis parameter space and then return a parameter setting based on a classification that attempts to match the input with the best parameter setting.
 - Visualizing sounds: \cite{wessel1979timbre} (Potentially add the George citation on visualizing sounds).
 
-- \cite{pardo2019learning} "Learning to build natural audio production interfaces" -> Rather than force nonintuitive interactions, or remove control altogether, we reframe the controls to work within the interaction paradigms identified by research done on how audio engineers and musicians communicate auditory concepts to each other: evaluative feedback, natural language, vocal imitation, and exploration
+
 \subsection{Intelligent Music Production}
+- Creativity support for music production tools
+
+- Overview of approaches in intelligent music production \cite{moffat2019approaches}, automatic mixing \cite{de2017ten}.
+
+- Conversations with music producers: \cite{andersen2016conversations}
+
+% Tie into audio production interfaces.
+- \cite{pardo2019learning} "Learning to build natural audio production interfaces" -> Rather than force nonintuitive interactions, or remove control altogether, we reframe the controls to work within the interaction paradigms identified by research done on how audio engineers and musicians communicate auditory concepts to each other: evaluative feedback, natural language, vocal imitation, and exploration
+
+- More directly related to music the fields of MIR (creative MIR) as well as intelligent music production. - automatic mixing ref, other topics (hit up some references and expand on this)
+
+\subsection{Neural Synthesis}
+One area of new development in audio synthesis is in methods that are leveraging advancements from the field of deep learning [deep learning cite], an area of audio synthesis that is explored in this thesis.  
+In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
+One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
+
+% GANs for synthesis
+In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
+
+This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
+\cite{ccakir2018musical} - not totally sure what this is about, I think it is generative though.
 
 %--------------------------------------------------------------------
 
-\section{Techniques}
+\section{Approaches}
 - This is really a user interface problem. Programming synthesizers is hard!
 - What are some of the different approaches that have been taken by people?
 - Interactive methods (IGAs)
@@ -139,15 +152,4 @@ Several researchers have explored the use of deep learning for ASP. Yee-King et 
 
 %--------------------------------------------------------------------
 
-% This probably belongs in another section. Maybe add a background section and include this there?
-\subsubsection{Neural Synthesis}
-One area of new development in audio synthesis is in methods that are leveraging advancements from the field of deep learning [deep learning cite], an area of audio synthesis that is explored in this thesis.  
-In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
-One benefit of synthesized audio is that the underlying factors of variation ({\em i.e.}~the parameters) are known.
-
-% GANs for synthesis
-In this work, we use Generative Adversarial Networks (GANs) \cite{goodfellow2014generative} to generate new instrumental audio from a dataset of existing material. GANs have the potential to be used to generate new sounds on the fly. This would dramatically alleviate both the problem of having to pore through giant sound libraries, and the problem with having to only use one sample repeatedly. In addition, the explosion of new sounds which could potentially be produced by GANs would vastly reduce recording costs by designers of sound libraries.
-
-This research avenue is to a certain degree untapped: GANs have been successfully applied to the generation and manipulation of images, however, relatively little work has been focused on the audio domain. Research related to the specific work proposed here was presented by \cite{donahue2018adversarial}  and \cite{engel2018gansynth}.
-\cite{ccakir2018musical} - not totally sure what this is about, I think it is generative though.
 
