@@ -4,37 +4,48 @@ The field of automatic synthesizer programming (ASP) emerged from the challenges
 
 This chapter provides a brief overview and survey of the field of ASP with an emphasis on inverse synthesis. To situate ASP in a larger body of research, background and related work is provided.
 
-\section{Background}
-\subsection{Creativity Support}
+% - other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
+
+% % Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
+% % - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+% % - https://benhayes.net/assets/pdf/16.Hayes.pdf
+% % - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
+% % - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
 
 
-- other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
+% Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
 
-% Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
-% - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
-% - https://benhayes.net/assets/pdf/16.Hayes.pdf
-% - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
-% - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
-
-
-Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
-
-- In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
-- Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
-- This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
-
+% - In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
+% - Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
+% - This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
 
 %--------------------------------------------------------------------
 
 \section{Creativity Support}
-The field of creativity support is focused on the development of tools to enable and enhance the creative output of an individual or group, both in novice and expert users. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. A central question that CSTs ask is: 
+Automatic synthesizer programming can be viewed from the perspective of trying to solve a human computer interaction (HCI) problem. How can a synthesizer user more effectively communicate their creative ideas to a synthesizer? Currently users are expected to learn the domain language from the perspective of whatever synthesis algorithm they are using. Can a user instead communicate their ideas to a synthesizer in a way that fits their creative needs? Creativity support is an emerging field of study that is interested in answering questions similar to this. It is focused on the development of tools that enable and enhance the creative output of an individual or group, both novices and experts. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. A central question that CSTs ask is: 
 \begin{quote}
     "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?"
 \end{quote}
- Shneiderman \cite{shneiderman2007creativity} outlines a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. In their work, the authors identify two types of novice users: domain novices and tool novices. Domain novices are new to both the creative domain as well as using the creativity support tool. Tool novices have experience with the creative domain, but are novices at using a particular tool. To help evaluate and promote the development of creativity support tools for novices, they also propose a theory of creativity support based on cognitive theory.
+
+
+Shneiderman \cite{shneiderman2007creativity} outlines a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. In their work, the authors identify two types of novice users: domain novices and tool novices. Domain novices are new to both the creative domain as well as using the creativity support tool. Tool novices have experience with the creative domain, but are novices at using a particular tool. To help evaluate and promote the development of creativity support tools for novices, they also propose a theory of creativity support based on cognitive theory.
+
+- How does the music interaction work fit into this?? Leman had some stuff about flow? Designing 
+
+Music and Human-Computer Interaction \cite{holland2013music}, or Music Interaction. Research related to the use of interactive systems that involve computes for any kind of musical activity. Music interaction draws heavily from other areas of HCI research, but also responds to the needs and desires of the music community. There are unique considerations in the context of musical applications that makes music interaction different from other fields of HCI. A musical instrument is not a utilitarian tool whose development should be ever-improved to make it more efficient. Musical instruments are played, and sometimes that is the only goal. Tomaka [cite me!] identifies that imperfections and limitations of a musical instrument give an instrument character. McDermott \cite{mcdermott2013should} identifies the importance of engagement in musical interaction and the relation that bears to the concept of \textit{flow} \cite{csikszentmihalyi1990flow}. The learning curve plays is crucial to the level of engagement that a player experiences when playing a musical instrument, both in the short-term and long-term.
+
+\begin{quote}
+    In order to remain engaging, consuming and flow-like, activities that involve musical instruments must offer continued challenges at appropriate levels of difficulty: not too difficult, and not too easy. 
+\end{quote}
 
 These concepts provide an important platform for beginning to develop tools to support users of synthesizers. Both types of novices described by Davis \textit{et al.} are common and serve to benefit from the development of improved methods for interacting with them; domain novices are both new to sound design / music production as well as to using a specific synthesizer, whereas a tool novices would likely have experience with sound design / music production, but would be a novice with using a specific synthesizer. 
 
+- This is a bit of a problem formulation.
+
+The inverse synthesis approach seeks to completely abstract the process of programming a sound. Creating a new sound with a synthesizer is seen as a hindrance to the process of creating music. But people enjoy using synthesizers and being involved in the process of designing new sounds. They already support long-term engagement to the dedicated users. The question arises, how can we support creativity and engagement for users of all experience levels? Can interfaces be designed that offer continued challenges at the appropriate level of difficulty? Can these interfaces adapt to the correct level of difficultly for a particular user?
+
+
+\section{Related Fields}
 \subsection{Music Information Retrieval}
 The field of music information retrieval (MIR) is a growing research area that was born out of the need to navigate increasingly large collections of digital music. Creative MIR is a subset of the field that is focused on applying the techniques from MIR towards creative applications including music production \cite{humphrey2013brief}.
 
@@ -48,26 +59,7 @@ The field of music information retrieval (MIR) is a growing research area that w
 - Visualizing sounds: \cite{wessel1979timbre} (Potentially add the George citation on visualizing sounds).
 
 - \cite{pardo2019learning} "Learning to build natural audio production interfaces" -> Rather than force nonintuitive interactions, or remove control altogether, we reframe the controls to work within the interaction paradigms identified by research done on how audio engineers and musicians communicate auditory concepts to each other: evaluative feedback, natural language, vocal imitation, and exploration
-
-
-%--------------------------------------------------------------------
-
-% This could potentially be its own section
-\section{Audio Representations}
-- how do we represent audio digitally?
-- That tutorial by that ableton author was helpful -- maybe can link to that.
-- Don't go into too much depth here.
-- What is a perceptually relevant method for representing audio?
-- Spectral features
-- STFT
-
-% Not totally sure how to incorporate these sections?
-\subsection{Learned Audio Representations}
-- Representation learning \cite{bengio2013representation}
-- Introduce machine learning
-- self-supervised learning
-- Learned audio representations
-- Give a brief plug for HEAR 2021 and the need for perceptual audio representations
+\subsection{Intelligent Music Production}
 
 %--------------------------------------------------------------------
 
@@ -78,8 +70,6 @@ The field of music information retrieval (MIR) is a growing research area that w
 - Semantic search
 - That interesting paper on sketching sounds visually
 - Pardo look at how we can build more natural interfaces for audio production tools \cite{pardo2019learning}
-
-\cite{holland2013music} HCI and music interaction.
 
 \subsection{Interactive Searches}
 Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
@@ -111,6 +101,23 @@ This section provides a brief summary of the main algorithmic methodologies that
 \subsection{Search vs. Modelling}
 % Add something abouth the search vs. modelling approach
 These two methods, the hill-climber and the LSTM++, represent two different methods for inverse synthesis; the hill-climber is a search algorithm and the LSTM++ is a modelling algorithm. Search algorithms (which include genetic algorithms) have been used extensively in the body of automatic synthesizer programming research and modelling with deep learning has been becoming more popular. Search algorithms are presented with a target sound and then begin an iterative search for the parameter settings, attempting to move closer to the target at each iteration.
+
+% This could potentially be its own section
+\subsection{Audio Representations}
+- how do we represent audio digitally?
+- That tutorial by that ableton author was helpful -- maybe can link to that.
+- Don't go into too much depth here.
+- What is a perceptually relevant method for representing audio?
+- Spectral features
+- STFT
+
+% Not totally sure how to incorporate these sections?
+\subsubsection{Learned Audio Representations}
+- Representation learning \cite{bengio2013representation}
+- Introduce machine learning
+- self-supervised learning
+- Learned audio representations
+- Give a brief plug for HEAR 2021 and the need for perceptual audio representations
 
 \subsection{Optimization}
 The optimization approach was first introduced in 1993 with Horner et al.'s work on sound matching for FM synthesis using genetic algorithms \cite{horner1993machine}. A genetic algorithm (GA) is a method for solving an optimization problem using techniques based on the principles of Darwinian evolution, and is part of a broader class of evolutionary algorithms \cite{whitley1994genetic}. In a GA, a potential solution (an individual) is represented as an array of bits. An initial set of individuals is randomly generated, and then iteratively evolved using biologically inspired processes including selection, breeding, and mutation. Individuals are ranked using an evaluation function that measures the $fitness$ of a given solution. The objective of a GA is to minimize that value (or maximize it, depending on the problem definition). The best candidates are selected for further evolution until either an optimal solution is found or a set number of evolutions has been completed.
