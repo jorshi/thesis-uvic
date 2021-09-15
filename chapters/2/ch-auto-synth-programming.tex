@@ -1,21 +1,28 @@
 \chapter{Automatic Synthesizer Programming}
 \label{chapter:asp-background}
+The field of automatic synthesizer programming (ASP) emerged from the challenges with programming synthesizers and the desire for more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?". James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm. This was an example of inverse synthesis, or sound matching, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work on inverse synthesis has been published, exploring a variety of synthesis techniques and algorithmic methods. In addition to inverse synthesis a number of other human interaction paradigms for automatic synthesizer programming have been explored including the use of semantic searches and intuitive \textit{macro} parameters. 
 
-- The field of ASP has been an active area of research for 40+ years.
-- What did the early work have to say about programming synthesizers? Why did the early work exist?
-- This chapter provides background to the field of automatic synthesizer programming and 
+This chapter provides a brief overview and survey of the field of ASP with an emphasis on inverse synthesis. To situate ASP in a larger body of research, background and related work is provided.
 
-Early ASP research emerged in the late 1970s with work that focused on the use of analytic methods to estimate the parameters for frequency modulation (FM) synthesis \cite{justice1979analytic}. That work was an example of synthesizer sound matching in which a system estimates synthesizer parameters to replicate a target sound. Since then a large volume of work on synthesizer sound matching has been published and has explored a variety of synthesis techniques and algorithmic methods.
+\section{Background}
+\subsection{Creativity Support}
+
 
 - other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
 
-- Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+% Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
+% - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+% - https://benhayes.net/assets/pdf/16.Hayes.pdf
+% - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
+% - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
+
 
 Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
 
 - In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
 - Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
 - This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
+
 
 %--------------------------------------------------------------------
 
@@ -90,6 +97,8 @@ Reinforcement Learning and interaction \cite{scurto2021designing}
  Other:
  
  Sketching sounds \cite{lobbers2021sketching} \cite{knees2016searching}
+ 
+ Timbre space representation of a substractive synthesizer: \cite{vahidi2020timbre} (Read this, it's short, how does this fit into the landscape?)
 
 %--------------------------------------------------------------------
 
