@@ -92,6 +92,10 @@ Goals:
 - Create framework and some structure for the ASP background chapter.
 - Start filling in the chapter
 
+September 16th
+Goals:
+- Complete first draft of that ASP chapter
+
 
 
 TODO:
