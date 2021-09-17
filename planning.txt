@@ -96,6 +96,9 @@ September 16th
 Goals:
 - Complete first draft of that ASP chapter
 
+September 17th
+- Continue to finish first draft of ASP chapter
+
 
 
 TODO:

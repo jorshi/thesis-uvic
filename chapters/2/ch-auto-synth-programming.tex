@@ -73,7 +73,18 @@ This research avenue is to a certain degree untapped: GANs have been successfull
 %--------------------------------------------------------------------
 
 \section{Approaches}
-In an automatic synthesizer programming system the result is typically an additional layer of abstraction on top of the control interface. The goal of this abstraction is to bridge the conceptual
+In an automatic synthesizer programming system the result is typically an additional layer of abstraction on top of the control interface. The goal of this abstraction is to help bridge the conceptual gap between the parameter space and the perceptual and semantic space. Similar to how synthesizer control interfaces create a mapping from the parameter space to the synthesis engine, interfaces of automatic synthesizer programming systems present an abstracted higher-level model of the parameter space to a user and create a mapping to the parameter space. Figure [Insert figure that builds off of the one some the synthesizer chapter] shows the original components of an audio synthesizer (the synthesis engine and control interface), along with the additional automatic synthesizer programming interface.
+
+A number of different interface approaches have been explored in previous ASP research. Pardo \textit{et al.} \cite{pardo2019learning} presented a framework for classifying different interaction paradigms within audio production tools. The development of this framework was based on how musicians and audio engineers communicate auditory concepts and included four different types of interaction styles: 1) evaluation interfaces, 2) using descriptive words, 3) vocal imitations, and 4) exploration interfaces. Pardo \textit{et al.} evaluated four different examples of audio production software with \textit{natura} interfaces that attempted to bridge the gap between the parameter space and perceptual/semantic space. One thing to note is that a system may fall under one or more of these categorizations.
+
+These four categories are useful for understanding the different approaches to ASP interactions that have been proposed in previous work. In addition to those, we also include a fifth category: \textit{example-based} interfaces. 
+
+\subsubsection{Example-based Interfaces}
+Example-based interfaces allow a user to present a system with an auditory example of a sound that they wish to have programmed into their synthesizer. This style of interface is a superset of vocal imitation interfaces for automatic synthesizer programming as vocal imitations represent a specific style of providing an example to a system. Inverse synthesis is an example of an example-based interaction paradigm and this approaches make up a large portion of the previous work in ASP.
+
+
+\subsection{Evaluation Interfaces}
+Evaluation type interfaces allow users to compare different potential synthesizer sounds and iteratively work towards finding their ideal solution. 
 
 
 In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}.
@@ -116,9 +127,7 @@ Early research in automatic synthesizer programming conducted in the late 70s th
  
 This section provides a brief summary of the main algorithmic methodologies that have been used in previous ASP research, namely, optimization and deep learning techniques. Other methods that have been used in ASP research that are beyond the scope of this paper include  include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}.
 
-\subsection{Search vs. Modelling}
-% Add something abouth the search vs. modelling approach
-These two methods, the hill-climber and the LSTM++, represent two different methods for inverse synthesis; the hill-climber is a search algorithm and the LSTM++ is a modelling algorithm. Search algorithms (which include genetic algorithms) have been used extensively in the body of automatic synthesizer programming research and modelling with deep learning has been becoming more popular. Search algorithms are presented with a target sound and then begin an iterative search for the parameter settings, attempting to move closer to the target at each iteration.
+
 
 % This could potentially be its own section
 \subsection{Audio Representations}
@@ -136,6 +145,10 @@ These two methods, the hill-climber and the LSTM++, represent two different meth
 - self-supervised learning
 - Learned audio representations
 - Give a brief plug for HEAR 2021 and the need for perceptual audio representations
+
+\subsection{Search vs. Modelling}
+% Add something abouth the search vs. modelling approach
+These two methods, the hill-climber and the LSTM++, represent two different methods for inverse synthesis; the hill-climber is a search algorithm and the LSTM++ is a modelling algorithm. Search algorithms (which include genetic algorithms) have been used extensively in the body of automatic synthesizer programming research and modelling with deep learning has been becoming more popular. Search algorithms are presented with a target sound and then begin an iterative search for the parameter settings, attempting to move closer to the target at each iteration.
 
 \subsection{Optimization}
 The optimization approach was first introduced in 1993 with Horner et al.'s work on sound matching for FM synthesis using genetic algorithms \cite{horner1993machine}. A genetic algorithm (GA) is a method for solving an optimization problem using techniques based on the principles of Darwinian evolution, and is part of a broader class of evolutionary algorithms \cite{whitley1994genetic}. In a GA, a potential solution (an individual) is represented as an array of bits. An initial set of individuals is randomly generated, and then iteratively evolved using biologically inspired processes including selection, breeding, and mutation. Individuals are ranked using an evaluation function that measures the $fitness$ of a given solution. The objective of a GA is to minimize that value (or maximize it, depending on the problem definition). The best candidates are selected for further evolution until either an optimal solution is found or a set number of evolutions has been completed.
