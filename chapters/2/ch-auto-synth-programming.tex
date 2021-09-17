@@ -59,6 +59,7 @@ Creative MIR is a subset of MIR that is focused on the applying techniques from 
 
 Music producers have expressed desires for improved methods for working with  Related work that I completed during my time at University of Victoria focused on techniques for visualizing drum machine samples in a music production context \cite{shier2021manifold}. Intelligent music production \cite{moffat2019approaches} is another related field that draws from MIR and machine learning with the aim to develop tools that support creativity and automate workflows within the context of music production. Tools that automate mixing, the practice of combining multiple individual audio tracks into a single tack, is a complex task that has received a large amount of focus \cite{de2017ten}.
 
+
 \subsection{Neural Synthesis}
 One area of new development in audio synthesis is in methods that are leveraging advancements from the field of deep learning [deep learning cite], an area of audio synthesis that is explored in this thesis.  
 In contrast to traditional synthesis, neural synthesizers generate audio using large-scale machine learning architectures with millions of parameters \cite{engel2017neural}. Differentiable digital signal processing \cite{engel2020ddsp} bridged the gap between traditional DSP synthesizers with the expressiveness of neural networks, exploring a harmonic model-based approach, using a more compact architecture with 100K parameters.
@@ -75,32 +76,49 @@ This research avenue is to a certain degree untapped: GANs have been successfull
 \section{Approaches}
 In an automatic synthesizer programming system the result is typically an additional layer of abstraction on top of the control interface. The goal of this abstraction is to help bridge the conceptual gap between the parameter space and the perceptual and semantic space. Similar to how synthesizer control interfaces create a mapping from the parameter space to the synthesis engine, interfaces of automatic synthesizer programming systems present an abstracted higher-level model of the parameter space to a user and create a mapping to the parameter space. Figure [Insert figure that builds off of the one some the synthesizer chapter] shows the original components of an audio synthesizer (the synthesis engine and control interface), along with the additional automatic synthesizer programming interface.
 
-A number of different interface approaches have been explored in previous ASP research. Pardo \textit{et al.} \cite{pardo2019learning} presented a framework for classifying different interaction paradigms within audio production tools. The development of this framework was based on how musicians and audio engineers communicate auditory concepts and included four different types of interaction styles: 1) evaluation interfaces, 2) using descriptive words, 3) vocal imitations, and 4) exploration interfaces. Pardo \textit{et al.} evaluated four different examples of audio production software with \textit{natura} interfaces that attempted to bridge the gap between the parameter space and perceptual/semantic space. One thing to note is that a system may fall under one or more of these categorizations.
+A number of different interface approaches have been explored in previous ASP research. Pardo \textit{et al.} \cite{pardo2019learning} presented a framework for classifying different interaction paradigms within audio production tools. The development of this framework was based on how musicians and audio engineers communicate auditory concepts and included four different types of interaction styles. Pardo \textit{et al.} evaluated four different examples of audio production software with \textit{natural} interfaces that attempted to bridge the gap between the parameter space and perceptual/semantic space. Each system was fell under one or more of the interaction paradigms. These categorizations are useful for understanding the different approaches to ASP interactions that have been proposed in previous work. For purpose of classifying ASP systems we include two additional categories: \textit{example-based} interfaces and \textit{intuitive controls}. The six interaction paradigms are:
 
-These four categories are useful for understanding the different approaches to ASP interactions that have been proposed in previous work. In addition to those, we also include a fifth category: \textit{example-based} interfaces. 
+\begin{enumerate}
+    \item evaluation interfaces (users compare and evaluate results of different parameter settings to help guide the selection process)
+    \item using descriptive words (semantic description of the desired result)
+    \item vocal imitations (users imitate the sound that they desire)
+    \item exploration interfaces (a number of different results are produced and provided to the user in a way for them to explore)
+    \item example-based interfaces (users provide an audio example of the sound that they want to play)
+    \item intuitive controls (higher-level parameters, or macro parameters, are provided that have a complex mapping to to the lower level parameters)
+\end{enumerate}
+
+\subsection{Evaluation Interfaces}
+Evaluation interfaces for synthesizer programming allow a user to compare the results from multiple parameter settings to help them navigate and select a desired setting. One approach to evaluation style interfaces is through the use of interace genetic agorithms (IGAs) \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. An IGA is a type of search algorithm that uses concepts from evolutionary biology to iterate towards an ideal solution, and utilizes feedback from a user at various points of the search to guide the process. This allows a user to provide feedback to the system and participate in the process of finding a sound. IGAs also facilitate exploration as they can produce a large variety of novel examples in a short period of time and help a user explore different aspects of the parameter space.  
+
+A recent example of an IGA used for automatic synthesizer programming is EvoSynth by Yee-King \cite{yee2016use}. EvoSynth is a modular architecture software synthesizer; it contains a set of basic modules that can be programmatically reorganized and patched together to create a larger synthesizer. Users are presented with a selection of configurations and parameter settings and are able to select which ones the way to "save" or "breed". When 
+
+
+Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
+
+Reinforcement Learning and interaction \cite{scurto2021designing}
+
+\subsubsection{Using Descriptive Words}
+In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}.
+
+ Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
+ - Check the seago cite?
+ \cite{roche2021make} - VAE
+
+\subsubsection{Vocal Imitations}
+It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches.
+
+\subsubsection{Exploration Interfaces}
 
 \subsubsection{Example-based Interfaces}
-Example-based interfaces allow a user to present a system with an auditory example of a sound that they wish to have programmed into their synthesizer. This style of interface is a superset of vocal imitation interfaces for automatic synthesizer programming as vocal imitations represent a specific style of providing an example to a system. Inverse synthesis is an example of an example-based interaction paradigm and this approaches make up a large portion of the previous work in ASP.
+Example-based interfaces allow a user to present a system with an auditory example of a sound that they wish to have programmed into their synthesizer. This style of interface is a superset of vocal imitation interfaces for automatic synthesizer programming as vocal imitations represent a specific style of providing an example to a system. Inverse synthesis is an example of an example-based interaction paradigm and this approaches make up a large portion of the previous work in ASP. In the 
+
+\subsubsection{Intuitive Controls}
 
 
 \subsection{Evaluation Interfaces}
 Evaluation type interfaces allow users to compare different potential synthesizer sounds and iteratively work towards finding their ideal solution. 
 
 
-In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}.
-
-
-- This is really a user interface problem. Programming synthesizers is hard!
-- What are some of the different approaches that have been taken by people?
-- Interactive methods (IGAs)
-- Semantic search
-- That interesting paper on sketching sounds visually
-- Pardo look at how we can build more natural interfaces for audio production tools \cite{pardo2019learning}
-
-\subsection{Interactive Searches}
-Researchers have also used Interactive Genetic Algorithms (IGAs) that allow users to interactively hear and rate potential synthesizer patches \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the sound matching case, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. 
-
-Reinforcement Learning and interaction \cite{scurto2021designing}
 
  \subsection{Vocal Imitations}
  It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches. 
@@ -110,15 +128,16 @@ Reinforcement Learning and interaction \cite{scurto2021designing}
  - Check the seago cite?
  \cite{roche2021make} - VAE
  
- Other:
- 
+ \subsubsection{Others}
  Sketching sounds \cite{lobbers2021sketching} \cite{knees2016searching}
  
+ % What is this?
  Timbre space representation of a substractive synthesizer: \cite{vahidi2020timbre} (Read this, it's short, how does this fit into the landscape?)
 
 %--------------------------------------------------------------------
 
 \section{Inverse Synthesis}
+Because of the pervasiveness of the inverse synthesis approach in ASP research, and because it is a focus of some of the experiments presented later in this thesis, more detail regarding some of the specific methods is provided in this section.
 
 Early research in automatic synthesizer programming conducted in the late 70s through to the early 90s focused on using analytic methods to understand and reverse engineer parameter settings for FM synthesis \cite{justice1979analytic, beauchamp1982synthesis, payne1987microcomputer} and non-linear synthesis \cite{delprat1990parameter} algorithms. 
 
