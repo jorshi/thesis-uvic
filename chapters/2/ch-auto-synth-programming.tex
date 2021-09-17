@@ -99,9 +99,11 @@ A typical inverse synthesis system involves the following steps: 1) the system r
 [Create a diagram of this process]
 
 \subsection{Audio Representations}
-Generally the first step in a typical inverse synthesis system is to convert the raw input audio into a representation that exposes relevant features for the proceeding algorithm. What defines a relevant feature in the context of audio analysis for synthesizer programming is an open-question and a wide variety of different approaches have been explored. Most commonly audio is transformed from a time-domain representation to a temporal-spectral representation that exposes the time-varying frequency components of the target sound. 
+Generally the first step in a typical inverse synthesis system is to convert the raw input audio into a representation that exposes relevant features for the proceeding algorithm. What defines a relevant feature in the context of audio analysis for synthesizer programming is an open-question and a wide variety of different approaches have been explored. Most commonly audio is transformed from a time-domain representation to a temporal-spectral representation that exposes the time-varying frequency components of the target sound. Previous work has used the temporal-spectral representation produced by the short-time Fourier transform \cite{horner1995wavetable, horner1995envelope, horner1996piecewise, chinen2007genesynth, yee2007evolving}. Audio features ex
 
-Horne \textit{et al.} computed the frequency spectrum  
+Using spectrograms produced by the short-time Fourier transform have been 
+
+Horner \textit{et al.} computed the frequency spectrum  
 
 What defines a relevant feature for a particular audio problem is an open question and great deal of research has been conducted on 
 
