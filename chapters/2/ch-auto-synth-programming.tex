@@ -94,7 +94,17 @@ The example-based paradigm for automatic synthesizer programming has dominated t
 
 The first research in this vein was conducted out of a desire to develop a deeper understanding of the complex relationship between the perceptual / semantic space and the parameter space of a synthesizer. In the late 70s through to the early 90s several researchers studied analytic methods to attempt to reverse engineer parameter settings for FM synthesis \cite{justice1979analytic, beauchamp1982synthesis, payne1987microcomputer} and non-linear synthesis \cite{delprat1990parameter} algorithms. In 1993 Andrew Horner conducted one of the first synthesizer sound matching experiments for FM synthesis using an artificial intelligence approach \cite{horner1993machine}. Horner used a genetic algorithm (GA) to search through the parameter space and attempt to find the optimal parameter settings to match a target instrumental sounds including trumpets and guitars. A large body of work followed these initial attempts to automatically program synthesizers and has explored programming various types of synthesis and methods for programming.
 
-A typical inverse synthesis system involves the following steps: 1) the system receives a raw audio target, 2) the audio is processed 
+A typical inverse synthesis system involves the following steps: 1) the system receives a raw audio target, 2) the audio is processed and transformed into a representation for input to an algorithm, 3) an algorithm receives the input representation and outputs parameter settings to match the audio target.
+
+[Create a diagram of this process]
+
+\subsection{Audio Representations}
+Generally the first step in a typical inverse synthesis system is to convert the raw input audio into a representation that exposes relevant features for the proceeding algorithm. What defines a relevant feature in the context of audio analysis for synthesizer programming is an open-question and a wide variety of different approaches have been explored. Most commonly audio is transformed from a time-domain representation to a temporal-spectral representation that exposes the time-varying frequency components of the target sound. 
+
+Horne \textit{et al.} computed the frequency spectrum  
+
+What defines a relevant feature for a particular audio problem is an open question and great deal of research has been conducted on 
+
 
 This section provides a brief summary of the main algorithmic methodologies that have been used in previous ASP research, namely, optimization and deep learning techniques. Other methods that have been used in ASP research that are beyond the scope of this paper include  include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}.
 
