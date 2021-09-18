@@ -164,22 +164,31 @@ A method that has been shown as an effective way to communicate sound concepts i
 
 Cartwright \textit{et al.} proposed the SynthAssist system for exploring and finding synthesizer sounds through vocal imitations \cite{cartwright2014synthassist}. Using SynthAssist a user can record an imitation of the synthesizer sound they wish to play, and then are presented with a set of possible solutions. They can then enter into an evaluation-based interaction style where the can rate and iterate through alternative sounds until they find a match. SynthAssist uses a data-driven approach for retrieving candidate synthesizer patches. A large number of patches are pre-generated and a set of time-series audio features computed and stored in a database along with the parameter settings and audio. Candidate synthesizer settings a queried using dynamic time warping to compare the audio feature time-series. [maybe add an example of the SynthAssist interface]
 
+% What's this cite? \cite{blancas2014sound}
+
 In related work, Zhang \textit{et al.} recently released \textit{Vroom!}, a sound search engine based on vocal imitations \cite{zhang2020vroom}. \textit{Vroom!} builds off of previous work by Zhang on query sounds by vocal imitations using CNNs \cite{zhang2017iminet, zhang2018visualization}. The implemented network features a siamese CNN stack that extracts audio features from the vocal imitation and sound target in parallel and then uses a fully connected layer to compute similarity.
 
 \section{Exploration Interfaces}
 
+- Some of the previous examples that enable exploration. (iteractive GAs for sure), the one on reinforcement learning.
+- 
+
+- Visualization. The Wessel paper? [Perhaps move the visaulization background seciton down to here]
 
 %  % What is this?
 %  Timbre space representation of a substractive synthesizer: \cite{vahidi2020timbre} (Read this, it's short, how does this fit into the landscape?)
 
 
 \section{Intuitive Controls}
+The idea of developing more intuitive controls that overlay the more complex low-level parameter space was introduced by Wessel in 1979 \cite{wessel1979timbre}. Wessel proposed a system based on Grey's timbre space \cite{grey1977multidimensional} for controlling an additive synthesizer using two higher-level perecptual parameters arranged on a two-dimensional grid; the vertical axis was related to the spectral energy distribution and the horizontal, to the character of the attack. Adjusting these parameters lead to smooth perceptual transitions, and Wessel suggested a method for achieving more complex forms of control based on an efficient computer language.
+
+Possible candidates for additional work \cite{dahlstedt2001creating}, \cite{arfib2002strategies}, \cite{huang2014active}
 
 Macro parameters -- Roche is an example \cite{roche2021make}. Esling \cite{esling2019universal}. 
 
 Some of those timbral controls also fit in here -- (The Roche one for sure) 
 
-The recent Phillipe Paper.
+The recent Phillipe Paper. \cite{tatar2021latent} -- how does this fit in. Need to read this.
 
 %  \subsubsection{Others}
 %  Sketching sounds \cite{lobbers2021sketching} \cite{knees2016searching}
