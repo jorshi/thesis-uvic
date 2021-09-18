@@ -145,14 +145,17 @@ Scurto \textit{et al.} \cite{scurto2021designing} explored interactive machine l
 One of the benefits of these evaluation-based systems is that it re-engages users in the process of searching for parameter settings, as opposed to taking over control of entire process as in the case in example-based interaction paradigms. These types of interfaces may be beneficial in depending on the situation, especially when the user doesn't have an example sound for the system or wants a more exploratory approach.
 
 \section{Using Descriptive Words}
-In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}. Shortly after Ethington published the SeaWave system which enable timbral control using predefined adjectives \cite{ethington1994seawave}. SeaWave broke the timbre of a sound into three different overlapping temporal segments (attack, presence, and cutoff) and mapped various adjectives within each of these segments to parameters of an additive synthesis engine. Johnson \textit{et al.} propose a machine learning approach to mapping timbral descriptors to parameter settings \cite{johnson2006timbre}.  
+In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}. Shortly after Ethington published the SeaWave system which enable timbral control using predefined adjectives \cite{ethington1994seawave}. SeaWave broke the timbre of a sound into three different overlapping temporal segments (attack, presence, and cutoff) and mapped various adjectives within each of these segments to parameters of an additive synthesis engine. Johnson \textit{et al.} propose a machine learning approach to mapping timbral descriptors to parameter settings \cite{johnson2006timbre}. Ross Clement collected a set of human-made Yamaha DX7 presets and extracted keywords from the names of the presets to help develop a preset generation system based on the most commonly found keywords \cite{clement2011automatic}. A novel approach to using descriptive words proposed by Krekovi\'{c} \textit{et al.} \cite{krekovic2016algorithm} used a combination of an expert-based system that mapped adjectives to numerical values for target audio features, and then used a GA to search for a parameter that matched those audio features. Figure \ref{fig:krekovic-desc} shows a diagram of this system.
 
-\cite{clement2011automatic}
- Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
- - Check the seago cite?
- \cite{roche2021make} - VAE
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/background/krekovic-descriptive.png}
+    \caption{Krekovi\'{c} \textit{et al.}'s \cite{krekovic2016algorithm} system for mapping between timbral descriptions and synthesizer parameter settings. }
+    \label{fig:krekovic-desc}
+\end{figure}
+
+\cite{roche2021make} - VAE
  
- - The Ben Hayes work might fit in here.
 
 \section{Vocal Imitations}
 It has been shown that vocal imitations are promising way to communicate sound concepts \cite{lemaitre2014effectiveness} and the VocalSketch dataset has been released to further research in this area \cite{cartwright2015vocalsketch}. Systems using vocal imitations include \cite{mcartwright2014}\cite{zhang2018visualization}. Other systems rely solely on human feedback in order to optimize towards a goal sound starting from a random selection of synthesizer patches.
