@@ -140,11 +140,14 @@ Evaluation interfaces for synthesizer programming allow a user to compare the re
     \label{fig:evosynth}
 \end{figure}
 
-Reinforcement Learning and interaction \cite{scurto2021designing}
+Scurto \textit{et al.} \cite{scurto2021designing} explored interactive machine learning for parameter selection using a deep reinforcement learning (RL) algorithm \cite{sutton2018reinforcement}. They developed \textit{Co-Explorer}, an RL algorithm that was able to accept feedback from the user and generate new synthesizer parameter settings in response. Co-Explorer supported both binary feedback, e.g. "I like / don't like that result", as well as \textit{zone feedback} which could be used to direct the algorithm into or away from a particular zone of the parameter space. Users were also able to guide the system use \textit{state commands} such as tell it to move to a previous setting, enter into an autonomous exploration mode, or allow them to take over control completely.
+
+One of the benefits of these evaluation-based systems is that it re-engages users in the process of searching for parameter settings, as opposed to taking over control of entire process as in the case in example-based interaction paradigms. These types of interfaces may be beneficial in depending on the situation, especially when the user doesn't have an example sound for the system or wants a more exploratory approach.
 
 \section{Using Descriptive Words}
-In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}.
+In 1986 Ashley proposed one of the first examples of an system for programming a synthesizer using semantic descriptions of the desired timbre \cite{ashley1986knowledge}. Shortly after Ethington published the SeaWave system which enable timbral control using predefined adjectives \cite{ethington1994seawave}. SeaWave broke the timbre of a sound into three different overlapping temporal segments (attack, presence, and cutoff) and mapped various adjectives within each of these segments to parameters of an additive synthesis engine. Johnson \textit{et al.} propose a machine learning approach to mapping timbral descriptors to parameter settings \cite{johnson2006timbre}.  
 
+\cite{clement2011automatic}
  Automatic programming using semantic sound descriptions has also been explored, and is a further methodology that has used GAs \cite{krekovic2016algorithm}.
  - Check the seago cite?
  \cite{roche2021make} - VAE
