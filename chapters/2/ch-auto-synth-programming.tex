@@ -99,6 +99,7 @@ A typical inverse synthesis system involves the following steps: 1) the system r
 [Create a diagram of this process]
 
 \subsection{Audio Representations}
+% This is kind of crap. Need to figure out how to introduce this -- perhaps this is a background section.
 Generally the first step in a typical inverse synthesis system is to convert the raw input audio into a representation that exposes relevant features for the proceeding algorithm. What defines a relevant feature in the context of audio analysis for synthesizer programming is an open-question and a wide variety of different approaches have been explored. Most commonly audio is transformed from a time-domain representation to a temporal-spectral representation that exposes the time-varying frequency components of the target sound. Previous work has used the temporal-spectral representation produced by the short-time Fourier transform \cite{horner1995wavetable, horner1995envelope, horner1996piecewise, chinen2007genesynth, yee2007evolving, barkan2019inversynth}. 
 
 Audio features extracted from temporal, spectral, and temporal-spectral representations are reviewed by Peeters \cite{peeters2004large} and have been used for in inverse synthesizer research \cite{mintz2007toward, stowell2010making, mcartwright2014, blancas2014sound}. Mel-frequency cepstral coefficients (MFCCs), initially used for speech processing research, provide a compact representation of the shape of a spectrum and have been used in work by Yee-King \cite{yee2008synthbot}, Heise \cite{ heise2009automatic}, Roth \cite{roth2011comparison}, and Smith \cite{smith2017play}. Transforms that attempt to model perceptual attributes of human-hearing have also been explored including using a Mel-scale log-spectrograms \cite{zhang2018visualization}, a spectrogram that has been scaled to be more reflective of how humans perceive frequency and loudness.
@@ -154,26 +155,35 @@ In 1986 Ashley proposed one of the first examples of an system for programming a
     \label{fig:krekovic-desc}
 \end{figure}
 
+- Ben Hayes work fits in here. 
+
 In a recent study Roche \textit{et al.} explored controlling synthesis using eight perceptually motivated parameters \cite{roche2021make}. Their work used a neural synthesizer that generated spectrograms using a variational autoencoder (VAE) regularized using perceptual attributes to provide parameters based on timbral descriptions. While this work doesn't fit the traditional description of automatic synthesizer programming since the mapping isn't made to the parameter space of a regular DSP synthesizer, their method provides a good framework for exploring perceptually motivated controls for audio synthesis and could likely be applied to other, more traditional forms of synthesis.
 
 \section{Vocal Imitations}
-A method that has been shown as an effective way to communicate sound concepts is by using vocal imitations \cite{lemaitre2014effectiveness}, and more effective than using a verbalization in the case of unidentified sounds (sounds that have an unclear source). Building on this, Cartwright \textit{et al.} developed the VocalSketch dataset \cite{cartwright2015vocalsketch} to support research in using vocal imitations to communicate sound concepts to computers. Cartwright \textit{et al.} proposed the SynthAssist system for exploring and finding synthesizer sounds through vocal imitations \cite{cartwright2014synthassist}. Using SynthAssist a user can record an imitation of the synthesizer sound they wish to play, and then are presented with a set of possible solutions. They can then enter into an evaluation-based interaction style where the can rate and iterate through alternative sounds until they find a match. SynthAssist uses a data-driven approach for retrieving candidate synthesizer patches. A large number of patches are pre-generated and a set of time-series audio features computed and stored in a database along with the parameter settings and audio. Candidate synthesizer settings a queried using dynamic time warping to compare the audio feature time-series.
+A method that has been shown as an effective way to communicate sound concepts is by using vocal imitations \cite{lemaitre2014effectiveness}, and more effective than using a verbalization in the case of unidentified sounds (sounds that have an unclear source). Building on this, Cartwright \textit{et al.} developed the VocalSketch dataset \cite{cartwright2015vocalsketch} to support research in using vocal imitations to communicate sound concepts to computers. In synthesizer programming, the vocal imitation approach can be viewed as a subset of the example-based interface approaches as vocal imitations are a specific style of examples that could be provided to a system.
 
-\cite{zhang2017iminet, zhang2018visualization}
+Cartwright \textit{et al.} proposed the SynthAssist system for exploring and finding synthesizer sounds through vocal imitations \cite{cartwright2014synthassist}. Using SynthAssist a user can record an imitation of the synthesizer sound they wish to play, and then are presented with a set of possible solutions. They can then enter into an evaluation-based interaction style where the can rate and iterate through alternative sounds until they find a match. SynthAssist uses a data-driven approach for retrieving candidate synthesizer patches. A large number of patches are pre-generated and a set of time-series audio features computed and stored in a database along with the parameter settings and audio. Candidate synthesizer settings a queried using dynamic time warping to compare the audio feature time-series. [maybe add an example of the SynthAssist interface]
+
+In related work, Zhang \textit{et al.} recently released \textit{Vroom!}, a sound search engine based on vocal imitations \cite{zhang2020vroom}. \textit{Vroom!} builds off of previous work by Zhang on query sounds by vocal imitations using CNNs \cite{zhang2017iminet, zhang2018visualization}. The implemented network features a siamese CNN stack that extracts audio features from the vocal imitation and sound target in parallel and then uses a fully connected layer to compute similarity.
 
 \section{Exploration Interfaces}
 
-% \sub\\section{Example-based Interfaces}
-% Example-based interfaces allow a user to present a system with an auditory example of a sound that they wish to have programmed into their synthesizer. This style of interface is a superset of vocal imitation interfaces for automatic synthesizer programming as vocal imitations represent a specific style of providing an example to a system. Inverse synthesis is an example of an example-based interaction paradigm and this approaches make up a large portion of the previous work in ASP. In the 
+
+%  % What is this?
+%  Timbre space representation of a substractive synthesizer: \cite{vahidi2020timbre} (Read this, it's short, how does this fit into the landscape?)
+
 
 \section{Intuitive Controls}
 
+Macro parameters -- Roche is an example \cite{roche2021make}. Esling \cite{esling2019universal}. 
+
+Some of those timbral controls also fit in here -- (The Roche one for sure) 
+
+The recent Phillipe Paper.
 
 %  \subsubsection{Others}
 %  Sketching sounds \cite{lobbers2021sketching} \cite{knees2016searching}
  
-%  % What is this?
-%  Timbre space representation of a substractive synthesizer: \cite{vahidi2020timbre} (Read this, it's short, how does this fit into the landscape?)
 
 %--------------------------------------------------------------------
 
