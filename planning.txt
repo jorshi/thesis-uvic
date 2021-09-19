@@ -84,6 +84,8 @@ Week 5:
 -------
 Making more space for my thesis! The competition work is going to slow now, so that feels like a breathe of fresh air. Carson's stuff is getting close as well. I do feel stressed about that work a bit. I feel a bit challenged by the fact that my background section has taken me so long, but I think getting through the synthesizer chapter at least as a first draft will be positive for morale. Shifting focus to completing a first draft of this entire document as quickly as possible. I've been thinking about doing some additional experiments with torchsynth to build on the inverse synthesis (perhaps the evolutionary search strategy in the UI). That can certainly be an add on. This could be implemented in Django on google colab -- that would be super cool. Could also create that synth interface as well. But. First, we need to finish the thesis.
 
+- Final chapter on UI could probably be restructured a little bit to help propose some design criteria for creating engaging interaction paradigms for synthesizer user interfaces -- and then provide a bit of a prototype system. That would be hype. Basically an idea system should scal, but also provide a number of different interaction paradigms. torchsynth is cool b/c it can be so fast. Potential tool for searching for sounds.
+
 Goals:
 Definitely complete an initial first pass on the background chapter(s). Would be great to have some more structure in place for finishing the other chapters of the document. I'd like to have my first draft fully completed before going to Vancouver next weekend. I think it is possible.
 
@@ -98,6 +100,12 @@ Goals:
 
 September 17th
 - Continue to finish first draft of ASP chapter
+
+September 19th
+- Continuiing to finish the first draft of the ASP chapter.
+- Want to read some of the references and try to fill in the next steps for the intuitive controls and exploratory interfaces.
+- Thinking about restructuring that chapter a little bit to support the fact that inverse synthesis takes up quite a bit more space in there than the other methods.
+
 
 
 
