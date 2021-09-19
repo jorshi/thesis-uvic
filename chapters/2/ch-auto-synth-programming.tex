@@ -89,6 +89,9 @@ A number of different interface approaches have been explored in previous ASP re
 
 An overview of each of these approaches and related work will be provided in the following sections. Due to the fact that the example-based interaction style represents the largest portion of the related work and provides context for some of the other categories, we will start with that approach.
 
+% Perhaps we can break this up a bit differently? 
+Example based interfaces make up a bulk of the previous work in the field and this thesis contains some experiments in this area -- blah blah, provides context for some of the other interface approaches, so I will start with an overview of inverse synthesis and the algorithmic techniques that have been explored in that area in the following section, and then look at related work from each of the other interaction styles in the section that follows that.
+
 \section{Example-Based Interfaces}
 The example-based paradigm for automatic synthesizer programming has dominated the landscape of previous work. Approaches that fall into this category are typically referred to as \textbf{sound matching} or \textbf{inverse synthesis}. The goal of these systems are to find a parameter setting for a synthesizer that sounds as close as possible given an example target sound. 
 
@@ -106,7 +109,7 @@ Audio features extracted from temporal, spectral, and temporal-spectral represen
 
 A more recent approach to extracting audio representations is to learn them using deep learning networks \cite{bengio2013representation}, a process called representation learning. Barkan \textit{et al.} explored using a convolutional neural network to learn features directly from time-domain audio \cite{barkan2019inversynth}.
 
--- Need to read through some of the newer papers and incude those in here.
+% Need to read through some of the newer papers and incude those in here. (What are those? we've include 
 
 \subsection{Algorithms}
 Algorithmic approaches that have been used for parameter estimation in inverse synthesis can be loosely categorized into search and modelling methods. Search algorithms, which include genetic algorithms, estimate an optimal parameter settings by performing a structured search of the parameter space. Modelling methods on the other hand, which have become more popular in recent years with the growth of deep learning, attempt to model the parameter space in order to estimate parameter settings. Other methods beyond search and modelling approaches that have been used in ASP research include fuzzy logic \cite{mitchell2005frequency, hamadicharef2012intelligent}, linear coding \cite{mintz2007toward}, and query approaches \cite{mcartwright2014}.
@@ -121,13 +124,16 @@ In the case of sound matching, the \textit{fitness} of a potential solution is d
 \subsection{Deep Learning Methods}
 Deep learning is subset of machine learning that utilizes artificial neural networks to learn patterns in data and make predictions based on those patterns \cite{lecun2015deep}. Deep learning models contain multiple layers comprised of simple non-linear modules. Through iterative training, the layers are able to extract features from raw input data and learn intricate patterns in high-dimensional data. These multi-layer models have enabled deep learning models to excel at complex tasks including image recognition, speech recognition, and music related tasks such as audio source separation \cite{spleeter2019} and pitch detection \cite{kim2018crepe}.
 
-In the context of an ASP sound matching experiment, a deep learning model accepts an audio signal as input and predicts synthesizer parameter settings to replicate that audio signal. Audio signals are often pre-processed using audio feature extraction or transformed into a time-frequency representation, although some approaches use raw time-domain audio \cite{barkan2019inversynth}. Models are trained using a large set of example sounds generated from a synthesizer and use the parameter settings that generated a particular sound as the ground truth. During training, the error between predicted parameter settings and the actual parameter settings (the ground truth) are used to evaluate how well the model is learning and to iteratively update variables within the model through gradient descent. In deep learning, models are grouped into discriminative models, which learn decision boundaries through observed data, or generatic models, which learn the distribution of the observed data. 
+In the context of an ASP sound matching experiment, a deep learning model accepts an audio signal as input and predicts synthesizer parameter settings to replicate that audio signal. Audio signals are often pre-processed using audio feature extraction or transformed into a time-frequency representation, although some approaches use raw time-domain audio \cite{barkan2019inversynth}. Models are trained using a large set of example sounds generated from a synthesizer and use the parameter settings that generated a particular sound as the ground truth. During training, the error between predicted parameter settings and the actual parameter settings (the ground truth) are used to evaluate how well the model is learning and to iteratively update variables within the model through gradient descent. In deep learning, models are grouped into discriminative models, which learn decision boundaries through observed data, or generatic models, which learn the distribution of the observed data. Related ASP approaches to the inverse synthesis problem have explored both types of models, and will be reviewed in the following sections.
 
 \subsubsection{Discriminative Models}
 
-- Say something about the discriminative models?
-
 Several researchers have explored the use of deep learning for ASP. Yee-King et al. reviewed several deep learning architectures for FM synthesizer sound matcing \cite{yee2018automatic}. In their work, they compared multi-layer perceptron (MLP), Long Short Term Memory (LSTM), and LSTM++ networks. Barkan et al. explored sound matching using convolutional neural networks (CNNs) \cite{barkan2019deep, barkan2019inversynth}. They framed the problem as an image classification task and used the STFT to create spectrogram images of target sounds to use as input to the CNNs.
+
+% Perhaps include some more background from the background of the inverse synthesis chapter here and dig into the different models that are used.
+
+Micheeltree and Koike introduced an interesting approach to programming Serum\footnote{\url{https://xferrecords.com/products/serum}}, a popular VST wavetable synthesizer \cite{mitcheltree2021serumrnn}. They focused on the audio effects processing chain that follows the initial synthesis stage and explored using an ensemble of CNN models that worked together to select and adjust the effects. Each model in the ensemble was responsible for a single effects module (compressor, distortion, equalizer, phaser, or a reverb) and another model was responsible for selecting the ordering of each of the individual effects modules. Micheltree and Koike hypothesized that this approach was more similar to how a human might select and program a synthesizer audio effect chain. It also provides insight into the intermediate steps of programming a synthesizer which could be useful for educational purposes.
+
 
 \subsubsection{Generative Models}
 Esling et al. recently presented a novel application called $FlowSynth$ that uses a generative model based on Variational Auto-Encoders (VAE) and Normalizing Flows \cite{esling2020flow}. In addition to performing well on sound matching tasks, they also showed that their approach supported novel interactions including macro-control of synthesizer parameters. 
