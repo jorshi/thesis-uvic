@@ -1,6 +1,20 @@
 \chapter{Automatic Synthesizer Programming}
 \label{chapter:asp-background}
-The field of automatic synthesizer programming (ASP) emerged from the challenges with programming synthesizers and the desire for more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?". James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm \cite{chowning1973synthesis}. This is an example of inverse synthesis, or sound matching \cite{horner1993machine}, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work on inverse synthesis has been published, exploring a variety of synthesis techniques and algorithmic methods. The central goal 
+In the previous chapter, some of the specific challenges in synthesizer programming were identified along with the desire for improved user interfaces and tools to support programming. The field of automatic synthesizer programming (ASP) emerged from the desire to solve these challenges and to find more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?". James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm \cite{chowning1973synthesis}. This is an example of inverse synthesis, or sound matching \cite{horner1993machine}, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work in automatic synthesizer programming has been published, exploring a variety of synthesis techniques, algorithmic methods, and user interaction approaches.
+
+% Should this go into the previous chapter?
+Automatic synthesizer programming is fundamentally attempting to solve a human computer interaction (HCI) problem: "How can a synthesizer user more effectively communicate their creative ideas to a synthesizer?" Pardo \textit{et al.} described the challenges with using music production tools (a synthesizer is a type of music production tool) as resulting from the large conceptual gap between the parameters and perceptually relevant output from the tool \cite{pardo2019learning}. To be more precise, Pardo \textit{et al.} describe the specific conceptual spaces that are involved in interacting with a music production tool: the perceptual space, the parameter space, and the semantic space. The perceptual space is related to how a tool actually sounds when it is being applied, i.e. we can tell the different when the filter on synthesizer is changed. The parameter space is the actual low-level techniques parameters on the control interface, i.e. the filter was parameter changed from 500Hz to 2000Hz. The semantic space is related to how one would describe the changes that we hear, e.g the synthesizer sounds brighter as a result of the filter change. Complexities with using a synthesizer arise when users are asked to bridge the gap between the low-level parameter space and the higher-level perceptual and semantic spaces themselves, which often involves a complex and non-linear mapping. Pardo \textit{et al.} identify the novice user as being particularly challenged by gap between the low-level and high-level spaces, and present a framework for developing tools that help to bridge that gap. 
+
+To 
+
+This framework is useful for understanding previous approaches to automatic synthesizer programming 
+
+
+
+
+This was reflected by the users in Krekovi\'{c}'s study \cite{krekovic2019insights}. The goal of automatic synthesizer programming research is to create tools that bridge the gap between the parameters and perceptual spaces.
+
+In this chapter an overview of the field of automatic synthesizer programming will be provided from the context of solving an human-computer
 
 
 Inverse synthesis, although the most researched, just one user interaction modality for solving the 
