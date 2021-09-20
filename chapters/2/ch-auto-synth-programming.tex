@@ -1,64 +1,19 @@
 \chapter{Automatic Synthesizer Programming}
 \label{chapter:asp-background}
-In the previous chapter, some of the specific challenges in synthesizer programming were identified along with the desire for improved user interfaces and tools to support programming. The field of automatic synthesizer programming (ASP) emerged from the desire to solve these challenges and to find more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?". James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm \cite{chowning1973synthesis}. This is an example of inverse synthesis, or sound matching \cite{horner1993machine}, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work in automatic synthesizer programming has been published, exploring a variety of synthesis techniques, algorithmic methods, and user interaction approaches.
+In the previous chapter, some of the specific challenges in synthesizer programming were identified along with the desire for improved user interfaces and tools to support programming. The field of automatic synthesizer programming (ASP) emerged from the desire to solve these challenges and to find more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?" James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm \cite{chowning1973synthesis}. This is an example of inverse synthesis, or sound matching \cite{horner1993machine}, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work in automatic synthesizer programming has been published, exploring a variety of synthesis techniques, algorithmic methods, and user interaction approaches. The goal of this chapter is to provide an overview of the field and survey the various methods that have been taken over the last 40 years that ASP has been an active area of research.
+
+Synthesizer programming is 
+
 
 % Should this go into the previous chapter?
 Automatic synthesizer programming is fundamentally attempting to solve a human computer interaction (HCI) problem: "How can a synthesizer user more effectively communicate their creative ideas to a synthesizer?" Pardo \textit{et al.} described the challenges with using music production tools (a synthesizer is a type of music production tool) as resulting from the large conceptual gap between the parameters and perceptually relevant output from the tool \cite{pardo2019learning}. To be more precise, Pardo \textit{et al.} describe the specific conceptual spaces that are involved in interacting with a music production tool: the perceptual space, the parameter space, and the semantic space. The perceptual space is related to how a tool actually sounds when it is being applied, i.e. we can tell the different when the filter on synthesizer is changed. The parameter space is the actual low-level techniques parameters on the control interface, i.e. the filter was parameter changed from 500Hz to 2000Hz. The semantic space is related to how one would describe the changes that we hear, e.g the synthesizer sounds brighter as a result of the filter change. Complexities with using a synthesizer arise when users are asked to bridge the gap between the low-level parameter space and the higher-level perceptual and semantic spaces themselves, which often involves a complex and non-linear mapping. Pardo \textit{et al.} identify the novice user as being particularly challenged by gap between the low-level and high-level spaces, and present a framework for developing tools that help to bridge that gap. 
 
-To 
-
-This framework is useful for understanding previous approaches to automatic synthesizer programming 
-
-
-
-
-This was reflected by the users in Krekovi\'{c}'s study \cite{krekovic2019insights}. The goal of automatic synthesizer programming research is to create tools that bridge the gap between the parameters and perceptual spaces.
-
-In this chapter an overview of the field of automatic synthesizer programming will be provided from the context of solving an human-computer
-
-
-Inverse synthesis, although the most researched, just one user interaction modality for solving the 
-
-In addition to inverse synthesis a number of other interaction paradigms for automatic synthesizer programming have been explored. 
-
-% In the previous chapter, some of the specific challenges in synthesizer programming were identified along with the desire for improved user interfaces and tools to support programming. The field of automatic synthesizer 
-
-Automatic synthesizer programming can be viewed from the perspective of trying to solve a human computer interaction (HCI) problem. "How can a synthesizer user more effectively communicate their creative ideas to a synthesizer?" Currently users are expected to learn the domain language from the perspective of whatever synthesis algorithm they are using. Can a user instead communicate their ideas to a synthesizer in a way that fits their creative needs? Creativity support is an emerging field of study that is interested in answering questions similar to this. It is focused on the development of tools that enable and enhance the creative output of an individual or group, both novices and experts. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. A central question that CSTs ask is: 
-\begin{quote}
-    "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?"
-\end{quote}
-
-% How to focus this on the human interaction problem? 
-- In the previous chapter outlined some of the challenges related to synthesizer programming as well as some potential opportunities. This is an interaction problem.
-
-- Talk about this as an interaction problem, tie in creativity support tools in this section as well as music interaction.
-
-- Also, advancements in artificial intelligence and machine learning have supported the growth of related fields that touch on music interaction including music information retrieval and intelligent music production. [introduce those fields].
-
-
-
-% 
-
-This chapter provides a brief overview and survey of the field of ASP with an emphasis on inverse synthesis. To situate ASP in a larger body of research, background and related work is provided.
-
-% - other early methods focuses on analytic methods for programming synthesizers \cite{beauchamp1982synthesis, payne1987microcomputer, delprat1990parameter}
-
-% % Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
-% % - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
-% % - https://benhayes.net/assets/pdf/16.Hayes.pdf
-% % - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
-% % - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
-
-
-% Since the early 90s, researchers have leveraged advances in ML to develop a deeper understanding of the synthesizer parameter space and to build more intuitive methods for interaction \cite{horner1993machine}. Recently, deep learning has been used for programming synthesizers.  Esling {\em et al.}\ \cite{esling2020flow} trained an auto-encoder network to program the \href{https://u-he.com/products/diva/}{U-He Diva} using 11K synthesized sounds with known preset values. Yee-King {\em et al.} \cite{yee2018automatic} used a recurrent network to automatically find parameters for \href{https://asb2m10.github.io/dexed/}{Dexed}, an open-source software emulation of the DX7.
-
-% - In this section an overview of the field of automatic synthesizer programming is presented. Specific emphasis is placed on the HCI aspect of the problem and an overview of various user interaction methodologies is provided here.
-% - Inverse synthesis, a subset of automatic synthesizer programming and a focus of this thesis, is reviewed in more detail in the following section.
-% - This chapter concludes with a categorization of work in automatic synthesizer programming research that has been conducted over the last 30 years.
+Despite the large body of work that has been conducted in automatic synthesizer programming, there exists no literature that overviews and organizes the related work. In this chapter I provide an overview of the field of automatic synthesizer programming and use the framework presented by Pardo \textit{et al.} to organize previous work using a human computer interaction lens. Due to the large body of related work in inverse synthesis, and its importance to experiments conducted in this thesis, particular emphasis is paid to the various algorithmic approaches that have been explored. The remainder of this chapter is structured as follows: [fill this in]
 
 %--------------------------------------------------------------------
 
 \section{Background}
+\label{sec:asp-background}
 Automatic synthesizer programming is an inherently interdisciplinary field. Previous research has focused on both the algorithmic and technical aspects of the problem, as well as the human interaction aspects of the problem. Depending on the focus a solution may draw from fields including human-computer interaction, digital signal processing (DSP), machine learning and artificial intelligence, to name a few. Insights can also be gleaned from related fields including music information retrieval and intelligent music production. To provide context and situate automatic synthesizer programming in a wider body of research, a brief introduction to these fields and how they relate to the synthesizer programming problem is provided in this section.
 
 \subsection{Human Computer Interaction}
@@ -68,10 +23,12 @@ Automatic synthesizer programming can be viewed from the perspective of trying t
     "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?"
 \end{quote}
 
+Too much detail - maybe put this in the last chapter
 Shneiderman \cite{shneiderman2007creativity} outlines a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. In their work, the authors identify two types of novice users: domain novices and tool novices. Domain novices are new to both the creative domain as well as using the creativity support tool. Tool novices have experience with the creative domain, but are novices at using a particular tool. To help evaluate and promote the development of creativity support tools for novices, they also propose a theory of creativity support based on cognitive theory.
 
 These concepts provide an important platform for beginning to develop tools to support users of synthesizers. Both types of novices described by Davis \textit{et al.} are common and serve to benefit from the development of improved methods for interacting with them; domain novices are both new to sound design / music production as well as to using a specific synthesizer, whereas a tool novices would likely have experience with sound design / music production, but would be a novice with using a specific synthesizer.
 
+This is also a bit too in detail
 \subsubsection{Music Interaction}
 Music and Human-Computer Interaction \cite{holland2013music}, or Music Interaction. Research related to the use of interactive systems that involve computes for any kind of musical activity. Music interaction draws heavily from other areas of HCI research, but also responds to the needs and desires of the music community. There are unique considerations in the context of musical applications that makes music interaction different from other fields of HCI. A musical instrument is not a utilitarian tool whose development should be ever-improved to make it more efficient. Musical instruments are played, and sometimes that is the only goal. Tomaka [cite me!] identifies that imperfections and limitations of a musical instrument give an instrument character. McDermott \cite{mcdermott2013should} identifies the importance of engagement in musical interaction and the relation that bears to the concept of \textit{flow} \cite{csikszentmihalyi1990flow}. The learning curve plays is crucial to the level of engagement that a player experiences when playing a musical instrument, both in the short-term and long-term. Holland \cite{holland2013music} concludes, "In order to remain engaging, consuming and flow-like, activities that involve musical instruments must offer continued challenges at appropriate levels of difficulty: not too difficult, and not too easy."
 
@@ -111,6 +68,7 @@ This research avenue is to a certain degree untapped: GANs have been successfull
 %--------------------------------------------------------------------
 
 \section{Approaches}
+\label{sec:asp-approaches}
 In an automatic synthesizer programming system the result is typically an additional layer of abstraction on top of the control interface. The goal of this abstraction is to help bridge the conceptual gap between the parameter space and the perceptual and semantic space. Similar to how synthesizer control interfaces create a mapping from the parameter space to the synthesis engine, interfaces of automatic synthesizer programming systems present an abstracted higher-level model of the parameter space to a user and create a mapping to the parameter space. Figure [Insert figure that builds off of the one some the synthesizer chapter] shows the original components of an audio synthesizer (the synthesis engine and control interface), along with the additional automatic synthesizer programming interface.
 
 A number of different interface approaches have been explored in previous ASP research. Pardo \textit{et al.} \cite{pardo2019learning} presented a framework for classifying different interaction paradigms within audio production tools. The development of this framework was based on how musicians and audio engineers communicate auditory concepts and included four different types of interaction styles: 1) evaluation, 2) descriptive words, 3) vocal imitations, and 4) exploration. Pardo \textit{et al.} evaluated four different examples of audio production software with \textit{natural} interfaces that attempted to bridge the gap between the parameter space and perceptual/semantic space. Each system was fell under one or more of the interaction paradigms. These categorizations are useful for understanding the different approaches to ASP interactions that have been proposed in previous work. For purpose of classifying ASP systems we include two additional categories: \textit{example-based} interfaces and \textit{intuitive controls}. The six interaction paradigms are:
@@ -130,6 +88,7 @@ An overview of each of these approaches and related work will be provided in the
 Example based interfaces make up a bulk of the previous work in the field and this thesis contains some experiments in this area -- blah blah, provides context for some of the other interface approaches, so I will start with an overview of inverse synthesis and the algorithmic techniques that have been explored in that area in the following section, and then look at related work from each of the other interaction styles in the section that follows that.
 
 \section{Example-Based Interfaces}
+\label{sec:asp-example-based}
 The example-based paradigm for automatic synthesizer programming has dominated the landscape of previous work. Approaches that fall into this category are typically referred to as \textbf{sound matching} or \textbf{inverse synthesis}. The goal of these systems are to find a parameter setting for a synthesizer that sounds as close as possible given an example target sound. 
 
 The first research in this vein was conducted out of a desire to develop a deeper understanding of the complex relationship between the perceptual / semantic space and the parameter space of a synthesizer. In the late 70s through to the early 90s several researchers studied analytic methods to attempt to reverse engineer parameter settings for FM synthesis \cite{justice1979analytic, beauchamp1982synthesis, payne1987microcomputer} and non-linear synthesis \cite{delprat1990parameter} algorithms. In 1993 Andrew Horner conducted one of the first synthesizer sound matching experiments for FM synthesis using an artificial intelligence approach \cite{horner1993machine}. Horner used a genetic algorithm (GA) to search through the parameter space and attempt to find the optimal parameter settings to match a target instrumental sounds including trumpets and guitars. A large body of work followed these initial attempts to automatically program synthesizers and has explored programming various types of synthesis and methods for programming.
@@ -195,6 +154,7 @@ Building on FlowSynth, Le Vaillant \textit{et al.} also used generative approach
 
 \cite{mitcheltree2021serumrnn} -- ensemble of models that work together to iteratively apply audio effects and select parameters for those effects to reduce the error between and input and a target. Significantly reduces the error between the input and target audio. Benefits from applying effects iteratively in a specific order. Learns which effects are most important. Provides interpretable and valuable intermediate steps. Can discover more efficient effect order sequences than a variety of baselines.
 
+
 \section{Evaluation Interfaces}
 Evaluation interfaces for synthesizer programming allow a user to compare the results from multiple parameter settings to help them navigate and select a desired setting. One approach to evaluation style interfaces is through the use of interace genetic agorithms (IGAs) \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}. In contrast to the GAs introduced in the example-based systems, the evaluation function in an IGA relies on user feedback during each iteration as opposed to measuring error between a candidate and a target. This allows a user to provide feedback to the system and participate in the process of finding a sound. IGAs also facilitate exploration as they can produce a large variety of novel examples in a short period of time and help a user explore different aspects of the parameter space. Figure \ref{fig:evosynth} shows an example an evaluation-based interface called EvoSynth developed by Matthew Yee-King \cite{yee2016use}. EvoSynth initially presents a user with a number of randomly selected examples, which they can listen to and iterate upon by selecting multiple examples to "breed" together. EvoSynth is web-based and at the time of writing is still available online\footnote{\url{http://www.yeeking.net/evosynth/}}.
 
@@ -220,6 +180,12 @@ In 1986 Ashley proposed one of the first examples of an system for programming a
 \end{figure}
 
 - Ben Hayes work fits in here. 
+% % Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
+% % - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
+% % - https://benhayes.net/assets/pdf/16.Hayes.pdf
+% % - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
+% % - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
+
 
 In a recent study Roche \textit{et al.} explored controlling synthesis using eight perceptually motivated parameters \cite{roche2021make}. Their work used a neural synthesizer that generated spectrograms using a variational autoencoder (VAE) regularized using perceptual attributes to provide parameters based on timbral descriptions. While this work doesn't fit the traditional description of automatic synthesizer programming since the mapping isn't made to the parameter space of a regular DSP synthesizer, their method provides a good framework for exploring perceptually motivated controls for audio synthesis and could likely be applied to other, more traditional forms of synthesis.
 
