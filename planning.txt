@@ -107,13 +107,49 @@ September 19th
 - Thinking about restructuring that chapter a little bit to support the fact that inverse synthesis takes up quite a bit more space in there than the other methods.
 
 
+Week 6:
+-------
+Four weeks left to get this thing done.
+
+Goal: Complete the first full draft of thesis by Friday night.
+
+September 20th
+Goals:
+- Complete first draft version of the two background chapters
+
+September 21st
+Goals:
+- torchsynth and SynthExplorer chapters clean up
+
+September 22nd
+Goals:
+- Rerun (if necessary) and create all the results / figures / plots for the inverse synthesizer experiment chapters
+
+September 23rd
+Goals:
+- First completed draft of the spiegelib and inverse synthesis experiments chapter
+
+September 24th
+Goals:
+- Write the conclusion, introduction, abstract and title page.
 
 
-TODO:
+TODO / Plan:
+Abstract:
+- Write it
 
-Background:
-    - Figures: skeumorphism for example
-    - 
+Introduction:
+- Write it
+
+Synthesizer Background:
+    - Figures: skeumorphism for example, some waveforms perhaps?
+    - Tighten up the synthesizer programming section. Add in some of the stuff from Justice / Ethington that acknowledged some of the challenges of synthesizer programming. 
+
+Automatic Synthesizer Programming:
+    - Finish up the remainder of chapter with interaction styles.
+    - Go through and rewrite the introduction - frame this an overview of the field of automatic synthesizer programming. Provide necassary background information, formulate the problem that is trying to be solved from an interaction perspective.
+    - Summarize some of the related work from the perspective of the interaction style, as well as giving an overview and background on some of the algorithmic techniques that have been used.
+    - Background section needs to be tightened up - probably move the audio representation section into background.
 
 SpiegeLib:
 - Create a research pipeline figure?
@@ -121,12 +157,21 @@ SpiegeLib:
 - Add some more code examples
 - Add a figure for the subjective evaluation
 
-SpiegeLib Experiment:
+Inverse Synthesis Experiment:
 - Input size for the spiegelib architectures
 - Render out all the loss plots for spiegelib experiments
 - Render out all the iteration plots for the GAs (with labels on the axes)
 - Informal listening on MAE to comment on the quality of each result.
 - Double check the spectrogram plots for the GA and CNN
+
+Torchsynth:
+ - Rewrite introduction to reframe the goals of the contribution. Note some of the challenges with deep learning and how this can be addressed with the GPU  ddsp synthesizer. Both from the deep learning persepctive as well as from the search perspective. Prototyping! Learning audio representations. Pre-training.
+
+SynthExplorer:
+- First iteration should be minimal effort, exactly what I have. This would be great to work on over the following weeks since it could drive home some points on designing good music interaction tools.
+
+Conclusion / Future Work.
+- Write it.
 
 
 Schedule:
