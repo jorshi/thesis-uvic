@@ -1,33 +1,32 @@
 
 \begin{table}[ht]
   \centering
-  \begin{tabular}{rlcrrrrrr}
-{} & & & \multicolumn{3}{c}{Spearman with a preset} & \multicolumn{3}{c}{DCG across presets} \\
- &  &  &  & Surge & DX7 &  & Surge & DX7 \\
-Representation & model choice & normed &  & pitch & velocity & mean & &  \\
+  \small
+  \tabcolsep=0.11cm
+  \begin{tabular}{rlrrrrrr}
+{} & & \multicolumn{3}{c}{Spearman in preset} & \multicolumn{3}{c}{DCG across presets} \\
+Representation & model choice &  mean & Surge & DX7 & mean & Surge & DX7  \\
 \hline
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & env, mel256, 6144  &              &          \textbf{0.821} &           \textbf{0.746} &              0.896 &             0.880 &              0.908 &                 0.852 \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19}& env, mel256, 6144 & \checkmark     &          \textbf{0.821} &           \textbf{0.747} &              0.895 &             0.809 &              0.883 &                 0.735 \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 6144 & \checkmark   &          0.817 &           0.732 &              \textbf{0.903} &             0.820 &              0.916 &                 0.724 \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 6144  &            &          0.813 &           0.722 &              \textbf{0.903} &             0.892 &              \textbf{0.942} &                 0.842 \\
-Coala \cite{drossos:icml:2020} & dual\_ae\_c & \checkmark                    &          0.813 &           0.729 &
- 0.896 &             0.555 &              0.547 &                 0.564 \\
-Coala \cite{drossos:icml:2020} & dual\_e\_c & \checkmark                     &          0.811 &           0.737 &
- 0.884 &             0.569 &              0.576 &                 0.563 \\
- 
-NSynth Wavenet \cite{engel2017neural} & & \checkmark                            &          0.810 &           0.717 &              \textbf{0.903} &             0.582 &              0.591 &                 0.573 \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, linear, 6144 &             &          0.808 &           0.722 &              0.895 &             0.874 &              \textbf{0.943} &                 0.805 \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 512 &              &          0.804 &           0.710 &              0.899 &             \textbf{0.904} &              \textbf{0.943} &                 \textbf{0.864} \\
-OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 512 & \checkmark    &          0.801 &           0.705 &              0.897 &             0.585 &              0.606 &                 0.564 \\
-NSynth Wavenet \cite{engel2017neural} & &                                     &          0.789 &           0.675 &              \textbf{0.903} &             0.835 &              0.893 &                 0.777 \\
-Coala \cite{drossos:icml:2020} & dual\_ae\_c &                              &          0.776 &           0.658 &              0.893 &             0.748 &              0.756 &                 0.740 \\
-Coala \cite{drossos:icml:2020} & dual\_e\_c &                               &          0.750 &           0.630 &
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & env, mel256, 6144  & \textbf{0.821} & \textbf{0.746} & 0.896 & 0.880 & 0.908 &  0.852 \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19}& env, mel256, 6144, normed &         \textbf{0.821} & \textbf{0.747} & 0.895 & 0.809 & 0.883 & 0.735 \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 6144, normed & 0.817 & 0.732 & \textbf{0.903} & 0.820 & 0.916 & 0.724 \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 6144  & 0.813 & 0.722 & \textbf{0.903} & 0.892 & \textbf{0.942} & 0.842 \\
+Coala \cite{drossos:icml:2020} & dual\_ae\_c, normed & 0.813 & 0.729 &
+ 0.896 & 0.555 & 0.547 & 0.564 \\
+Coala \cite{drossos:icml:2020} & dual\_e\_c, normed &          0.811 & 0.737 & 0.884 & 0.569 & 0.576 & 0.563 \\
+ Wavenet \cite{engel2017neural} & normed & 0.810 & 0.717 & \textbf{0.903} &  0.582 & 0.591 & 0.573 \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, linear, 6144 & 0.808 & 0.722 & 0.895 & 0.874 & \textbf{0.943} & 0.805 \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 512 & 0.804 &           0.710 & 0.899 & \textbf{0.904} & \textbf{0.943} & \textbf{0.864} \\
+OpenL3 \cite{Cramer:LearnMore:ICASSP:19} & music, mel256, 512, normed & 0.801 & 0.705 & 0.897 & 0.585 & 0.606 & 0.564 \\
+Wavenet \cite{engel2017neural} & & 0.789 & 0.675 &  \textbf{0.903} &             0.835 &              0.893 &                 0.777 \\
+Coala \cite{drossos:icml:2020} & dual\_ae\_c &         0.776 &           0.658 &              0.893 &             0.748 &              0.756 &                 0.740 \\
+Coala \cite{drossos:icml:2020} & dual\_e\_c &         0.750 &           0.630 &
  0.871 &             0.681 &              0.710 &                 0.652 \\
-Multi-scale spectrogram \cite{engel2020ddsp,steinmetz2020auraloss} & linear+log, [4096 ... 64] & &          0.792 &           0.690 &              0.894 &             0.543 &              0.555 &                 0.531 \\
-Multi-scale spectrogram \cite{engel2020ddsp,steinmetz2020auraloss} & log, [4096 ... 64] & &          0.786 &           0.689 &              0.884 &             0.542 &              0.566 &                 0.518 \\
-Multi-scale spectrogram \cite{engel2020ddsp,steinmetz2020auraloss} & linear, [4096 ... 64] & &          0.658 &           0.410 &              \textbf{0.905} &             0.447 &              0.343 &                 0.551 \\
-Coala \cite{drossos:icml:2020} & cnn & \checkmark                          &          0.555 &           0.303 &              0.806 &             0.485 &              0.433 &                 0.537 \\
-Coala \cite{drossos:icml:2020} & cnn &                                   &          0.552 &           0.297 &              0.807 &             0.714 &              0.614 &                 0.815 \\
+MSS \cite{engel2020ddsp,steinmetz2020auraloss} & linear+log, [4096 ... 64] &         0.792 &           0.690 &              0.894 &             0.543 &              0.555 &                 0.531 \\
+MSS \cite{engel2020ddsp,steinmetz2020auraloss} & log, [4096 ... 64] &         0.786 &           0.689 &              0.884 &             0.542 &              0.566 &                 0.518 \\
+MSS \cite{engel2020ddsp,steinmetz2020auraloss} & linear, [4096 ... 64] &          0.658 &           0.410 &              \textbf{0.905} &             0.447 &              0.343 &                 0.551 \\
+Coala \cite{drossos:icml:2020} & cnn, normed &          0.555 &           0.303 &              0.806 &             0.485 &              0.433 &                 0.537 \\
+Coala \cite{drossos:icml:2020} & cnn &         0.552 &           0.297 &              0.807 &             0.714 &              0.614 &                 0.815 \\
  \end{tabular}
   \caption{Performance of representations on experiments defined in \S~\ref{sec:experiment1} and \ref{sec:experiment2}. Best scores, and scores within 0.002 of the best, are bold-faced. $\ell_1$ distance was used because it outperformed $\ell_2$. We sort by mean spearman within a preset.
   }

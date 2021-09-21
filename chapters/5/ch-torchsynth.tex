@@ -2,12 +2,9 @@
 
 \chapter{GPU Enabled Synthesis}
 
-In the preceding chapter I explored and compared various methods for inverse synthesis, which is one approach to automatic synthesizer programming. These experiments highlighted some of the challenges that researchers are faced with in this work. The most daunting challenge is related to the shear complexity of the relationship between the parameter space and perceptual (auditory) space, and how much variability there is within that relationship depending on the specifics of the synthesis engine and the number and type of parameters. In addition to that, there is no accepted best approach to computationally representing the perceptual space and defining metrics within that space. It is an open question on how to answer the question "How similar are these two sounds?" in a quantifiable way with regards to timbre. The ability to perform experiments that seek to solve these challenges is hindered by additional computational challenges associated with software synthesizers. Recent research has sought to automatically program commercially available VST synthesizers. This approach is well-founded considering these synthesizers represent tools that are currently being used by music producers and sound designers. However, these synthesizes are optimized for real-time use as opposed to use in the machine learning research, where they introduce bottlenecks \cite{masudo2021quality} and difficulties with learning in gradient descent methods.
+In the preceding chapter I explored and compared various methods for inverse synthesis, one approach to automatic synthesizer programming. These experiments highlighted some of the challenges that researchers are faced with in pursuing this work. The most daunting challenge is related to the sheer complexity of the relationship between the parameter space and perceptual (auditory) space, and how much variability there is within that relationship depending on the specifics of the synthesis engine and the number and type of parameters. In addition to that, there is no accepted best approach to computationally representing the perceptual space and defining metrics within that space. It is an open question on how to answer the question "How similar are these two sounds?" in a quantifiable way with regards to timbre. The ability to perform experiments that seek to solve these challenges is hindered by additional computational challenges associated with software synthesizers. Recent research has sought to automatically program commercially available VST synthesizers. This approach is well-founded considering these synthesizers represent tools that are currently being used by music producers and sound designers. However, these synthesizes are optimized for real-time use as opposed to use in the machine learning research, where they introduce bottlenecks \cite{masudo2021quality} and difficulties with learning in gradient descent methods.
 
-In this chapter I present a GPU-enabled modular synthesizer that was designed in response to the identified computational challenges and can be used to support research in automatic synthesizer programming. The work presented here was conducted with Joseph Turian, Max Henry, and my supervisors George Tzanetakis and Kirk McNally, and was published in the proceedings of s 
-
-
-In response to these computational challenges, and out of a desire to support research that seeks to elucidate the complex relationship between synthesizer parameters and the auditory result, a GPU enabled 
+In this chapter I present a GPU-enabled modular synthesizer called \textit{torchsynth} that was designed in response to the identified computational challenges. A large-scale dataset, generated with torchsynth, called synth1B1 is also presented in this chapter, along with two additional synthesized sound datasets generated using existing synthesizers. These datasets, and the torchsynth synthesizer, are made publicly available to support continued research in automatics synthesizer programming and synthesizer design. This work was published in the proceedings of the 24th International Conference on Digital Audio Effects (DAFx 20in21) \cite{turian2021one}. Joseph Turian was the first author on this work and I was the second author with equal contribution. Max Henry, George Tzanetakis, and Kirk McNally were also co-authors on this work.
 
 \section{Introduction}
 \label{sec:intro}
@@ -41,8 +38,6 @@ synth1B1 & synth & 1111111 & yes & parameters \\
 Unfortunately, audio ML progress has been hindered by a dearth of large-scale corpora. Audio ML involves multiple epoch training on comparably small corpora compared to vision or NLP. Table~\ref{tbl:audio-corpora} summarizes various large-scale and/or synthesizer audio corpora.
 For example, using AudioSet \cite{45857} requires scraping 5000 hours of Youtube videos, many of which become unavailable over time (thus impeding experimental control). FSD50K \cite{fonseca2020fsd50k}, a free corpus, was recently released to mitigate these issues, but contains only 108 hours of audio. To the best knowledge of the authors, the largest audio set used in published research is Jukebox \cite{dhariwal2020jukebox}, which scraped 1.2M songs and their corresponding lyrics. Assuming average song length is 4:20, we estimate their corpus is $\approx$90K hours. 
 
-
-
 \subsection{Background and Motivation}
 
 \subsubsection{Pre-training and learned representations}
@@ -53,7 +48,7 @@ Images evince sizes of objects immediately, while object size is difficult to gl
 Multi-model learning of audio---with video in \cite{DBLP:conf/icassp/CramerWSB19} and semantic tags in \cite{drossos:icml:2020}---has led to strong audio representations.
 Constrastive audio learning approaches like \cite{saeed2020contrastive} can be used in multi-modal settings, for example by learning the correspondence between a synthesized sound and its underlying parameters.
 % Later, cite BYOL-A if their paper is selected
-However, training such models is limited by small corpora and/or the relatively slow synthesis speed of traditional CPU-based synths (Niizumi, p.c.).
+However, training such models is limited by small corpora and/or the relatively slow synthesis speed of traditional CPU-based synths (Niizumi, p.c.),  \cite{masudo2021quality}.
 
 % Going to pull out some of this to the 
 % \subsubsection{Software Synthesizers}
