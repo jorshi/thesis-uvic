@@ -2,6 +2,13 @@
 
 \chapter{GPU Enabled Synthesis}
 
+In the preceding chapter I explored and compared various methods for inverse synthesis, which is one approach to automatic synthesizer programming. These experiments highlighted some of the challenges that researchers are faced with in this work. The most daunting challenge is related to the shear complexity of the relationship between the parameter space and perceptual (auditory) space, and how much variability there is within that relationship depending on the specifics of the synthesis engine and the number and type of parameters. In addition to that, there is no accepted best approach to computationally representing the perceptual space and defining metrics within that space. It is an open question on how to answer the question "How similar are these two sounds?" in a quantifiable way with regards to timbre. The ability to perform experiments that seek to solve these challenges is hindered by additional computational challenges associated with software synthesizers. Recent research has sought to automatically program commercially available VST synthesizers. This approach is well-founded considering these synthesizers represent tools that are currently being used by music producers and sound designers. However, these synthesizes are optimized for real-time use as opposed to use in the machine learning research, where they introduce bottlenecks \cite{masudo2021quality} and difficulties with learning in gradient descent methods.
+
+In this chapter I present a GPU-enabled modular synthesizer that was designed in response to the identified computational challenges and can be used to support research in automatic synthesizer programming. The work presented here was conducted with Joseph Turian, Max Henry, and my supervisors George Tzanetakis and Kirk McNally, and was published in the proceedings of s 
+
+
+In response to these computational challenges, and out of a desire to support research that seeks to elucidate the complex relationship between synthesizer parameters and the auditory result, a GPU enabled 
+
 \section{Introduction}
 \label{sec:intro}
 
@@ -151,7 +158,7 @@ The default configuration in torchsynth is the Voice, which is the architecture 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.5\linewidth]{SynthDiagram_3.pdf}
+    \includegraphics[width=0.6\linewidth]{SynthDiagram_3.pdf}
   \vspace{-1.5em}
     \caption{Module configuration for the Voice in torchsynth}
     \label{fig:voice_diagram}
@@ -165,7 +172,7 @@ While the Voice is the default architecture of torchsynth 1.0, any number of syn
 
 \begin{figure}[thb]
     \centering
-    \includegraphics[width=0.95\linewidth]{Hyperparam_4.pdf}
+    \includegraphics[width=0.80\linewidth]{Hyperparam_4.pdf}
     \caption{Examples of parameter curves used to convert to and from normalized parameter values and the human-readable values used in the DSP algorithms. The top two curves are non-symmetric curves, mapping to values in the range [0, 127]. The bottom two curves are symmetric, mapping to values in the range [-127, 127].}
     \label{fig:parameter_curves}
 \end{figure}
