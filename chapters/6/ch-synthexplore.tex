@@ -11,6 +11,24 @@
 
 \chapter{Visualizing Synthesizer Sounds}
 \label{ch:visualization}
+In this chapter I present Synth Explorer, a prototype of an automatic synthesizer programming interface built on top of the torchsynth synthesizer. Synth Explorer is an interactive visual browsing interface for torchsynth that was built with goal of supporting both novice and expert users in the process of navigating and developing an understanding of the vast and complex sonic space expressed by a synthesizer. It builds upon previous research in the area of sound visualization and the design is informed by concepts from the the fields of creativity support tools (CSTs) and music interaction [need cites]. These concepts, along with the taxonomy of automatic synthesizer programming interaction approaches presented in \S\ref{chapter:asp-background} grounds the the development of Synth Explorer, and provides a framework for the development of future systems. Synth Explorer is an example of an exploratory interface, with potential for inclusion of additional interactions, such as an example-based interface.
+
+The target audience of Synth Explorer is music producers and creatives who require the use of synthesized sounds for a project. 
+
+Kristina Andersen interviewed experienced music producers and asked them about their experience 
+
+% During conversations with experienced music producers conducted by Kristina Andersen, participants expressed the difficulties with searching for sounds through list-based interfaces and the effort involved with organizing sound files in a way that supported their individual workflow \cite{andersen2016conversations}. Several participants expressed a desire for tools that would aid them in the process of finding sounds while promoting happy accidents. A particular emphasis was placed on the role of tools aiding in the creative process as opposed to taking over the process. The field of creative music information retrieval has also had the focus of finding ways to address the challenges of searching for sounds \cite{humphrey2013brief}. Visual browsing interfaces have been identified as beneficial for allowing users to navigate large collections of sounds more efficiently than traditional list based methods \cite{turquois2016exploring}.
+
+
+
+It is focused on enabling users to quickly navigate both the parameter space and the perceptual space represented by a software synthesizer through an interactive visual representation of the sound.
+
+produced by a software synthesizer through a visual representation of the sound. S
+
+Synth Explorer is intended to support the navigation of synthesizer sounds, allowing users to develop a "sound palette" for their project which they can download and transfer into their audio workstation of choice. In addition to supporting exploration, Synth Explorer is designed with the novice user in mind. While the interface includes some technical audio terms, the drag and drop interface is modelled off of an interaction modality that will be familiar to most computer users and will allow anyone to quickly start constructing visualizations and exploring sounds. The inclusion of the technical names will allow users to begin to build up an understanding of the different dimensions of sound and how they relate to the underlying synthesizer parameters.
+
+
+The design of this tool was informed by concepts put forth by research in HCI, specifically creativity support tools (CSTs) and music interaction. Based on these concepts, a framework for developing synthesizer interfaces that support creativity is presented.
 
 \section{Introduction}
 % This is pretty standard introduction material:
@@ -41,6 +59,24 @@ Synth Explorer is a synthesizer browsing interface that builds upon previous res
 % -- 
 
 \section{Background and Related Work}
+
+% Some previously written fluff on CSTs and music interaction
+% \subsection{Human Computer Interaction}
+% \subsubsection{Creative Support Tools}
+% Automatic synthesizer programming can be viewed from the perspective of trying to solve a human computer interaction (HCI) problem. How can a synthesizer user more effectively communicate their creative ideas to a synthesizer? Currently users are expected to learn the domain language from the perspective of whatever synthesis algorithm they are using. Can a user instead communicate their ideas to a synthesizer in a way that fits their creative needs? Creativity support is an emerging field of study that is interested in answering questions similar to this. It is focused on the development of tools that enable and enhance the creative output of an individual or group, both novices and experts. Creativity support tools (CSTs) \cite{shneiderman2007creativity} span a wide array of application domains including visual art, textiles, cooking, and music. A central question that CSTs ask is: 
+% \begin{quote}
+%     "How can designers of programming interfaces, interactive tools, and rich social environments enable more people to be more creative more often?"
+% \end{quote}
+
+% Too much detail - maybe put this in the last chapter
+% Shneiderman \cite{shneiderman2007creativity} outlines a set of design principles for developing creativity support tools which include: support exploratory search, enable collaboration, provide rich history keeping, design with low thresholds, high ceilings, and wide walls. In subsequent related work, Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. In their work, the authors identify two types of novice users: domain novices and tool novices. Domain novices are new to both the creative domain as well as using the creativity support tool. Tool novices have experience with the creative domain, but are novices at using a particular tool. To help evaluate and promote the development of creativity support tools for novices, they also propose a theory of creativity support based on cognitive theory.
+
+% These concepts provide an important platform for beginning to develop tools to support users of synthesizers. Both types of novices described by Davis \textit{et al.} are common and serve to benefit from the development of improved methods for interacting with them; domain novices are both new to sound design / music production as well as to using a specific synthesizer, whereas a tool novices would likely have experience with sound design / music production, but would be a novice with using a specific synthesizer.
+
+% This is also a bit too in detail
+% \subsubsection{Music Interaction}
+% Music and Human-Computer Interaction \cite{holland2013music}, or Music Interaction. Research related to the use of interactive systems that involve computes for any kind of musical activity. Music interaction draws heavily from other areas of HCI research, but also responds to the needs and desires of the music community. There are unique considerations in the context of musical applications that makes music interaction different from other fields of HCI. A musical instrument is not a utilitarian tool whose development should be ever-improved to make it more efficient. Musical instruments are played, and sometimes that is the only goal. Tomaka [cite me!] identifies that imperfections and limitations of a musical instrument give an instrument character. McDermott \cite{mcdermott2013should} identifies the importance of engagement in musical interaction and the relation that bears to the concept of \textit{flow} \cite{csikszentmihalyi1990flow}. The learning curve plays is crucial to the level of engagement that a player experiences when playing a musical instrument, both in the short-term and long-term. Holland \cite{holland2013music} concludes, "In order to remain engaging, consuming and flow-like, activities that involve musical instruments must offer continued challenges at appropriate levels of difficulty: not too difficult, and not too easy."
+
 \subsection{Creativity Support}
 % Copying to the background:
 The field of creativity support is focused on the development of tools to enable and enhance the creative output of both novice and expert users. Creativity support tools (CSTs) span a wide array of application domains including visual art, textiles, cooking, and music. Davis \textit{et al.} focus on the role that CSTs play in supporting novices engaging in creative tasks and the relationship that the environment plays in creativity \cite{davis2013toward}. 
