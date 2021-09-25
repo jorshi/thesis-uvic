@@ -25,7 +25,10 @@
 \usepackage{hyperref}           % clickable references and URLs
 
 % Setup for code listings
-\usepackage{minted}
+
+% Required for Texpad, remove outputdir for overleaf
+\usepackage[outputdir=.texpadtmp]{minted}
+
 \usepackage{xcolor}
 
 \definecolor{bg_minted}{rgb}{0.95,0.95,0.95}
