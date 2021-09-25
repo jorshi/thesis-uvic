@@ -151,6 +151,51 @@ $NSGA III$ & \textbf{0.81} & \textbf{0.89} & \textbf{0.001} & \textbf{3.06} \\
 
 Histograms of the the MAE were also plotted for each estimator using the \mintinline{python}{plot_hist()} method in \mintinline{python}{EvaluationBase}. Histograms of the MAE for all predictions made by all estimators are shown in figure \ref{fig:group_hist}. These plots clearly show the NSGA III as the winner in terms of MFCC MAE; 24/25 of the predicted sounds have an MAE less than 2.5 (the smallest histogram bin), and the other sound is still less than 5. For the deep learning models, the LSTM++ performed the best overall, however the LSTM model produced more results that had a MAE less than 2.5. The MLP model performed the worst overall and the histogram shows a wide range of results, the MLP also produced a result with the worst individual score of 34.12. The CNN model performed only slightly better than the MLP and had no predictions with a score less than 2.5.
 
+\begin{table}[t]
+\centering
+\caption{Results from sound matching evaluation}
+\label{tbl:param_eval_eg}
+\begin{tabular}{r|ccc|ccc|c}
+\toprule
+{} & \multicolumn{3}{c}{EG RATE} & \multicolumn{3}{c}{EG LEVEL} & {} \\
+{} & 2 & 3 & 4 & 2 & 3 & 4 & Mean \\
+\midrule
+MLP      &     0.0011 &     0.0902 &     0.0223 &      0.0096 &      0.0134 &      0.0215 &   0.0264 \\
+LSTM     &     0.0002 &     \textbf{0.0081} &     0.0191 &      0.0042 &      0.0020 &      0.0331 &   0.0111 \\
+5-LSTM++ &     0.0007 &     0.0354 &     0.0210 &      0.0069 &      0.0037 &      0.0348 &   0.0171 \\
+LSTM++   &     \textbf{0.0002} &     0.0241 &     0.0306 &      0.0072 &      0.0025 &      0.0434 &   0.0180 \\
+Conv6    &     0.0022 &     0.0212 &     0.0583 &      0.0024 &      0.0071 &      0.0223 &   0.0189 \\
+Conv6s   &     0.0008 &     0.0252 &     0.0280 &      0.0107 &      0.0029 &      0.0307 &   0.0164 \\
+Conv5    &     0.0026 &     0.0230 &     0.0300 &      0.0055 &      0.0108 &      0.0321 &   0.0174 \\
+Conv5s   &     0.0012 &     0.0293 &     0.0111 &      0.0067 &      0.0033 &      0.0228 &   0.0124 \\
+\midrule
+Mean  &     0.0011 &     0.0321 &     0.0275 &      0.0067 &      0.0057 &      0.0301 &   0.0172 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Results from sound matching evaluation}
+\label{tbl:param_eval_osc}
+\begin{tabular}{r|ccc|c}
+\toprule
+{} & \multicolumn{3}{c}{OSC} & {} \\
+{} & Coarse & Fine & Detune & Mean \\
+\midrule
+MLP      &    0.0053 &  0.0958 &      0.0709 & 0.0573 \\
+LSTM     &    0.0044 &  0.0770 &      0.0606 & 0.0473 \\
+5-LSTM++ &    0.0056 &  0.0696 &      0.0711 & 0.0488 \\
+LSTM++   &    0.0052 &  0.0933 &      0.0723 & 0.0570 \\
+Conv6    &    0.0051 &  0.0852 &      0.0681 & 0.0528 \\
+Conv6s   &    0.0063 &  0.0916 &      0.0651 & 0.0543 \\
+Conv5    &    0.0093 &  0.0698 &      0.0721 & 0.0504 \\
+Conv5s   &    0.0068 &  0.0729 &      0.0704 & 0.0500 \\
+\midrule
+Mean     &    0.0060 &  0.0819 &      0.0689 & 0.0523 \\
+\bottomrule
+\end{tabular}
+\end{table}
 % TODO objective evaluation based on the parameter values?
 
 \subsection{Qualitative Evaluation}
