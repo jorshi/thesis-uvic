@@ -32,7 +32,34 @@ The following section describes in more detail the methods used for this experim
 \section{Methods}
 
 \subsection{Synthesizer}
-The first step in the experiment was defining the synthesizer setup and creating data for training deep learning models. $Dexed$ is an emulation of the Yamaha DX7 synthesizer with six individual operators and 155 parameters available for external control. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-oscillator FM synthesizer. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. In this configuration the second operator modulates the frequency of the first operator. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. Each operator in $Dexed$ has a complex envelope generator (EG) that can be used to modulate the amplitude of that operator; a diagram and description of the EG is shown in figure \ref{fig:dx7_envelope}. The complex envelope generator has five independent stages that are controlled by a set of parameters that are used to adjust the length and amplitude of each stage. For this experiment, only the EG for the second operator had parameters for estimation: $LEVEL 2-4$ and $RATE 2-4$. The $RATE 1$ and $LEVEL 1$ parameters were locked to the minmimum rate and highest level, effectively turning off the initial rise portion of the envelope. Three parameters controlling the pitch and tuning of the second operator were also open for estimation. All parameters have a normalized range from $[0-1]$. The remainder of the available parameters in $Dexed$ are locked at values to create a simple sine wave generator that is being frequency modulated by the second operator. The \mintinline{python}{SynthVST} class provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
+The first step in the experiment was defining the synthesizer setup. The $Dexed$ VST instrument was selected for this experiment for a number of reasons: 1) it is an FM synthesizer that is modelled closely after the Yamaha DX7 synthesizer which is both widely used as well as notoriously difficult to program, 2) Dexed is open-source and free to use which makes it easy for the results to be reproduced, and 3) it has been used in a number of previous works on inverse synthesis \cite{yee2018automatic, luke2019stochastic, le2021improving, masudo2021quality}. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. Dexed has 155 automatable parameters that are accessible for control from a DAW, which represent the parameters that are available for programming via inverse synthesis. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-operator FM synthesizer. In this configuration the second operator modulates the frequency of the first operator. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. An overview of these nine parameters is given in table \ref{tbl:dexed-params}.
+
+\begin{table}[ht]
+\centering
+\caption{Synthesis parameters used in experiment}
+\label{tbl:dexed-params}
+%\def\arraystretch{1.5}%  1 is the default, change whatever you need
+\begin{tabular}{l|l}
+\toprule
+Parameter     & Description                                                                                  \\
+\midrule
+OP2 EG RATE 2 & \multirow{3}{*}{\parbox{0.70\linewidth}{Controls the duration of stages 2-4 of the envelope generator applied the the amplitude of operator 2}} \\
+OP2 EG RATE 3 \\
+OP2 EG RATE 4 \\
+\midrule
+OP2 EG LEVEL 2 & \multirow{3}{*}{\parbox{0.6\linewidth}{Controls level of the envelope generator at stages 2-4, which is applied the amplitude of operator 2}} \\
+OP2 EG LEVEL 3 \\
+OP2 EG LEVEL 4 \\
+\midrule
+OP2 F COARSE & \multirow{2}{*}{\parbox{0.6\linewidth}{Frequency of second operator in relation to the fundamental frequency of the MIDI pitch. Coarse tuning is an integer ratio from $\frac{1}{2}$ to 31. Fine tuning allows for smaller non-integer adjustments.}} \\[2.75ex]
+OP2 F FINE \\[2.75ex]
+\midrule
+OP2 OSC DETUNE & \multirow{1}{*}{\parbox{0.6\linewidth}{Detunes the second operator by $\pm$ 7 cents}}\\
+\bottomrule                                                                                             
+\end{tabular}
+\end{table}
+
+Each operator in $Dexed$ has a complex envelope generator (EG) that is used modulate the amplitude of that operator. The complex envelope generator has five independent stages that are controlled by a set of parameters that are used to adjust the length and amplitude of each stage. For this experiment, only the EG for the second operator had parameters for estimation: $LEVEL 2-4$ and $RATE 2-4$. The $RATE 1$ and $LEVEL 1$ parameters were locked to the minmimum rate and highest level, effectively turning off the initial rise portion of the envelope. Three parameters controlling the pitch and tuning of the second operator were also open for estimation. Although each of the included parameters control the amplitude EG and pitch of the operator in distinct ways, there is redundancy in the parameter spaced, i.e. different parameter settings could lead to the same auditory result. This redundancy represents one of the complexities of synthesizer parameter spaces and challenges in automatic synthesizer programming. This experiment intentionally seeks to explore the affect this redundancy has on each techniques ability to effectively match. All parameters have a normalized range from $[0-1]$ and mapping from this normalized range is handled internally by the Dexed code. The remainder of the available parameters in $Dexed$ are locked at values to create a simple sine wave generator that is being frequency modulated by the second operator. [ADD A TABLE IN APPENDIX FOR ALL THE PARAMETER VALUES]. The \mintinline{python}{SynthVST} class in spiegelib provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
 
 \begin{figure}[ht]
     \centering
@@ -55,22 +82,20 @@ The first step in the experiment was defining the synthesizer setup and creating
     \label{fig:dx7_envelope}
 \end{figure}
 
-% \begin{table}[]
-%     \centering
-%     \begin{tabular}{c|c}
-%          &  \\
-%          & 
-%     \end{tabular}
-%     \caption{Caption}
-%     \label{tab:my_label}
-% \end{table}
 
 \subsection{Dataset}
+A dataset of synthesized audio paired with the parameters used for generation was required for training the deep learning models used in this experiment. Dataset creation consisted of sampling the parameter space, rendering the audio resulting from the parameters, and then transforming the audio into a suitable audio representation for each model. All audio was rendered by sending a single MIDI note to Dexed with a note value of 48 (C3 - $\approx 130.81$Hz) and length of one second. 60,000 examples were generated by uniformly sampling the nine parameters and rendering audio for one second; audio results were saved as wav files at a sampling rate of 44,100kHz. The parameter values were also saved alongside each example. Once the audio dataset was created, audio representations were generated for each example.
+
+\subsubsection{Audio Representations}
+All the models received audio input that has been transformed into a more perceptually relevant representation. Two different representations were used. The fully-connected and recurrent models used a 13-band mel-frequency cepstral coefficient (MFCC) representation, which was the same used by Yee-King \textit{et al.} \cite{yee2018automatic}, and the convolutional neural networks (CNNs) used a log-scaled mel-spectrogram representation. Barkan \textit{et al.} \cite{barkan2019inversynth} used a STFT representation in their experiments with CNNs, however mel-spectrograms provide a more perceptually relevant frequency scaling and has been used in recent work in audio representations \cite{cramer:learnmore:icassp:19, hershey2017cnn}.
+
+The MFCCs were computed with 13-bands using a frame size of 2048 and a hop size of 1024, this resulted in 44 frames over the 1-second long input audio.
+
+
+
 The \mintinline{python}{DatasetGenerator} class was then used to create datasets for deep learning training. All deep learning models, except for the CNN, used a 13-band MFCC calculated with a frame size of 2048 samples and a hop size of 1024 samples. The input of the CNN was the magnitude spectrum from a STFT, calculated using an FFT with 512 bins and a hop size of 256 samples. Using an instance of \mintinline{python}{DatasetGenerator}, 50,000 training examples and 10,000 validation examples were generated by randomly sampling the nine parameters from $Dexed$. Resulting feature vectors were normalized by removing the mean and scaling to unit variance using methods within the \mintinline{python}{FeatureBase} base class. Datasets and settings for normalization were then stored as NumPy files for later use.
 
 \subsection{Deep Learning Models}
-
-
 
 All deep learning models are defined in classes within \mintinline{python}{spiegelib} and all inherit from \mintinline{python}{TFEstimatorBase}. Three models derived from work by Yee-King et al. \cite{yee2018automatic} were used: 1) A simple multi-layer perceptron with three hidden layers, all with a ReLu activation, 2) a LSTM recurrent network with three layers and dense output, and 3) a LSTM++ networks which contains a single bidirectional LSTM node followed by a dense layer with an elu activation, six highway layers, and a dense output. One convolutional neural network (CNN) derived from work by Barkan et al. \cite{barkan2019inversynth} was also included: this network featured six layers of strided convolutions followed by a dropout layer and a dense output. Specific details of all these models is provided in appendx \ref{appendix:spiegelib_models}.
 
