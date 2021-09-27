@@ -264,7 +264,7 @@ In the Surge dataset, to control for the helical nature of pitch perception \cit
 \subsection{Evaluation Results}
 
 To evaluate the perceptual similarity between two audio samples, we need a good representation to compute distances: a) The multi-scale spectrogram distance has been used in a variety of applications, particularly in speech synthesis \cite{wang_neural_2019,DBLP:conf/icassp/YamamotoSK20} but also in music \cite{DBLP:journals/corr/abs-2008-01393,engel2020ddsp,dhariwal2020jukebox};
-b) NSynth Wavenet \cite{engel2017neural} is a Wavenet-architecture trained on NSynth musical notes; c) OpenL3 \cite{Cramer:LearnMore:ICASSP:19} was  trained multi-modally on AudioSet audio and video, on two distinct subsets: music and environmental sounds; d) Coala \cite{drossos:icml:2020} was trained multi-modally on Freesound audio and their corresponding tags.
+b) NSynth Wavenet \cite{engel2017neural} is a Wavenet-architecture trained on NSynth musical notes; c) OpenL3 \cite{cramer:learnmore:icassp:19} was  trained multi-modally on AudioSet audio and video, on two distinct subsets: music and environmental sounds; d) Coala \cite{drossos:icml:2020} was trained multi-modally on Freesound audio and their corresponding tags.
 
 We experimented with a variety of hyperparameter settings for the representations. The best results are in Table~\ref{tab:distance-eval}. $\ell_1$ distance was used because it gave better results than $\ell_2$ across the board. For Coala and NSynth Wavenet, normalizing
 % We maybe should have done l1 norm not l2 norm :\
