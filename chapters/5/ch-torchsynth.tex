@@ -1,6 +1,7 @@
 \graphicspath{{./}{./figures/}{./figures/torchsynth/}}
 
 \chapter{GPU Enabled Synthesis}
+\label{ch:torchsynth}
 
 In the preceding chapter I explored and compared various methods for inverse synthesis, one approach to automatic synthesizer programming. These experiments highlighted some of the challenges that researchers are faced with in pursuing this work. The most daunting challenge is related to the sheer complexity of the relationship between the parameter space and perceptual (auditory) space, and how much variability there is within that relationship depending on the specifics of the synthesis engine and the number and type of parameters. In addition to that, there is no accepted best approach to computationally representing the perceptual space and defining metrics within that space. It is an open question on how to answer the question "How similar are these two sounds?" in a quantifiable way with regards to timbre. The ability to perform experiments that seek to solve these challenges is hindered by additional computational challenges associated with software synthesizers. Recent research has sought to automatically program commercially available VST synthesizers. This approach is well-founded considering these synthesizers represent tools that are currently being used by music producers and sound designers. However, these synthesizes are optimized for real-time use as opposed to use in the machine learning research, where they introduce bottlenecks \cite{masudo2021quality} and difficulties with learning in gradient descent methods.
 
@@ -80,6 +81,7 @@ A variety of existing research problems can use synth1B1, including:
 Researchers can also use the synth1B1 corpus to arbitrage innovations from adjacent ML fields, namely: large-scale multi-modal, self-supervised, and/or contrastive learning, and transfer-learning through fine-tuning on the downstream task of interest, particularly tasks with few labeled examples.
 
 \subsection{synth1B1}
+\label{section:synth1B1}
 
 synth1B1 is a corpus consisting of one million hours of audio: one billion 4-second synthesized sounds. The corpus is multi-modal: Each sound includes its corresponding synthesis parameters. We use deterministic random number generation to ensure replicability, even of noise oscillators. One tenth of the examples are designated as the test set. Researchers can denote subsamples of this corpus as synth1M1, synth10M1, {\em etc.} % which would refer to the first 1 million and 10 million samples of Synth1B1 respectively.
 
@@ -89,6 +91,7 @@ Besides sheer size, another benefit of synth1B1 is that it is multi-modal: insta
 Large-scale contrastive learning typically requires data augmentation ({\em e.g.}\ image or spectrogram deformations) to construct positive contrastive-pairs \cite{pmlr-v119-chen20j,DBLP:journals/corr/abs-2103-06695}. However, this sort of faux-constrastive-pair creation is not necessary when the underlying latent parameters are known in a corresponding modality.
 
 \subsection{torchsynth}
+\label{section:torchsynth}
 
 synth1B1 is generated {\em on the fly} by \href{https://github.com/torchsynth/torchsynth}{torchsynth 1.0}.
 % TODO: pypi package
