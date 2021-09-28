@@ -1,4 +1,4 @@
-\chapter{Inverse Synthesis}
+\chapter{Inverse Synthesis Experiment}
 \label{chapter:inverse_synth_experiment}
 This chapter presents an inverse synthesis experiment that was conducted to compare some of the recent approaches that have been used in previous work. The methodology used for this experiment was modelled after Yee-King et al.'s study on deep learning for automatic synthesizer programming \cite{yee2018automatic}, but with a simplified synthesizer configuration and a unique set of estimators. In total ten different methods for inverse synthesis were compared, including eight deep learning models based on previous work \cite{barkan2019inversynth, yee2018automatic} and two versions of a genetic algorithm \cite{horner1993machine, tatar2016automatic}. A VST software emulation of the Yamaha DX7 FM synthesizer called \textit{Dexed} was used with a restricted subset of the parameters. While Dexed has been used in previous work for inverse synthesis \cite{yee2018automatic, luke2019stochastic, le2021improving, masudo2021quality}, each work has used a unique subset of parameters and sounds for their experiments. Depending on the parameters that are selected, the difficulty of the problem varies considerably. In this experiment we propose a minimal subset of nine parameters to reduce the complexity of the problem and to provide a benchmark for evaluation.
 
@@ -34,6 +34,20 @@ The following section describes in more detail the methods used for this experim
 \subsection{Synthesizer}
 The first step in the experiment was defining the synthesizer setup. The $Dexed$ VST instrument was selected for this experiment for a number of reasons: 1) it is an FM synthesizer that is modelled closely after the Yamaha DX7 synthesizer which is both widely used as well as notoriously difficult to program, 2) Dexed is open-source and free to use which makes it easy for the results to be reproduced, and 3) it has been used in a number of previous works on inverse synthesis \cite{yee2018automatic, luke2019stochastic, le2021improving, masudo2021quality}. An image of the $Dexed$ interface is shown in figure \ref{fig:dexed}. Dexed has 155 automatable parameters that are accessible for control from a DAW, which represent the parameters that are available for programming via inverse synthesis. A subset of nine of these parameters were used in this experiment to turn $Dexed$ into a simple two-operator FM synthesizer. In this configuration the second operator modulates the frequency of the first operator. A block diagram showing the resulting synth configuration is shown in figure \ref{fig:two_op_fm_block}. The subset of nine parameters control the amplitude envelope and tuning of the modulating oscillator; this simple synthesizer can produce a wide range of timbres that evolve in various ways over time based on the amplitude envelope of the modulating oscillator. An overview of these nine parameters is given in table \ref{tbl:dexed-params}.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/spiegelib/dexed.png}
+    \caption{The Dexed synthesizer interface. Dexed is an open-source emulation of the Yamaha DX7 FM synthesizer and it was used in the experiments in this chapter/}
+    \label{fig:dexed}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/spiegelib/two_op_fm_block.png}
+    \caption{Block diagram of a two operator FM synthesizer. Dexed has six independent operators that can be configured in various ways, however for the experiments conducted here only the first two operators were used and were setup in this configuration.}
+    \label{fig:two_op_fm_block}
+\end{figure}
+
 \begin{table}[ht]
 \centering
 \caption{Synthesis parameters used in experiment}
@@ -55,25 +69,12 @@ OP2 F COARSE & \multirow{2}{*}{\parbox{0.6\linewidth}{Frequency of second operat
 OP2 F FINE \\[2.75ex]
 \midrule
 OP2 OSC DETUNE & \multirow{1}{*}{\parbox{0.6\linewidth}{Detunes the second operator by $\pm$ 7 cents}}\\
-\bottomrule                                                                                             
+\bottomrule                                                                                        
 \end{tabular}
 \end{table}
+\vspace{1cm}
 
 Each operator in $Dexed$ has a complex envelope generator (EG) that is used modulate the amplitude of that operator. The complex envelope generator has five independent stages that are controlled by a set of parameters that are used to adjust the length and amplitude of each stage. For this experiment, only the EG for the second operator had parameters for estimation: $LEVEL 2-4$ and $RATE 2-4$. The $RATE 1$ and $LEVEL 1$ parameters were locked to the minmimum rate and highest level, effectively turning off the initial rise portion of the envelope. Three parameters controlling the pitch and tuning of the second operator were also open for estimation. Although each of the included parameters control the amplitude EG and pitch of the operator in distinct ways, there is redundancy in the parameter spaced, i.e. different parameter settings could lead to the same auditory result. This redundancy represents one of the complexities of synthesizer parameter spaces and challenges in automatic synthesizer programming. This experiment intentionally seeks to explore the affect this redundancy has on each techniques ability to effectively match. All parameters have a normalized range from $[0-1]$ and mapping from this normalized range is handled internally by the Dexed code. The remainder of the available parameters in $Dexed$ are locked at values to create a simple sine wave generator that is being frequency modulated by the second operator. [ADD A TABLE IN APPENDIX FOR ALL THE PARAMETER VALUES]. The \mintinline{python}{SynthVST} class in spiegelib provides methods for overriding and freezing parameters as well as saving and loading parameter settings as JSON files. 
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.75\textwidth]{figures/spiegelib/dexed.png}
-    \caption{The Dexed synthesizer interface. Dexed is an open-source emulation of the Yamaha DX7 FM synthesizer and it was used in the experiments in this chapter/}
-    \label{fig:dexed}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/spiegelib/two_op_fm_block.png}
-    \caption{Block diagram of a two operator FM synthesizer. Dexed has six independent operators that can be configured in various ways, however for the experiments conducted here only the first two operators were used and were setup in this configuration.}
-    \label{fig:two_op_fm_block}
-\end{figure}
 
 \begin{figure}[ht]
     \centering
@@ -114,18 +115,35 @@ MFCC features were standardized to have zero mean and unit variance, and the Mel
 \end{figure}
 
 \subsection{Deep Learning Models}
-Eight different models were used in this experiment. Three recurrent neural networks (RNNs) derived from work by Yee-King \textit{et al.} \cite{yee2018automatic}, four convolutional neural networks (CNNs) derived from work by Barkan \textit{et al.} \cite{barkan2019inversynth}, and a baseline multi-layer perceptron (MLP) network, also from Yee-King \textit{et al.} \cite{yee2018automatic}. The RNN models use the time-series of MFCC features as input, the CNN models use the Mel-spectrogram images as input, and the MLP network uses a flattened version of the time-series MFCC features. All models output floating point value estimations for the nine synthesizer parameters. Because these output values can be any 32-bit floating point number (outputs are clipped to a $[0-1]$ range), this is a regression problem. This is a natural way to approach the problem considering the continuous nature of the parameters exposed by a given synthesizer, and this is the approach taken by Yee-King \textit{et al.}. Conversely, Barkan \textit{et al.} framed the inverse synthesis problem as a classification problem by dividing each parameter into 16 classes, which meant that there would be $n*16$ classes, where $n$ is the number of parameters.
+Eight different models were used in this experiment. Three recurrent neural networks (RNNs) derived from work by Yee-King \textit{et al.} \cite{yee2018automatic}, four convolutional neural networks (CNNs) derived from work by Barkan \textit{et al.} \cite{barkan2019inversynth}, and a baseline multi-layer perceptron (MLP) network, also from Yee-King \textit{et al.} \cite{yee2018automatic}. The RNN models use the time-series of MFCC features as input, the CNN models use the Mel-spectrogram images as input, and the MLP network uses a flattened version of the time-series MFCC features. All models output floating point value estimations for the nine synthesizer parameters. Because these output values can be any 32-bit floating point number (outputs are clipped to a $[0-1]$ range), this means that the models are solving a regression problem. The loss function used during training was the mean squared error (MSE) between the target parameter values $\textbf{y}$ and the predicted parameter values $\hat{\textbf{y}}$. The MSE is calculated as follows, where $N$ is the number of parameters:
 
+\begin{equation}\label{equation:mse}
+    \ell(\textbf{y}, \hat{\textbf{y}}) = \frac{\sum_{i \in N}{(y_i - \hat{y_i})^2}}{N}
+\end{equation}
+
+Ideally the loss would be calculated on audio produced by Dexed using the estimated parameters, however there are currently no available solutions for rendering audio using VST instruments within a deep learning model and including it in the the training loop. Recent work by Ramírez \textit{et al.} presented a solution for including audio effect plugins within a deep learning networks \cite{ramirez2021differentiable} which could also enable training on VSTis as well, however I leave that for future suggested work. 
+
+Models were trained using an $Adam$ optimizer \cite{kingma2014adam} and hyperparameters for each model were optimized using a  Tree-structured Parzen Estimator (TPE), which has been shown to be an effective method for hyperparameter selection \cite{bergstra2011algorithms}. Early stopping was used during training for all models, this halted training if the validation loss stopped decreasing for a certain number of training epochs. The number of training epochs that early stopping waited before halting training is referred to as $patience$, and was selected based on results from hyperparameter optimization.
+
+The following subsections describe each of the models in more detail and the specifics of each architecture is provided in appendix \ref{appendix:spiegelib_models}.
+
+% Maybe not important
+%This is a natural way to approach the problem considering the continuous nature of the parameters exposed by a given synthesizer, and this is the approach taken by Yee-King \textit{et al.}. Conversely, Barkan \textit{et al.} framed the inverse synthesis problem as a classification problem by dividing each parameter into 16 classes, which meant that there would be $n*16$ classes, where $n$ is the number of parameters. Quantizing the parameter space into 16 discrete values per parameter 
+
+\subsubsection{Multi-Layer Perceptron}
+The MLP is included as a baseline model to compare the other models against. The architecture for the MLP was derived from Yee-King \textit{et al.} \cite{yee2018automatic} and has three hidden layers containing 50, 40, and 30 neurons respectively. Each neuron utilizes a ReLu activation and the model contains 32k trainable parameters. It was trained using a learning rate of 0.001, a patience of 25 epochs, and a batch-size of 128.
+
+\subsubsection{Recurrent Neural Networks}
+
+% I'm tired :(
 
 Three models derived from work by Yee-King et al. \cite{yee2018automatic} were used: 1) A simple multi-layer perceptron with three hidden layers, all with a ReLu activation, 2) a LSTM recurrent network with three layers and dense output, and 3) a LSTM++ networks which contains a single bidirectional LSTM node followed by a dense layer with an elu activation, six highway layers, and a dense output. One convolutional neural network (CNN) derived from work by Barkan et al. \cite{barkan2019inversynth} was also included: this network featured six layers of strided convolutions followed by a dropout layer and a dense output. Specific details of all these models is provided in appendx \ref{appendix:spiegelib_models}.
 
 Models were trained using an $Adam$ optimizer \cite{kingma2014adam} with a learning rate of 0.001, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. Ideally the loss function would be computed directly on audio rendered from $Dexed$ using the predicted parameters, but that is challenging to implement, so the loss is computed on the parameter values which has been standard in previous work \cite{yee2018automatic, barkan2019inversynth}.
 
-The loss function used was the RMS error between the target parameter values and the predicted parameter values, which is given by the following formula where $N$ is the number parameters, $y$ is the true parameter values, and $\hat{y}$ is the predicted parameter values:
+The loss function used was the RMS error between the target parameter values and the predicted parameter values, which is given by the following formula where $N$ is the number parameters, $\textbf{y}$ is the true parameter values, and $\hat{\textbf{y}}$ is the predicted parameter values:
 
-\begin{equation}
-    \ell(y, \hat{y}) = \sqrt{\frac{\sum_{i \in N}{(y_i - \hat{y_i})^2}}{N}} 
-\end{equation}
+
 
 Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. 
 

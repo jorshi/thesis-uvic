@@ -133,6 +133,22 @@ September 24th
 Goals:
 - Write the conclusion, introduction, abstract and title page.
 
+Week 7:
+-------
+Fak. This is taking for fucking ever. No more coding this week.
+
+September 28th
+- Finish first draft of the visualization chapter in the morning. Then finish off a first draft of the inverse synth experiment after that.
+
+September 29th
+- Complete a first draft of the background section.
+- SpiegeLib additions
+
+September 30th
+- First draft of the Introduction and Conclusion
+- 
+
+
 
 TODO / Plan:
 Abstract:
