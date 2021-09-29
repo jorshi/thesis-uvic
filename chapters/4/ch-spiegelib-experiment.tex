@@ -5,31 +5,6 @@ This chapter presents an inverse synthesis experiment that was conducted to comp
 
 The following section describes in more detail the methods used for this experiment including the precise configuration of the synthesizer, the dataset used for training, and the various techniques compared. Section \ref{sec:inverse-synth-eval} describes the methods used for evaluation and the results of this evaluation. Section \ref{sec:inverse-synth-discuss} presents a discussion of the results and some of the challenges associated with the inverse synthesis problem. In alignment with Vandewalle et al.'s criteria for reproducible research, implementation details, code, and datasets are all available on the \mintinline{python}{spiegelib} online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match.html}}
 
-
-%\section{Related Work}
-%- Go over the three specific papers that SpiegeLib and the experiments are based on.
-%- Deep learning: Fully connected and recursive nets: \cite{yee2018automatic}, Convolutional Nets: \cite{barkan2019inversynth}, Genetic Algorithms: \cite{tatar2016automatic}
-%
-%\subsection{Recurrent Neural Networks}
-%One of the first works on the application of deep learning to the inverse synthesis problem was published by Matthew Yee-King et al. \cite{yee2018automatic} in 2018. The main contribution of their work was an experiment that showed the effectiveness of a type of recurrent neural networks (RNN) called long short-term memory (LSTM) networks at sound matching on an FM synthesizer audio plugin. RNNs were developed to handle time-series data and receive ordered data which is successively fed into the network architecture. As data is fed into the networks, activation states are stored internally and help to provide temporal context in latter stages of computation. RNNs have been particularly successful for audio generation problems \cite{oord2016wavenet, engel2017neural}. 
-%
-%Yee-King er al. also experimented with additional machine learning techniques including genetic algorithm (GA), Hill-climber, and  multi-layer perceptron (MLP) methods. They also compared two RNN models: a regular LSTM network as well as a modified LSTM network that had a bi-directional LSTM layer as well as several highway layers, they called this network an LSTM++. Their methodology compared a set of algorithms on a series of successfully more challenging problems on the open-source FM synthesizer Dexed\footnote{\url{https://asb2m10.github.io/dexed/}}. Each problem was focused on programming a subset of the parameters in Dexed; a larger subset was used for each successive problem. A dataset of audio samples paired with the parameters used to generate the audio was created for training each of the deep learning models. Mel-frequency Cepstral Coefficients (MFCCs) were used as input for each of the models. The results were evaluated by looking at the error between MFCCs from target sound and a predicted sound. Results showed that the hill-climber algorithm and the LSTM++ model performed the best. The LSTM++ model showed significant improvements over the other deep learning methods, however the hill-climber performed the best on a majority of the tasks.
-%
-%Their methodology and software provided a basis for the work presented in the chapter and in the development of SpiegeLib.
-%
-%\subsection{Convolutional Neural Networks}
-%Barkan et al. explored convolutional neural networks (CNNs) applied to the inverse synthesis problem in their work which presenting InverSynth \cite{barkan2019deep}. The CNN has been used extensively for image related deep learning tasks and has recently been used successfully in music and audio related tasks including music genre classification \cite{choi2016automatic} and neural audio generation \cite{donahue2018adversarial}. A key feature of CNNs is the use of shared filters that perform convolutions and produce representations at various levels of specificity. The shared filters has allowed them to process large input data such as images and audio with relatively few parameters compared to their fully connected counterparts. 
-%
-%In their work, Barkan et al. experiment with several different CNN architectures and compare them to a few different fully-connected networks. The focus of their research is performing inverse synthesis on a custom built four oscillator FM synthesizer. They frame the inverse synthesis problem as a classification problem and quantize each of the 23 continuous synthesizer parameters into 16 discrete states. As input they experiment with both STFT as well as raw time-domain audio. Because of the size of these input they created different input representations for the fully-connected networks, for these they used a selection of hand-picked audio features defined in work by Itoyama et al. \cite{itoyama2014parameter}.
-%
-%Results were evaluated using four different objective methods which evaluate both the ability of the model to match the parameters as well as to reconstruct the target audio. The evaluation metrics used are:
-%1) Mean Percentile Rank (MPR): ranked position of the correct class measured against predicted classes in the output. Computed independently on each of the 23 synthesizer parameters, each parameter has 16 classes.
-%2) Top-k Mean Accuracy: measures whether the correct class is among the top-k predicted classes for each parameter.
-%3) Mean Absolute Error (MAE): this measures the error of the predicted class for each parameter.
-%4) Spectral Reconstruction Quality: predicted parameters are used to synthesize a predicted audio. The predicted audio is compared against the target audio using error metrics calculated on the STFT and FT representations.
-%
-%They also conducted a subjective listening experiment which measured the quality of the target audio to the predicted audio for a selection of the methods. Results from the objective and subjective evaluation showed that the depth of the convolutional network played an important role in the quality of the estimator and the best performing networks were two different networks with 6-layers.
-
 \section{Methods}
 
 \subsection{Synthesizer}
@@ -126,48 +101,78 @@ Ideally the loss would be calculated on audio produced by Dexed using the estima
 
 Models were trained using an $Adam$ optimizer \cite{kingma2014adam} and hyperparameters for each model were optimized using a  Tree-structured Parzen Estimator (TPE), which has been shown to be an effective method for hyperparameter selection \cite{bergstra2011algorithms}. Early stopping was used during training for all models, this halted training if the validation loss stopped decreasing for a certain number of training epochs. The number of training epochs that early stopping waited before halting training is referred to as $patience$, and was selected based on results from hyperparameter optimization.
 
-The following subsections describe each of the models in more detail and the specifics of each architecture is provided in appendix \ref{appendix:spiegelib_models}.
+The following subsections describe each of the models that were included in this experiment. To find specific details on the implementation of each model see appendix \ref{appendix:spiegelib_models}.
 
 % Maybe not important
 %This is a natural way to approach the problem considering the continuous nature of the parameters exposed by a given synthesizer, and this is the approach taken by Yee-King \textit{et al.}. Conversely, Barkan \textit{et al.} framed the inverse synthesis problem as a classification problem by dividing each parameter into 16 classes, which meant that there would be $n*16$ classes, where $n$ is the number of parameters. Quantizing the parameter space into 16 discrete values per parameter 
 
 \subsubsection{Multi-Layer Perceptron}
-The MLP is included as a baseline model to compare the other models against. The architecture for the MLP was derived from Yee-King \textit{et al.} \cite{yee2018automatic} and has three hidden layers containing 50, 40, and 30 neurons respectively. Each neuron utilizes a ReLu activation and the model contains 32k trainable parameters. It was trained using a learning rate of 0.001, a patience of 25 epochs, and a batch-size of 128.
+% Find cites for  the MLP?
+Multi-Layer Perceptron (MLP) models, also referred to as a feedforward neural network, were the first and most simple types of neural networks. They contain one or more hidden layers containing neurons that are connected to each neuron in the preceding and proceeding layers. Because of fully connected nature of these layers, they are also referred to as dense layers. An MLP is included in this experiment as a baseline model to benchmark the other models againsts. The architecture for the MLP was derived from Yee-King \textit{et al.} \cite{yee2018automatic} and has three hidden layers containing 50, 40, and 30 neurons respectively. Each neuron utilizes a ReLu activation and the model contains 32k trainable parameters. It was trained using a learning rate of 0.001, a patience of 25 epochs, and a batch-size of 128.
 
 \subsubsection{Recurrent Neural Networks}
+% Find cites for these different networks??
+Three different Recurrent Neural Networks (RNNs) derived from work by Yee-King \textit{et al.} \cite{yee2018automatic} were used in this experiment:
+\begin{itemize}
+    \item \textit{LSTM:} The first is an RNN with three LSTM layers, each containing 64 units, followed by a dropout layer with frequency of 0.2 and a fully connected output layer. It contains 86.6k trainable parameters. This is a modified version of the model used by Yee-King, the number of units for each LSTM and the rate of the dropout were both selected through hyperparameter optimization; the main difference is that this model uses only 64 units in each LSTM as opposed to 100, meaning that the tuned model contains less trainable parameters. This model was trained with a learning rate of 0.001, early-stopping patience of 30 epochs, and a batch-size of 64.
+    \item \textit{LSTM++:} This model is the same LSTM++ model proposed by Yee-King. Each LSTM in the bi-directional layer contains 128 units. A dropout with a rate of 0.2 follows the bi-directional layer. This is then projected down to 64 dimensions using a dense layer with an exponential linear unit (ELU) activation. Six highway layers follow this, also with ELU activations. The highway layers perserve the dimensionality of the input. The final highway layer is connected to the output with a fully connected layer containing an ELU activation. This model contains 212k trainable parameters and was trained using a learning rate of 0.001, early-stopping patience of 30, and a batch-size of 32.
+    \item \textit{5-LSTM++:} This model is an attempt to optimize the previous LSTM++ model for the specific problem. The main different between this model and the LSTM++ is that it only contains five highway layers, and each highway layer is only 32 dimensions. Therefore, the capacity of this model is less than that of the LSTM++; it contains 164.5k trainable parameters. The dropout layer also operates at a higher dropout rate of 0.5. This model was trained using the same learning rate and early-stopping patience as the LSTM++, but with a larger batch-size of 128.
+\end{itemize}
 
-% I'm tired :(
+\subsubsection{Convolutional Neural Networks}
+Four different convolution networks based on models proposed by Barkan \textit{et al.} were used \cite{barkan2019inversynth}. In their work, Barkan \textit{et al.} experimented with seven different CNN models that used a log STFT spectrogram for input. They found that the model with the most capacity, a model with 6 CNN layers and 2.3M trainable parameters, performed the best in their experiments. All the other spectrogram based models that they experimented with had 1.2M trainable parameters and had between one to six convolutional layers. They also use strided convolutions as opposed to the more traditional max pooling approach to downsample between layers \cite{goodfellow2016deep}. The 6-layer and 5-layer networks proposed by Barkan \textit{et al.} were used for this experiment, these models were called \textit{Conv6} and \textit{Conv5} respectively. Early experiments showed that these models were prone to overfitting on the Dexed parameter estimation dataset and two derivative models with less capacity were developed for this experiment, these models were called \textit{Conv6s} and \textit{Conv5s}, where the appended "s" stands for "small". The Conv6 and Conv5 models were modified by reducing the size of the filters in each convolutional layer to produce the smaller models. Both the Conv6 and Conv5 networks contained 1.1M trainable parameters, the Con6s model contained 686k trainable parameters, and the Conv5s model contained 600k trainable parameters. 
 
-Three models derived from work by Yee-King et al. \cite{yee2018automatic} were used: 1) A simple multi-layer perceptron with three hidden layers, all with a ReLu activation, 2) a LSTM recurrent network with three layers and dense output, and 3) a LSTM++ networks which contains a single bidirectional LSTM node followed by a dense layer with an elu activation, six highway layers, and a dense output. One convolutional neural network (CNN) derived from work by Barkan et al. \cite{barkan2019inversynth} was also included: this network featured six layers of strided convolutions followed by a dropout layer and a dense output. Specific details of all these models is provided in appendx \ref{appendix:spiegelib_models}.
-
-Models were trained using an $Adam$ optimizer \cite{kingma2014adam} with a learning rate of 0.001, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. Ideally the loss function would be computed directly on audio rendered from $Dexed$ using the predicted parameters, but that is challenging to implement, so the loss is computed on the parameter values which has been standard in previous work \cite{yee2018automatic, barkan2019inversynth}.
-
-The loss function used was the RMS error between the target parameter values and the predicted parameter values, which is given by the following formula where $N$ is the number parameters, $\textbf{y}$ is the true parameter values, and $\hat{\textbf{y}}$ is the predicted parameter values:
-
-
-
-Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. 
-
-% TODO: add in some of the other loss plots (probably all of them) and remark on the differences betwee them.
-
-Trained models are then saved for future use.
+Hyperparameter optimization with TPE was used to further refine these models. Model parameters that were included in the optimization were the depth and size of the fully connected layers that were inserted before the output, whether or not to include batch-normalization between the convolutional layers, and the amount of dropout to include before and between each of fully connected layers. Based on the optimization trials, two fully connected layers of size 512 were selected, batch normalization was included, and a dropout with rate 0.2 was selected. These modifications were applied to all four of the convolution models. Figure \ref{fig:conv5s} shows a diagram of the Conv5s architecture, without the batch normalization and dropout layers.
 
 \begin{figure}[ht]
-\begin{center}
-\includegraphics[width=0.75\columnwidth]{blstm_training.png}
-\caption{Traing and validation accuracy and loss over epochs for LSTM++ model training.}
-\label{fig:lstm_bi_train}
-\end{center}
+    \centering
+    \includegraphics[width=0.99\textwidth]{figures/inverse-synth/CONV5s_Diagram.png}
+    \caption{Network diagram of the Conv5s CNN. This model accepts a Mel-spectrogram as input and contains five 2D convolutional layers followed by two dense layers. The output layer is predicted synthesizer parameters.}
+    \label{fig:conv5s}
 \end{figure}
 
+During initial experiments all of the models (especially the models with more capacity) began to overfit during training after about 50 epochs. A learning rate schedule was introduced in an attempt to address this and allow the models to train for longer. An inverse time-decay scheduler was included that reduced the learning rate according to the following equation:
+
+\begin{align}
+    \eta_i = \frac{\eta_0}{1 + \lambda\frac{i}{T}}
+\end{align}
+
+Where $\eta_i$ is the learning rate at training step $i$, $\eta_0$ is the initial learning rate, $\lambda$ is the decay rate, and $T$ is the decay steps. For this experiment $\eta_0=0.001$, $\lambda=1.0$, and $T$ was set to be equivalent to 50 epochs, which means that the decay rate decreased by a factor of two by 50 epochs into training. All the CNNs were trained using this learning schedule, an early-stopping patience of 20, and a batch-size of 128. 
+
+% Three models derived from work by Yee-King et al. \cite{yee2018automatic} were used: 1) A simple multi-layer perceptron with three hidden layers, all with a ReLu activation, 2) a LSTM recurrent network with three layers and dense output, and 3) a LSTM++ networks which contains a single bidirectional LSTM node followed by a dense layer with an elu activation, six highway layers, and a dense output. One convolutional neural network (CNN) derived from work by Barkan et al. \cite{barkan2019inversynth} was also included: this network featured six layers of strided convolutions followed by a dropout layer and a dense output. Specific details of all these models is provided in appendx \ref{appendix:spiegelib_models}.
+
+% Models were trained using an $Adam$ optimizer \cite{kingma2014adam} with a learning rate of 0.001, batch sizes of 64, and used an early stopping callback which halted training if validation loss was stagnant for 10 epochs to prevent overfitting. Ideally the loss function would be computed directly on audio rendered from $Dexed$ using the predicted parameters, but that is challenging to implement, so the loss is computed on the parameter values which has been standard in previous work \cite{yee2018automatic, barkan2019inversynth}.
+
+% The loss function used was the RMS error between the target parameter values and the predicted parameter values, which is given by the following formula where $N$ is the number parameters, $\textbf{y}$ is the true parameter values, and $\hat{\textbf{y}}$ is the predicted parameter values:
+
+
+
+% Logging of training and validation progress was recorded using the \mintinline{python}{TFEpochLogger} class. Plots of training and validation accuracy and loss for the LSTM++ model are shown in figure \ref{fig:lstm_bi_train}. 
+
+% % TODO: add in some of the other loss plots (probably all of them) and remark on the differences betwee them.
+
+% Trained models are then saved for future use.
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=0.75\columnwidth]{blstm_training.png}
+% \caption{Traing and validation accuracy and loss over epochs for LSTM++ model training.}
+% \label{fig:lstm_bi_train}
+% \end{center}
+% \end{figure}
+
 \subsection{Genetic Algorithms}
-Two different GAs were used: a basic single-objective GA and a multi-objective NSGA III. The multi-ojective GA was derived from work conducted by \cite{macret2012automatic} that used the algorithm to automatically tune the parameters of a Teenage Engineering OP-1\footnote{\url{https://teenage.engineering/products/op-1}} synthesizer. In the GAs the $fitness$ (which is equivalent to the loss in deep learning) is easily computed directly on the audio rendered from $Dexed$. In the case of the basic GA the $fitness$ is computed as the mean absolute error (MAE) between 13-band MFCCs from the target and the individual. Three different metrics were used for evaluating the $fitness$ of an individual for the NSGA-III algorithm, MAE between: 1) a 13-band MFCC, 2) magnitude spectrum from an FFT, and 3) five spectral features. MAE is given by the following formula, where $N$ is the number of features, $y$ is the target, and $\hat{y}$ is the predicted individual:
+Two different GAs were used: a basic single-objective GA and a multi-objective NSGA III. The multi-ojective GA was derived from work conducted by \cite{macret2012automatic} that used the algorithm to automatically tune the parameters of a Teenage Engineering OP-1\footnote{\url{https://teenage.engineering/products/op-1}} synthesizer. In the GAs the $fitness$ is easily computed directly on the audio rendered from $Dexed$.
+
+In the case of the basic GA the $fitness$ is computed as the mean absolute error (MAE) between 13-band MFCCs from the target and the individual. Three different metrics were used for evaluating the $fitness$ of an individual for the NSGA-III algorithm, MAE between: 1) a 13-band MFCC, 2) magnitude spectrum from an FFT, and 3) five spectral features. MAE is given by the following formula, where $N$ is the number of features, $y$ is the target, and $\hat{y}$ is the predicted individual:
 
 \begin{equation}
     \text{MAE} = \frac{\sum_{i \in N}{|y_i - \hat{y}_i|}}{N}
 \end{equation}
 
-Both genetic algorithms were run for 100 generations for each sound target. The basic GA and NSGA used population sizes of 300 and 100 individuals respectively. Figure \ref{fig:nsga_fitness} shows the minimum spectral error achieved by an individual during each iteration of the NSGA algorithm on one of the target sounds. The plot shows a period of rapid improvement during early iterations, with some short periods of stagnation, followed by longer periods where the algorithm is unable to find an individual that is an improvement over those in the current population.
+Both genetic algorithms were run for 100 generations for each sound target. The basic GA and NSGA used population sizes of 300 and 100 individuals respectively. 
+
+%Figure \ref{fig:nsga_fitness} shows the minimum spectral error achieved by an individual during each iteration of the NSGA algorithm on one of the target sounds. The plot shows a period of rapid improvement during early iterations, with some short periods of stagnation, followed by longer periods where the algorithm is unable to find an individual that is an improvement over those in the current population.
 
 % TODO: Add in the other population generation plots for each objective
 
@@ -301,3 +306,30 @@ Another aspect of the spectrograms that can be identified are periodic amplitude
 - Comparison of the search versus modelling methods for inverse synthesis
 - Discussion of the parameter sampling methods -- uniform sampling may not provide the best method for training the deep learning models to learn sounds that a human might program
 - Challenges associated with programming a VST software synth
+
+
+
+
+%\section{Related Work}
+%- Go over the three specific papers that SpiegeLib and the experiments are based on.
+%- Deep learning: Fully connected and recursive nets: \cite{yee2018automatic}, Convolutional Nets: \cite{barkan2019inversynth}, Genetic Algorithms: \cite{tatar2016automatic}
+%
+%\subsection{Recurrent Neural Networks}
+%One of the first works on the application of deep learning to the inverse synthesis problem was published by Matthew Yee-King et al. \cite{yee2018automatic} in 2018. The main contribution of their work was an experiment that showed the effectiveness of a type of recurrent neural networks (RNN) called long short-term memory (LSTM) networks at sound matching on an FM synthesizer audio plugin. RNNs were developed to handle time-series data and receive ordered data which is successively fed into the network architecture. As data is fed into the networks, activation states are stored internally and help to provide temporal context in latter stages of computation. RNNs have been particularly successful for audio generation problems \cite{oord2016wavenet, engel2017neural}. 
+%
+%Yee-King er al. also experimented with additional machine learning techniques including genetic algorithm (GA), Hill-climber, and  multi-layer perceptron (MLP) methods. They also compared two RNN models: a regular LSTM network as well as a modified LSTM network that had a bi-directional LSTM layer as well as several highway layers, they called this network an LSTM++. Their methodology compared a set of algorithms on a series of successfully more challenging problems on the open-source FM synthesizer Dexed\footnote{\url{https://asb2m10.github.io/dexed/}}. Each problem was focused on programming a subset of the parameters in Dexed; a larger subset was used for each successive problem. A dataset of audio samples paired with the parameters used to generate the audio was created for training each of the deep learning models. Mel-frequency Cepstral Coefficients (MFCCs) were used as input for each of the models. The results were evaluated by looking at the error between MFCCs from target sound and a predicted sound. Results showed that the hill-climber algorithm and the LSTM++ model performed the best. The LSTM++ model showed significant improvements over the other deep learning methods, however the hill-climber performed the best on a majority of the tasks.
+%
+%Their methodology and software provided a basis for the work presented in the chapter and in the development of SpiegeLib.
+%
+%\subsection{Convolutional Neural Networks}
+%Barkan et al. explored convolutional neural networks (CNNs) applied to the inverse synthesis problem in their work which presenting InverSynth \cite{barkan2019deep}. The CNN has been used extensively for image related deep learning tasks and has recently been used successfully in music and audio related tasks including music genre classification \cite{choi2016automatic} and neural audio generation \cite{donahue2018adversarial}. A key feature of CNNs is the use of shared filters that perform convolutions and produce representations at various levels of specificity. The shared filters has allowed them to process large input data such as images and audio with relatively few parameters compared to their fully connected counterparts. 
+%
+%In their work, Barkan et al. experiment with several different CNN architectures and compare them to a few different fully-connected networks. The focus of their research is performing inverse synthesis on a custom built four oscillator FM synthesizer. They frame the inverse synthesis problem as a classification problem and quantize each of the 23 continuous synthesizer parameters into 16 discrete states. As input they experiment with both STFT as well as raw time-domain audio. Because of the size of these input they created different input representations for the fully-connected networks, for these they used a selection of hand-picked audio features defined in work by Itoyama et al. \cite{itoyama2014parameter}.
+%
+%Results were evaluated using four different objective methods which evaluate both the ability of the model to match the parameters as well as to reconstruct the target audio. The evaluation metrics used are:
+%1) Mean Percentile Rank (MPR): ranked position of the correct class measured against predicted classes in the output. Computed independently on each of the 23 synthesizer parameters, each parameter has 16 classes.
+%2) Top-k Mean Accuracy: measures whether the correct class is among the top-k predicted classes for each parameter.
+%3) Mean Absolute Error (MAE): this measures the error of the predicted class for each parameter.
+%4) Spectral Reconstruction Quality: predicted parameters are used to synthesize a predicted audio. The predicted audio is compared against the target audio using error metrics calculated on the STFT and FT representations.
+%
+%They also conducted a subjective listening experiment which measured the quality of the target audio to the predicted audio for a selection of the methods. Results from the objective and subjective evaluation showed that the depth of the convolutional network played an important role in the quality of the estimator and the best performing networks were two different networks with 6-layers.
