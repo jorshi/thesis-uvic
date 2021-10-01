@@ -5,43 +5,23 @@
 \begin{document}
 
 % Front Matter
-\input frontmatter/fm
+\input frontmatter/front-matter
 
 \newpage
 
-	\include{chapters/1/ch-intro}
-	\include{chapters/2/ch-review}
-	\include{chapters/3/ch-spiegelib}
-	\include{chapters/4/ch-spiegelib-experiment}
-	%\include{chapters/4/ch-neural}
-	\include{chapters/5/ch-torchsynth}
-	\include{chapters/6/ch-synthexplore}
-	\include{chapters/7/ch-conclusion}
+	\include{chapters/ch1-introduction}
+	\include{chapters/ch2-audio-synthesizers}
+	\include{chapters/ch3-automatic-synthesizer-programming}
+	\include{chapters/ch4-spiegelib}
+	\include{chapters/ch5-inverse-synthesis-experiment}
+	\include{chapters/ch6-torchsynth}
+	\include{chapters/ch7-synthexplore}
+	\include{chapters/ch8-conclusion}
+
 	\appendix
 	\include{chapters/appendix/spiegelib-models}
 	\include{chapters/appendix/inverse-synth-training-time}
     \include{chapters/appendix/inverse-synth-training-loss}
-	%\include{chapters/appendix/neural-architecture}
-	%\include{chapters/appendix/neural-loss_plots}
-	
-%   From the starter document
-% 	\include{chapters/2/chapter_problem}
-% 	\include{chapters/3/chapter_new}
-% 	\include{chapters/4/chapter_experiments}
-% 	\include{chapters/5/chapter_evaluation}
-% 	\include{chapters/6/chapter_conclusion}
-% 	\appendix
-% 	\include{chapters/appendix/chapter_app}
-
-% The style of bibliography exemplified here is the "plain",
-% normally used in science theses. This is shown
-% by the entry {plain} below. Substitute the
-% appropriate bibliography style. See also the
-% PDF file "InformationOnBibliographyStyles" in this
-% directory for more choices.
-
-% The Bibliography file is a BibTex file named
-% UVicThesis.bib and called below
 
 	\TOCadd{Bibliography}
 	\bibliographystyle{plain}

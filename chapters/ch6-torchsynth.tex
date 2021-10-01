@@ -1,7 +1,7 @@
 \graphicspath{{./}{./figures/}{./figures/torchsynth/}}
 
 \chapter{GPU Enabled Synthesis}
-\label{ch:torchsynth}
+\label{chapter:torchsynth}
 
 In the preceding chapter I explored and compared various methods for inverse synthesis, one approach to automatic synthesizer programming. These experiments highlighted some of the challenges that researchers are faced with in pursuing this work. The most daunting challenge is related to the sheer complexity of the relationship between the parameter space and perceptual (auditory) space, and how much variability there is within that relationship depending on the specifics of the synthesis engine and the number and type of parameters. In addition to that, there is no accepted best approach to computationally representing the perceptual space and defining metrics within that space. It is an open question on how to answer the question "How similar are these two sounds?" in a quantifiable way with regards to timbre. The ability to perform experiments that seek to solve these challenges is hindered by additional computational challenges associated with software synthesizers. Recent research has sought to automatically program commercially available VST synthesizers. This approach is well-founded considering these synthesizers represent tools that are currently being used by music producers and sound designers. However, these synthesizes are optimized for real-time use as opposed to use in the machine learning research, where they introduce bottlenecks \cite{masudo2021quality} and difficulties with learning in gradient descent methods.
 

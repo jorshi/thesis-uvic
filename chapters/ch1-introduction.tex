@@ -1,0 +1,68 @@
+\startfirstchapter{Introduction}
+\label{chapter:introduction}
+
+[Needs to be written]
+
+\section{Thesis Structure}
+\begin{itemize}
+    \item Chapter \ref{chapter:background} provides background information and a historical context for audio synthesizers. The challenges and opportunities associated with synthesizer programming are outlined and provide motivation for the research conducted as a part of this thesis.
+    \item Chapter \ref{chapter:asp-background} overviews the field of automatic synthesizer programming. Synthesizer programming is framed as a human computer interaction problem and the various different interaction paradigms and algorithmic techniques that have been proposed in previous work is reviewed.
+    \item Chapter \ref{chapter:spiegelib} introduces a software library that I designed to support research in automatic synthesizer programming and to serve as a repository for sharing and comparing approaches. This library was used for the experiments conducted in the proceeding chapter.
+    \item Chapter \ref{chapter:inverse_synth_experiment} describes an inverse synthesis experiment that was conducted to compare some of the recent approaches presented in literature. Several deep learning models and genetic algorithms were compared on a baseline FM synthesis problem.
+    \item Chapter \ref{chapter:torchsynth} introduces a large-scale synthesizer dataset and a GPU-accelerated modular synthesizer called torchsynth that was designed to support further research in automatic synthesizer programming and audio.
+    \item Chapter \ref{chapter:synth-explore} outlines the design and development of a novel automatic synthesizer programming application that utilizes two dimensional visualization of sounds to support exploration of the synthesizer sound space. The application was developed with novice users in mind and is based on a set of design principles that are provided as a framework to support the design of assistive synthesizer programming tools.
+    
+\end{itemize}
+
+% "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." - Laurie Spiegel \cite{hinkle2006women}
+
+% My main statement about the introduction is:
+% \textit{"keep it short and write it last".} The main features should be as follows:
+% \begin{enumerate}
+% \item {3-4 pages at most;}
+% \item {Start with a VERY short statement of the problem (2-3 sentences) - the problem should be stated, not described, as there will be a whole chapter for that;}
+% \item {State why the problem is important, its impact, how well it has been studied recently, its application (3 sentences) - this should be again a brief motivation, leaving a full impact description to later in the document;}
+% \item {Give a sketch of the new approach - there will be a whole chapter with all the details, now just impress the reader about what is the new approach, just as you would do if your boss asked you at work during an elevator ride;}
+% \item {Sketch the main new ideas of the new approach - again briefly, just get the reader interested;}
+% \item {Give a short statement regarding the results, nothing too elaborate, but certainly you should blow your horn and make sure that the reader is intrigued;}
+% \item {Interspersed in all the writing above do not forget the marketing angle, trying to suggest forcefully why the reader should keep reading;}
+% \item {Give an outline of what is to come in the organization of the thesis overall - you will find one below for this document.}
+
+% \end{enumerate}
+
+% Finally the strong suggestion is write the introduction chapter last. It will be faster, you will know what to say as the rest is already there, and the abstract, introduction and conclusion will be a mirror and complement of each other. You may well ask where to start writing your thesis. My view is included in the organization below.
+
+
+% Automated methods for music production -- why do we need it? The main thread here is looking at methods for exploring sound spaces. How can we improve this approach? Potentially need a bit on timbre -- the timbre space article could be really good.
+
+% General introduction. Distinction between creative mir, intelligent music production, automatic synthesizer programming.
+
+% Democratization of sound \cite{tavana2015democracy}
+
+% Moffat and Sandler examine approaches to intelligent music production \cite{moffat2019approaches}.
+
+% \cite{krekovic2019insights} user study examined synthesizer user habits and pointing to need for further work in automatic synthesizer programming
+
+% \section{Automating Synthesizers}
+% The use of sound synthesizers in the fields of music composition, production, and performance is widespread, but the task of programming a synthesizer is complex and requires a thorough understanding of technical details. It is not uncommon for a software synthesizer to have 30+ parameters displayed on a user interface (UI) and labelled using technical names \cite{rasmussen2018evaluating}. Manually programming sounds using such a large set of parameters is a daunting task. Synthesizer programming is further complicated by the fact that modifications to parameters are often not intuitively reflected in the end sonic result. This disconnect can be disruptive to the creative process. Automatic synthesizer programming (ASP) is the field of research focused on addressing these challenges in programming synthesizers.
+
+%  Early ASP research emerged in the late 1970s with work that focused on the use of analytic methods to estimate the parameters for frequency modulation (FM) synthesis \cite{justice1979analytic}. That work was an example of synthesizer sound matching in which a system estimates synthesizer parameters to replicate a target sound. Since then a large volume of work on synthesizer sound matching has been published and has explored a variety of synthesis techniques and algorithmic methods. One popular approach is the use of evolutionary algorithms \cite{horner1993machine, mitchell2007evolutionary, yee2007evolving, yee2008synthbot, heise2009automatic, roth2011comparison, tatar2016automatic, smith2017play}. More recently, deep learning techniques have been explored \cite{yee2018automatic, barkan2019inversynth, esling2020flow}. Other methods that have been studied include semantic descriptions \cite{ethington1994seawave, johnson2006timbre, krekovic2016algorithm}, interactive methods \cite{johnson1999exploring, dahlstedt2001creating, yee2016use}, and sound matching with vocal imitations \cite{mcartwright2014, zhang2018visualization}.
+ 
+%  A recent user study conducted by Krekovi{\'c} et al. confirmed the desire among synthesizer users for improved means of working with their synthesizers \cite{krekovic2019insights}. 
+%  %Users identified approaches they felt would be particularly beneficial, which included automatic sound matching and improvements to user interface design. 
+%  While recent research has produced promising results, automatically programming a modern software synthesizer still presents challenges. Current evolutionary techniques face issues including time complexity \cite{tatar2016automatic}, while recent deep learning approaches have challenges in consistently producing accurate reproductions \cite{yee2018automatic}. The desires expressed by the users in Krekovi{\'c} et al.'s study, coupled with the need for further research and improvement noted in the existing body of work, point to the need for further development in ASP.
+ 
+%  The work presented here attempts to continue this development, and promote collaboration and reproducibility in ASP research through the introduction of \mintinline{python}{spiegelib}, an open-source library written in the Python programming language. Vandewalle et al. argue that reproducibility in computational science research increases the impact of a work and they provide a framework for evaluating the quality of reproducibility \cite{vandewalle2009reproducible}. The aim of \mintinline{python}{spiegelib} is to provide a platform for researchers of automatic synthesizer programming to develop, test, and share implementations in a way that promotes reproducibility at the highest level. \mintinline{python}{spiegelib} stands for Synthesizer Programming with Intelligent Exploration, Generation, and Evaluation Library. The name \mintinline{python}{spiegelib} was chosen to pay homage to Laurie Spiegel, an early pioneer in electronic music composition. Laurie Spiegel is known for utilizing synthesizers and software to automate certain aspects of the music composition process. Her philosophy for using technology in music serves as a motivation for the \mintinline{python}{spiegelib} software library: "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." \cite{hinkle2006women}
+
+
+% Introduce automatic synthesizer programming. Tie it to intelligent music production \cite{moffat2019approaches} \cite{de2017ten} and creative MIR \cite{humphrey2013brief}.
+
+% \subsection{History}
+% DX7 plays an important role here - made synthesizers more widely available but programming them was notoriously difficult. 9 out of 10 DX7s that went in for service had factory presets intact (Reference needed). Almost immediately researchers became interested in learning how to estimate synthesizer presets for FM algorithms which spread into non-linear synthesis methods, then wavetable synthesis, then physical modelling, granular, additive. (References needed for synthesis types). 
+
+% Justice 1979 \cite{justice1979analytic}  - Automatic FM matching. Early example of looking try to find a coarse match of FM generated tone to the parameters (ie examples were FM generated). Beauchamp 1982 \cite{beauchamp1982synthesis} - Frequency domain matching of FM tones. Included in a larger study involving spectral centroid matching in nonlinear synthesis. Early automatic spectral match. Also looked at non-linear and filter model. Found that non-linear/filter model worked better. Payne 1987 \cite{payne1987microcomputer} Looked at automatic FM tone matching to the acoustic sounds - using DX7 and hilbert transform as well. Delprat et al. 1990 \cite{delprat1990parameter} using wavelets for non-linear synthesis parameter estimation. Horner at al. early example of automatic synthesizer preset generation in 1993 \cite{horner1993machine}. Attempted to match FM parameters with a harmonic signal using a genetic algorithm. Horner et al. then applied denetic algorithm applied to wavetable synthesis \cite{horner1993methods}. Vouri and V{\"a}lim{\"a}ki on parameter estimation for physical modelling of flute tones \cite{vuori1993parameter}. Fujinaga and Vantomme 1994 Genetic Algorithms applied to granular synthesis \cite{fujinaga1994genetic}. SeaWave by Ethington and Punch, a synthesizer that can be controlled using vocabulary. Has a pre-defined set of descriptors \cite{ethington1994seawave}. Miranda 1995 paper proposing a system utilizing AI to automatically program a generic synth using vocabulary \cite{miranda1995artificial}. Horner 2003 paper reviews FM and wavetable synthesis as well as approaches to automatic parameter matching \cite{horner2003auto}.
+
+
+% \section{User Interface Design}
+% \subsection{Synthesizer Programming}
+% Seago identified disconnect between the language of users and the language used in synthesizer interfaces \cite{seago2004critical}. Recent work focussed on synthesizer UIs \cite{rasmussen2018evaluating}. Krekovic in a 2019 study of 112 synthesizer users, reported most participants reported feeling like the process of modifying or creating new synthesizer patches was a challenging process and not intuitive \cite{krekovic2019insights}. A majority of users' felt like more intuitive interfaces was the area that would be most beneficial in helping them during the process of programming a synth. Users also felt that sound matching would be helpful. Krekovic identifies that relatively little research has been completed in the area of synthesizer user interfaces. This is reflective of recent research focussed on human computer interface and ui design for music applications \cite{pardo2019learning}\cite{knees2019intelligent}.

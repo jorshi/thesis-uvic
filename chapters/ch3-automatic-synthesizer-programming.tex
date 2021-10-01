@@ -1,5 +1,6 @@
 \chapter{Automatic Synthesizer Programming}
 \label{chapter:asp-background}
+
 In the previous chapter, some of the specific challenges in synthesizer programming were identified along with the desire among synthesizer users for improved user interfaces and supportive tools. The field of automatic synthesizer programming (ASP) emerged from the desire to solve these challenges and to find more intuitive answers for the question "How do I create \rule{1cm}{0.15mm} sound using \rule{1cm}{0.15mm} synthesizer?" James Justice \cite{justice1979analytic} was one of the first to try to answer this question in the late 1970s. Justice's work used analytic methods to estimate the parameters for the FM algorithm \cite{chowning1973synthesis}. This is an example of inverse synthesis, or sound matching \cite{horner1993machine}, where a system estimates synthesizer parameters to replicate a target sound as closely as possible. Since then a large volume of work in automatic synthesizer programming has been published, exploring a variety of synthesis techniques, algorithmic methods, and user interaction approaches. The goal of this chapter is to provide an overview of the field and survey some of the more popular methods that have been explored over the more than 40 years that ASP has been active area of research.
 
 \section{Problem Formulation}
@@ -198,7 +199,7 @@ In 1986 Ashley proposed one of the first examples of an system for programming a
     \label{fig:krekovic-desc}
 \end{figure}
 
-- Ben Hayes work fits in here. 
+% - Ben Hayes work fits in here. 
 % % Does this is fit in on the topic of synthesizer timbre?? Or perhaps there is an opportunity to discuss the timbre space in representations? Representing synthesizer sounds or something?
 % % - Research by Benjamin Hayes on the timbre space of synths -- looks super interesting.
 % % - https://benhayes.net/assets/pdf/16.Hayes.pdf
@@ -218,6 +219,7 @@ Cartwright \textit{et al.} proposed the SynthAssist system for exploring and fin
 In related work, Zhang \textit{et al.} recently released \textit{Vroom!}, a sound search engine based on vocal imitations \cite{zhang2020vroom}. \textit{Vroom!} builds off of previous work by Zhang on query sounds by vocal imitations using CNNs \cite{zhang2017iminet, zhang2018visualization}. The implemented network features a siamese CNN stack that extracts audio features from the vocal imitation and sound target in parallel and then uses a fully connected layer to compute similarity.
 
 \section{Exploration Interfaces}
+\textbf{[Incomplete]}
 
 - Some of the previous examples that enable exploration. (iteractive GAs for sure), the one on reinforcement learning.
 - 
@@ -238,6 +240,7 @@ Graphical interfacces for interpolating between synthesizer presets has also bee
 
 
 \section{Intuitive Controls}
+\textbf{[Incomplete]}
 The idea of developing more intuitive controls that overlay the more complex low-level parameter space was introduced by Wessel in 1979 \cite{wessel1979timbre}. Wessel proposed a system based on Grey's timbre space \cite{grey1977multidimensional} for controlling an additive synthesizer using two higher-level perecptual parameters arranged on a two-dimensional grid; the vertical axis was related to the spectral energy distribution and the horizontal, to the character of the attack. Adjusting these parameters lead to smooth perceptual transitions, and Wessel suggested a method for achieving more complex forms of control based on an efficient computer language.
 
 Possible candidates for additional work \cite{dahlstedt2001creating}, \cite{arfib2002strategies}, \cite{huang2014active}
@@ -258,6 +261,7 @@ The recent Phillipe Paper. \cite{tatar2021latent} -- how does this fit in. Need 
 %--------------------------------------------------------------------
 
 \section{Challenges and Opportunities}
+\textbf{[Incomplete]}
 - Okay can I motivate future work here?
 - The parameter space is ginormous! How do we represent synthesized sounds in a perceptually relevant way? The relationship between parameters and the resulting output sounds is very complex. Deep learning 
 

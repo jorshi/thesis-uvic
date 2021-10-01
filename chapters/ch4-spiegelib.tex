@@ -1,28 +1,8 @@
 \graphicspath{{./}{./figures/}{./figures/spiegelib/}}
 
-% \section{Goals}
-% \begin{enumerate}
-%     \item Main contributions: spiegelib software, initial experiments using Dexed.
-%     \item Goal is to explore some of the main recent approaches to inverse synthesis and compare them in the task of finding parameters to match a target sound
-%     \item Expand on the experimental research -- provide a bit more background on the specific methods that we are trying to emulate. Specifically: the genetic algorithm approaches and the deep learning approaches.
-%     \item Identify some of the challenges faced with this approach: rendering from VSTs is slow. Recent techniques SPSA could allow for VSTs to be inserted directly into the pipeline. Leads us to an area for future work: torchsynth
-% \end{enumerate}
-
-% Will have given a bit of a history by this point in the background -- something similar to Brecht's paper, but for automatic synthesizer programming. Here we want to focus on the main techniques that we want to use.
-
-% \section{Plan}
-% \begin{enumerate}
-%     \item This chapter explores the inverse synthesis problem. This is based on work I completed under the supervision of my supervisors and was published at AES ...
-%     \item Contributes SpiegeLib software and demonstrates the steps of conducting an inverse synthesis experiment through some experiments.
-%     \item Software in Inverse Synthesis -- overview the available software. Give some motivation based on reproducible research. Maybe add a figure that outlines the experimental process and how each of the library components fit together to help with this.
-%     \item SpiegeLib
-%     \item Experiment -- Go into more detail on the specific algorithms and methods that are being used here. Can give some code detail as well if that would be helpful.
-%     \item Evaluation -- How are the results evaluated and list the results
-%     \item Conclusion
-% \end{enumerate}
-
 \chapter{SpiegeLib: A framework for automatic synthesizer research}
-\label{chapter:inverse_synth}
+\label{chapter:spiegelib}
+
 This chapter introduces SpiegeLib, a software framework for automatic synthesizer research that I developed under the supervision of my supervisors and published at the 148th Audio Engineering Society (AES) Convention in 2020 \cite{shier2020spiegelib}. SpiegeLib is an open-source software library written in the Python programming language with the goal of promoting collaboration and reproducibility in automatic synthesizer research. The development of the library was based on work published by Yee-King et al. \cite{yee2018automatic} that explored automatic synthesizer programming of a VST FM synthesizer using deep learning methods. In their work they focused on the inverse synthesis problem which has the goal of finding synthesizer parameters to match a target sound, also referred to as sound matching. SpiegeLib is designed to support research in inverse synthesizer and provide a platform for sharing and evaluating methods.
 
 Vandewalle et al. argue that reproducibility in computational science research increases the impact of a work and they provide a framework for evaluating the quality of reproducibility \cite{vandewalle2009reproducible}. The aim of \mintinline{python}{spiegelib} is to provide a platform for researchers of automatic synthesizer programming to develop, test, and share implementations in a way that promotes reproducibility at the highest level. \mintinline{python}{spiegelib} stands for Synthesizer Programming with Intelligent Exploration, Generation, and Evaluation Library. The name \mintinline{python}{spiegelib} was chosen to pay homage to Laurie Spiegel, an early pioneer in electronic music composition. Laurie Spiegel is known for utilizing synthesizers and software to automate certain aspects of the music composition process. Her philosophy for using technology in music serves as a motivation for the \mintinline{python}{spiegelib} software library: "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." \cite{hinkle2006women}
@@ -54,6 +34,7 @@ SpiegeLib contains components to support all stages of this experimental pipelin
 % - Figure for the research pipeline?
 
 \section{Library Components}
+\textbf{[Needs to be updated]}
 
 Base classes with functionality for interacting with software synthesizers, audio feature extraction, parameter estimation, and evaluation provide an API to support development of custom implementations that will work with other components of the library. A number of utility classes are also provided for handling audio signals, generating datasets, and running experiments.
 
