@@ -129,8 +129,13 @@ In 1986 Ashley proposed one of the first examples of an system for programming a
 % % - https://benhayes.net/assets/pdf/icmpc_escom_2021.pdf
 % % - https://benhayes.net/publications/ (Has some interesting perceptual studies on synthesizer timbre space, also something new on neural synthesis)
 
+% Definitely need to review and cite this \cite{wallmark2019creating}
 
 In a recent study Roche \textit{et al.} explored controlling synthesis using eight perceptually motivated parameters \cite{roche2021make}. Their work used a neural synthesizer that generated spectrograms using a variational autoencoder (VAE) regularized using perceptual attributes to provide parameters based on timbral descriptions. While this work doesn't fit the traditional description of automatic synthesizer programming since the mapping isn't made to the parameter space of a regular DSP synthesizer, their method provides a good framework for exploring perceptually motivated controls for audio synthesis and could likely be applied to other, more traditional forms of synthesis.
+
+In related work, Hayes and Saiti explored the semantic dimensions of a three operator FM synthesizer \cite{hayes2020there}. %In their study, experienced sound designers were asked to program a synthesizer, starting from a preset, in order to create a sound that fulfilled a timbre objective related to the luminance-texture-mass (LTM) model of timbre semantics (e.g. brighter, less thick, more rough, ..., etc.). Users were then asked to rate sounds based on a larger selection of timbre adjectives. 
+They found five major factors related to timbre semantics; the first two factors related to the  luminance-texture-mass (LTM) model of timbre semantics \cite{zacharakis2012interlanguage} and the extra three factors related to clarity, pluckiness, and rawness.
+
 
 \section{Vocal Imitations}
 A method that has been shown as an effective way to communicate sound concepts is by using vocal imitations \cite{lemaitre2014effectiveness}, and more effective than using a verbalization in the case of unidentified sounds (sounds that have an unclear source). Building on this, Cartwright \textit{et al.} developed the VocalSketch dataset \cite{cartwright2015vocalsketch} to support research in using vocal imitations to communicate sound concepts to computers. In synthesizer programming, the vocal imitation approach can be viewed as a subset of the example-based interface approaches as vocal imitations are a specific style of examples that could be provided to a system.
@@ -161,8 +166,7 @@ Interfaces that visualize sounds on two or three dimensional interface based on 
 Another type of interface that enables exploration are graphical interfaces for interpolating between synthesizer presets \cite{gibson2020analyzing}. These systems generally present a user with a two-dimensional interface that represents a number of different presets for an underlying synthesis engine. Each present is positioned in a different location on the interface and the user can specify a point on the interface resulting in an interpolation between presets represented at that position. Le Vaillant \textit{et al.} conducted a user evaluation that compared users ability to recreate a sound using an interface with four parameters that controlled a synthesis engine versus a graphical interpolator interface \cite{le2020analytic}. Expert users were able to use both interfaces equally well, however, novice and intermediate users were able to match the sound more easily and achieve comparable results to expert users with the interpolating interface.
 
 \section{Bridging the Conceptual Gap}
-All the work mentioned in the previous sections seek to help bridge the conceptual gap between the 
-Developing an understanding of the relationship between the perceptual space and parameters. Vahidi \textit{et al.} conducted research attempting to elucidate the correlations between the timbre space of subtractive synthesizer and a set of low-level audio features \cite{vahidi2020timbre}. Similar to Grey \cite{grey1977multidimensional}, they used multi-dimensional scaling (MDS) to produce a timbre space representation for a set of synthesized tones and found high perceptual correlations with certain spectral features. 
+All the work mentioned in the previous sections seek to help bridge the conceptual gap between the perceptual / semantic space and parameter space of a synthesizer. The amount of work that has been conducted to this end further reinforces the complexity of this divide. Developing a deeper understanding of the relationship between these spaces will help enable future work in automatic synthesizer programming and research specifically focused on this has been conducted. Vahidi \textit{et al.} found correlations between the timbre space of subtractive synthesizer and a set of low-level audio features \cite{vahidi2020timbre}. Similar to Grey \cite{grey1977multidimensional}, they used multi-dimensional scaling (MDS) to produce a timbre space representation for a set of synthesized tones and found high perceptual correlations with certain spectral features. 
 
 %  \subsubsection{Others}
 %  Sketching sounds \cite{lobbers2021sketching} \cite{knees2016searching}
@@ -173,14 +177,14 @@ Developing an understanding of the relationship between the perceptual space and
 
 %--------------------------------------------------------------------
 
-\section{Challenges and Opportunities}
+\section{Conclusion}
 \textbf{[Incomplete]}
-- Okay can I motivate future work here?
-- The parameter space is ginormous! How do we represent synthesized sounds in a perceptually relevant way? The relationship between parameters and the resulting output sounds is very complex. Deep learning 
+% - Okay can I motivate future work here?
+% - The parameter space is ginormous! How do we represent synthesized sounds in a perceptually relevant way? The relationship between parameters and the resulting output sounds is very complex. Deep learning 
 
 % Challenges. Maybe move this to a section that is specifically related to automatic synthesizer programming challenges.
 % This is a challenge that is potentially particularly related to synthesizer programming. The space of possible sounds is immense! It is infeasible to compute all the possible sounds and index them beforehand. So the question becomes, how to you navigate this space in an intelligent way?? How do we learn to teach our systems to generate sounds or learn to programm sounds in a way that is related to or relevant to how a human would program a sound?? This is addressed in the torchsynth chapter a bit.
-One of distinguishing factors between querying tasks and automatic synthesizer programming is that often querying tasks, the database of audio already exists and can be queried for an exact match or for the match that is most similar. Some approaches to automatic synthesizer programming have pre-computed large sets of sytnhesizer sounds 
+% One of distinguishing factors between querying tasks and automatic synthesizer programming is that often querying tasks, the database of audio already exists and can be queried for an exact match or for the match that is most similar. Some approaches to automatic synthesizer programming have pre-computed large sets of sytnhesizer sounds 
 
 
 
