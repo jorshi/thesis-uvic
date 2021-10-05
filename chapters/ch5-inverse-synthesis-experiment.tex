@@ -3,6 +3,21 @@
 
 This chapter presents an inverse synthesis experiment that was conducted to compare some of the recent approaches that have been used in previous work. The methodology used for this experiment was modelled after Yee-King et al.'s study on deep learning for automatic synthesizer programming \cite{yee2018automatic}, but with a simplified synthesizer configuration and a unique set of estimators. In total ten different methods for inverse synthesis were compared, including eight deep learning models based on previous work \cite{barkan2019inversynth, yee2018automatic} and two versions of a genetic algorithm \cite{horner1993machine, tatar2016automatic}. A VST software emulation of the Yamaha DX7 FM synthesizer called \textit{Dexed} was used with a restricted subset of the parameters. While Dexed has been used in previous work for inverse synthesis \cite{yee2018automatic, luke2019stochastic, le2021improving, masudo2021quality}, each work has used a unique subset of parameters and sounds for their experiments. Depending on the parameters that are selected, the difficulty of the problem varies considerably. In this experiment we propose a minimal subset of nine parameters to reduce the complexity of the problem and to provide a benchmark for evaluation.
 
+The specific research questions that this experiment seeks to answer are:
+\begin{itemize}
+    \item \textbf{RQ1}: How do deep learning approaches compare to genetic algorithms for FM inverse synthesis?
+    \item \textbf{RQ2}: How do RNNs compare to CNNs for inverse synthesis? Does the Mel-spectrogram help the CNN to learn more accurately?
+    \item \textbf{RQ3}: Are the GAs able to produce competitive results when constrained to a limited number of generations to improve efficiency?
+    \item \textbf{RQ4}: Are certain synthesis parameters more easily learned? How does the ability to predict parameters correlate with audio results?
+\end{itemize}
+
+% Add in some specific research questions?
+% RQ1: How do deep learning methods compare genetic algorithms for FM inverse synthesis?
+% RQ2: How do the RNNs compare to the CNNs - and do higher resolution Mel-spectrograms allow the CNNs to learn more accurately compared to the RNNs using MFCCs?
+% RQ3: Are the genetic algorithms able to produce competitive results when constrained to a limited number of trials and population size?
+% RQ4: Are certain parameters more easily learned? Are parameters that control temporal aspects vs. frequency components more easy to estimate?
+
+
 The following section describes in more detail the methods used for this experiment including the precise configuration of the synthesizer, the dataset used for training, and the various techniques compared. Section \ref{sec:inverse-synth-eval} describes the methods used for evaluation and the results of this evaluation. Section \ref{sec:inverse-synth-discuss} presents a discussion of the results and some of the challenges associated with the inverse synthesis problem. In alignment with Vandewalle et al.'s criteria for reproducible research, implementation details, code, and datasets are all available on the \mintinline{python}{spiegelib} online documentation.\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match.html}}
 
 \section{Synthesizer Configuration}
@@ -195,9 +210,9 @@ In the case of the basic GA the $fitness$ is computed as the mean absolute error
 \section{Evaluation}
 \label{sec:inverse-synth-eval}
 
-Evaluation was carried out by measuring the ability of each technique to accurately perform inverse synthesis on a dataset of testing sounds. A dataset with 250 examples was created for this purpose using the same technique for rendering sounds described earlier in this chapter (see \S\ref{sec:dataset-generation}). The same nine parameter subset of sounds were used for the test dataset; using sounds generated from this synthesizer configuration means that an exact match for inverse synthesizer is possible, which provides a known baseline for comparing each of the methods. Each of the 10 different techniques were were run on each of the 250 target test sounds and parameters estimated. The trained models for all the deep learning approaches were used to for estimation, making a prediction at this stage is computationally efficient and performing inference on a single target takes $\approx 70$ms on Macbook Pro (no GPU). T
+Evaluation was carried out by measuring the ability of each technique to accurately perform inverse synthesis on a dataset of testing sounds. A dataset with 250 examples was created for this purpose using the same technique for rendering sounds described earlier in this chapter (see \S\ref{sec:dataset-generation}). The same nine parameter subset of sounds were used for the test dataset; using sounds generated from this synthesizer configuration means that an exact match for inverse synthesizer is possible, which provides a known baseline for comparing each of the methods. Each of the 10 different techniques were were run on each of the 250 target test sounds and parameters estimated. The trained models for all the deep learning approaches were used for estimation and inference on a single target took $\approx 70$ms on Macbook Pro (no GPU).
 
-he GAs had no training stage, however, are much more computationally expensive during the prediction stage. The two GAs were each run on each of the 250 target sounds, which took $\approx 5$ hours using the NSGA-III and $\approx 3$ hours with the basic GA. Figure \ref{fig:nsga-error-generations} shows an example of how the fitness values for the three objectives are optimized over consecutive generations. These figures illustrate how performance can vary significantly from target to target, both examples started with populations that contained individuals with relatively high error with respect to the objectives, the search for target 35 successfully found a solution with minimal error for all objectives, however the search for target 5 was only able to find a solution that resulted in low error for one of the objectives.
+The GAs had no training stage, however, are much more computationally expensive during the prediction stage. The two GAs were each run on each of the 250 target sounds, which took $\approx 5$ hours using the NSGA-III and $\approx 3$ hours with the basic GA. Figure \ref{fig:nsga-error-generations} shows an example of how the fitness values for the three objectives are optimized over consecutive generations. These figures illustrate how performance can vary significantly from target to target, both examples started with populations that contained individuals with relatively high error with respect to the objectives, the search for target 35 successfully found a solution with minimal error for all objectives, however the search for target 5 was only able to find a solution that resulted in low error for one of the objectives.
 
 \begin{figure}[ht]
     \centering
@@ -217,7 +232,7 @@ he GAs had no training stage, however, are much more computationally expensive d
     \label{fig:nsga-error-generations}
 \end{figure}
 
-Predicted audio was rendered using Dexed and the the resulting audio and parameter pairs were saved for evaluation. The results were evaluated quantitatively using three different metrics: 1) MFCC MAE,  2) Log Spectral Distance (LSD), 3) Parameter MAE. The first two metrics evaluate on the audio produced by rendering the estimated parameters whereas the third metric evaluates the accuracy of the parameters themselves. In the case of inverse synthesis we are most interesting in evaluating how closely an estimated synthesizer patch can reproduce a target sound, which would be evaluated by the auditory metrics best. The parameter metric provides insight into how each technique is selecting parameters and helps to elucidate the strengths and weaknesses of each approach. Each metric is described in more detail below and all the results are summarized in table \ref{tbl:objective_resuls}.
+Predicted audio was rendered using Dexed and the the resulting audio and parameter pairs were saved for evaluation. The results were evaluated quantitatively using three different metrics: 1) MFCC MAE,  2) Log Spectral Distance (LSD), 3) Parameter MAE. The first two metrics evaluate on the audio produced by rendering the estimated parameters whereas the third metric evaluates the accuracy of the parameters themselves. In the case of inverse synthesis we are most interesting in evaluating how closely an estimated synthesizer patch can reproduce a target sound, which would be evaluated by the auditory metrics best. The parameter metric provides insight into how each technique is selecting parameters and helps to elucidate the strengths and weaknesses of each approach. Each metric is described in more detail below and all the results are summarized in table \ref{tbl:objective_resuls} and in box plots shown in figure \ref{fig:eval-boxplot}.
 
 \begin{table}[ht]
 \centering
@@ -245,27 +260,6 @@ NSGA     &       $\mathbf{2.0 \pm 2.2}$ &     $\mathbf{73.2 \pm 17.9}$ &  $0.243
 \label{tbl:objective_resuls}
 \end{table}
 
-\subsection{MFCC Error}
-The MFCC error is calculated by computing the mean absolute error between MFCCs from a target audio and a prediction. Yee-King \textit{et al.} \cite{yee2018automatic} also used MFCCs to evaluate the quality of predicted sounds, however they used the euclidian distance between MFCCs as opposed to MAE. The MAE was used here as it showed results in a range that was easier compare. It also provides an interesting comparison to the Log Spectral Distance that was also included. [Appendex X shows results for MFCC evaluation using the Euclidian Distance]. For this evaluation, MFCCs were caclulated using a frame size of 2048 and a hop-size of 512. Figure \ref{fig:mfcc-mae} shows a boxplot graph comparing all the techniques using this metric, ordered by the mean. There is quite high variance for all of the techniques and quite a few outliers with high error, even for the best techniques. However, based on the mean error, both the GAs performed the best and the NSGA was overall the best technique. Out of the deep learning models the LSTM models all performed the best, with the LSTM performing the best followed by the LSTM++.
-
-\subsection{Log Spectral Distance}
-The log spectral distance (LSD) is a distance metric that is calculated between to power spectrums to quantify difference. It was used by Masuda and Saito as a fitness objective in a genetic algorithm for inverse synthesis \cite{masudo2021quality}. This metric is included to add more depth to the audio evaluation. Masuda and Saito identified a the limitations with calculating error between synthesized sounds using MFCC, particularly with the ability of MFCC to capture specific frequency information as opposed to just the shape of the spectral envelope. LSD provides a more robust evaluation on the spectrograms of the results.  LSD is calculated as:
-
-\begin{equation}
-    LSD(P, \hat{P}) = \sqrt{\sum_{\omega}10\text{log}_{10}\left( \frac{P(\omega)}{\hat{P}(\omega)} \right)^2}
-\end{equation}
-
-Where $P$ is a target power spectrum, $\hat{P}$ is the power spectrum of a predicted sound, and $\omega$ is a frequency bin. Power spectrums were calculated using a STFT with an FFT size of 1024 samples and a hop-size of 512 samples. The average value of LSD over frames is used as the final evaluation metric in this evaluation. Lower values for LSD indicate a closer match. Figure \ref{fig:lsd} shows a boxplot graph comparing the results of this evaluation. Again, the variance is quite high among all the techniques. Based on the mean LSD, the ranking of each of the techniques is almost identical to the results obtained from the MFCC evaluation, except that the Conv6 model is now ranked higher than the MLP model. The NSGA algorithm is again ranked most highly based on this metric and has several outliers with smaller distances.
-
-\subsection{Parameter Error}
-This metric measures the mean absolute error (MAE) between the parameter values from a target and a prediction. In related work, Barkan \textit{et al.} included this metric to evaluate the distance between target and estimated synthesizer parameters, it is include here for the same reason. Figure \ref{fig:param-mse} shows a boxplot graph comparing the results of this evaluation. In terms of mean parameter accuracy across testing dataset, all the deep learning models outperformed both of the GAs. All the LSTM based models were in the top three models, with the LSTM performing overal the best. These results highlight an important aspect regarding synthesizer programming: poor parameter reconstruction does not necessarily mean poor auditory results.
-
-In addition to calculating the MAE over all nine parameters for each target-prediction pair, the absolute error between individual parameters was calculated. This metrics provides insight into how each technique handled the various parameters, as well as specific aspects of the synthesizer programming task. The average was taken over all the different methods for each parameter to give insight into how challenging each parameter was to estimate for this task. 
-
-The frequency and tuning parameters affect the distribution of the harmonics in the frequency domain, whereas the envelope generator is related to the temporal aspect of the sound and how the frequencies evolve over time. Results for the six parameters related to the envelope generator are shown in table \ref{tbl:param_eval_eg}, and results for the three parameter related to the frequency of operator two are shown in table \ref{tbl:param_eval_osc}. 
-
-For the EG, the parameter that each of the methods was able to estimate was the rate of the second stage of the envelope (EG Rate 2). The NSGA III received the lowest parameter error for the EG rate 2 parameter, 0.0097, however scored quite poorly on the remained of the parameters. The parameters of the EG were taken together and averaged for each method, the 5-LSTM++ model performed the best overall on estimating parameters for the EG with an error 0f 0.1328. Turning to the parameters controlling the frequency of the second operator, the coarse tuning parameter was by far the easiest parameter for each of the methods to estimate. Interestingly the MLP model was the best performing approach for both the individual coarse parameter estimation (error of 0.0678) as well when looking at tuning the frequency of the second operator as whole with an error of 0.1881. Looking at the mean across all the results for the parameters for the EG compared to the operator frequency show that overall the techniques were able to correctly select the EG parameters (average error of 0.1577) over the frequency parameters (average error of 0.1958).
-
 \begin{figure}[p]
     \centering
     \begin{subfigure}[b]{0.99\textwidth}
@@ -287,9 +281,29 @@ For the EG, the parameter that each of the methods was able to estimate was the 
         \label{fig:param-mse}
     \end{subfigure}
     \caption{Boxplots showing the objective measurements comparing each estimation method using a 250 sample evaluation dataset for sound matching.}
-    \label{fig:eval-bocplot}
+    \label{fig:eval-boxplot}
 \end{figure}
 
+\subsection{MFCC Error}
+The MFCC error is calculated by computing the mean absolute error between MFCCs from a target audio and a prediction. Yee-King \textit{et al.} \cite{yee2018automatic} also used MFCCs to evaluate the quality of predicted sounds, however they used the euclidian distance between MFCCs as opposed to MAE. The MAE was used here as it showed results in a range that was easier compare. It also provides an interesting comparison to the Log Spectral Distance that was also included. [Appendex X shows results for MFCC evaluation using the Euclidian Distance]. For this evaluation, MFCCs were caclulated using a frame size of 2048 and a hop-size of 512. Figure \ref{fig:mfcc-mae} shows a boxplot graph comparing all the techniques using this metric, ordered by the mean. There is quite high variance for all of the techniques and quite a few outliers with high error, even for the best techniques. However, based on the mean error, both the GAs performed the best and the NSGA was overall the best technique. Out of the deep learning models the LSTM models all performed the best, with the LSTM performing the best followed by the LSTM++.
+
+\subsection{Log Spectral Distance}
+The log spectral distance (LSD) is a distance metric that is calculated between to power spectrums to quantify difference. It was used by Masuda and Saito as a fitness objective in a genetic algorithm for inverse synthesis \cite{masudo2021quality}. This metric is included to add more depth to the audio evaluation. Masuda and Saito identified a the limitations with calculating error between synthesized sounds using MFCC, particularly with the ability of MFCC to capture specific frequency information as opposed to just the shape of the spectral envelope. LSD provides a more robust evaluation on the spectrograms of the results.  LSD is calculated as:
+
+\begin{equation}
+    LSD(P, \hat{P}) = \sqrt{\sum_{\omega}10\text{log}_{10}\left( \frac{P(\omega)}{\hat{P}(\omega)} \right)^2}
+\end{equation}
+
+Where $P$ is a target power spectrum, $\hat{P}$ is the power spectrum of a predicted sound, and $\omega$ is a frequency bin. Power spectrums were calculated using a STFT with an FFT size of 1024 samples and a hop-size of 512 samples. The average value of LSD over frames is used as the final evaluation metric in this evaluation. Lower values for LSD indicate a closer match. Figure \ref{fig:lsd} shows a boxplot graph comparing the results of this evaluation. Again, the variance is quite high among all the techniques. Based on the mean LSD, the ranking of each of the techniques is almost identical to the results obtained from the MFCC evaluation, except that the Conv6 model is now ranked higher than the MLP model. The NSGA algorithm is again ranked most highly based on this metric and has several outliers with smaller distances.
+
+\subsection{Parameter Error}
+This metric measures the mean absolute error (MAE) between the parameter values from a target and a prediction. In related work, Barkan \textit{et al.} included this metric to evaluate the distance between target and estimated synthesizer parameters, it is include here for the same reason. Figure \ref{fig:param-mse} shows a boxplot graph comparing the results of this evaluation. In terms of mean parameter accuracy across testing dataset, all the deep learning models outperformed both of the GAs. All the LSTM based models were in the top three models, with the LSTM performing overal the best. These results highlight an important aspect regarding synthesizer programming: poor parameter reconstruction does not necessarily mean poor auditory results.
+
+In addition to calculating the MAE over all nine parameters for each target-prediction pair, the absolute error between individual parameters was calculated. This metrics provides insight into how each technique handled the various parameters, as well as specific aspects of the synthesizer programming task. The average was taken over all the different methods for each parameter to give insight into how challenging each parameter was to estimate for this task. 
+
+The frequency and tuning parameters affect the distribution of the harmonics in the frequency domain, whereas the envelope generator is related to the temporal aspect of the sound and how the frequencies evolve over time. Results for the six parameters related to the envelope generator are shown in table \ref{tbl:param_eval_eg}, and results for the three parameter related to the frequency of operator two are shown in table \ref{tbl:param_eval_osc}. 
+
+For the EG, the parameter that each of the methods was able to estimate was the rate of the second stage of the envelope (EG Rate 2). The NSGA III received the lowest parameter error for the EG rate 2 parameter, 0.0097, however scored quite poorly on the remained of the parameters. The parameters of the EG were taken together and averaged for each method, the 5-LSTM++ model performed the best overall on estimating parameters for the EG with an error 0f 0.1328. Turning to the parameters controlling the frequency of the second operator, the coarse tuning parameter was by far the easiest parameter for each of the methods to estimate. Interestingly the MLP model was the best performing approach for both the individual coarse parameter estimation (error of 0.0678) as well when looking at tuning the frequency of the second operator as whole with an error of 0.1881. Looking at the mean across all the results for the parameters for the EG compared to the operator frequency show that overall the techniques were able to correctly select the EG parameters (average error of 0.1577) over the frequency parameters (average error of 0.1958).
 
 % All estimators were run on each one of the 25 target sounds using the \mintinline{python}{SoundMatch} class. This resulted in a set of audio files generated from $Dexed$ using the estimated parameters from each estimator run on each of the 25 target sounds. All of the resulting sounds are available for listening online on the SpiegeLib docs page\footnote{\url{https://spiegelib.github.io/spiegelib/examples/fm_sound_match_pages/fm_sound_match_listen.html}}. Quantitative and qualitative evaluation was conducted on these sounds.
 
@@ -300,7 +314,7 @@ For the EG, the parameter that each of the methods was able to estimate was the 
 
 % Histograms of the the MAE were also plotted for each estimator using the \mintinline{python}{plot_hist()} method in \mintinline{python}{EvaluationBase}. Histograms of the MAE for all predictions made by all estimators are shown in figure \ref{fig:group_hist}. These plots clearly show the NSGA III as the winner in terms of MFCC MAE; 24/25 of the predicted sounds have an MAE less than 2.5 (the smallest histogram bin), and the other sound is still less than 5. For the deep learning models, the LSTM++ performed the best overall, however the LSTM model produced more results that had a MAE less than 2.5. The MLP model performed the worst overall and the histogram shows a wide range of results, the MLP also produced a result with the worst individual score of 34.12. The CNN model performed only slightly better than the MLP and had no predictions with a score less than 2.5.
 
-\begin{table}[p]
+\begin{table}[ht]
 \centering
 \begin{tabular}{r|ccc|ccc|c}
 \toprule
@@ -325,7 +339,7 @@ Mean  &     0.0272 &     0.1904 &     0.1990 &      0.1407 &      0.1372 &      
 \label{tbl:param_eval_eg}
 \end{table}
 
-\begin{table}[p]
+\begin{table}[ht]
 \centering
 \begin{tabular}{r|ccc|c}
 \toprule
@@ -380,8 +394,28 @@ Mean     &    0.0754 &  0.2436 &      0.2683 & 0.1958 \\
 \section{Discussion}
 \label{sec:inverse-synth-discuss}
 
-\textbf{[Needs to be finished]}
- These results shed light an important aspect of synthesizer programming: high parameter error does not necessarily equate to high auditory error. The NSGA-III algorithm consistently outperformed all of the other techniques in both the audio evaluation metrics, despite being outperformed by all the deep learning models in terms of parameter error. 
+\subsection{Deep Learning vs. Genetic Algorithms}
+\textbf{RQ1} sought to explore the difference between the deep learning approaches an the genetic algorithms. Results show clear differences in terms of accuracy as well as computational complexity between the approaches. Both the genetic algorithms outperformed the deep learning models in terms of the objective auditory metrics. This also answer \textbf{RQ3} which asked whether the GAs would be able to produce competitive results even when constrained to a limited number of generations. To say with more certainty which approach produces the best results, a formal listening experiment would need to be conducted. However, the fact that the GAs were consistently able to produce audio results that more closely resemble the target in terms of both MFCCs and LSD points to the quality of these approaches. 
+
+The GAs had an advantage because they were optimized directly on the audio signal from the specific target, whereas the deep learning models were optimized on the parameter values from a training set. Results from the objective metrics reflected these differences, the deep learning models reproduced the exact parameter values more accurately.
+
+\subsubsection{Time Complexity}
+The genetic algorithms are much more computationally expensive at the time of prediction. Training the deep learning models is expensive, however once trained they can predict parameters in less than a tenth of a second, over 1000x faster the NSGA-III algorithm which was constrained to only 25 generations. The NSGA-III was able to perform well even when constrained to a small number of generations, although as the number of parameters increases then the complexity of the search space will grow exponentially and it is likely that such a small number of generations will be insufficient. This trade-off between computational complexity and accuracy represents one of the main challenges for inverse synthesis. There is motivation for fast inference considering the main application of these methods is in a music production context where the goal is to reduce the time required to program a synthesizer.
+
+\subsection{Recurrent vs. Convolutional Networks}
+The second research question in this experiment, \textbf{RQ2}, sought to compare the different types of deep learning models used in this experiment and the types of input that they used. Results from all the objective metrics showed that the CNNs under-performed the the RNNs in all cases. This was surprising considering the CNNs used as input the Mel-spectrogram, which is higher resolution representation compared to the MFCCs. This was unexpected based on the comments from Masuda \textit{et al.} regarding the unsuitability of MFCCs for inverse synthesis \cite{masudo2021quality}. I was expecting to see that the CNNs would be able to extract more meaningful information from the higher resolution and more perceptually relevant log Mel-spectrograms. Specifically one would expect to see that the relationship between the harmonics and the pitch to be more accurately learned using the Mel-spectrograms. In fact, the MLP model which used MFCCs as input obtained the lowest parameter error for the frequency and detuning parameters.
+
+It is not surprising that the RNN models were more acurrately able to model the temporal aspects of the input sound and achieved low error on the parameters associated with the envelope generator. RNNs are specifically designed to model relationships in sequential data, such as the framewise MFCCs. Initial experiments explored using the Mel-spectrograms as input for the RNNs, but difficulties in training these models with such high-resolution data were encountered. Unfortunately this makes it challenging to more accurately compare the RNNs and CNNs since they used different input representations. However, it does reflect the differences in approaches from previous work and highlights the strengths of RNNs for inverse synthesis.
+
+One of the issues that was encountered with all the convolutional models is that they were challenging to train. In all experiments the models improved quickly initially, and then began to overfit quite quickly as well (see appendix \ref{appendix:training-loss} figures e-h). Even introducing the learning rate schedule resulted in difficulties with training and overfitting. The CNNs consistently started overfitting before the validation loss reached a level comparable to the RNN models.
+
+\subsubsection{Model Capacity}
+Another interesting result is that the CNN with the least capacity, the \textit{Conv5s} model, was able to train with the most stability and achieve the best scores amongst the CNNs. The Conv5s model contained 600k trainable parameters compared to the Conv5 and Conv6 models which each contained over 1M. Even more interestingly is that the best performing model, which was the tuned LSTM, contained only 86k parameters, and only the MLP was smaller. This shows that for contrary to the results from Barkan \textit{et al.} \cite{barkan2019inversynth}, increasing the capacity of the model did not lead to improved results for this task. These results could also be due to inefficiencies in training that are preventing the larger models from training to their full potential. Exploring larger hyperparameter grids during optimization could help with this.
+
+\subsection{Parameters vs. Audio}
+The last research question, \textbf{RQ4}, sought to elucidate how the models responded to the different parameters and how that affected the audio results. The difference between the audio metrics and the parameter metrics shows that high error in terms of parameter values does not necessarily mean a high error in terms of the resulting audio. The NSGA method produced by far the most results with low auditory error, however, was the second worst method in terms of parameter error. Every deep learning approach outperformed it. The LSTM model was the most accurate in terms of parameter error as well as the best deep learning model in terms of audio error, which indicates that achieving low parameter error is correlated with low audio error.
+
+These results point to the fact that there is a many-to-one relationship between parameter settings and synthesized audio. This is an important attribute of the synthesizer parameter space that was identified earlier in the synthesizer configuration section of this chapter. There redundancy in the parameter space, and the amount of redundancy depends on the selection of the other parameters. For example, in this specific experiment, if the rate of the second stage of the EG was set to a value equivalent to one second of longer (length of the MIDI note and resulting audio), then that stage of the envelope would be the only one to have any affect on the resulting sound; all values for stages 3 and 4 rate and level would become redundant. This means that a large portion of the parameter space would map to a single audio result. Developing a a deeper understanding of the complexities of the parameter space and how that relates to synthesized audio will be beneficial for future work on synthesizer programming.
 
 % This is one of the benefits of the GAs over the deep learning approaches, the error between the target and the prediction can be measured directly on the audio, as opposed to measuring the error based on the parameter settings. The downside of this is that GAs are mu
 
@@ -395,7 +429,7 @@ Mean     &    0.0754 &  0.2436 &      0.2683 & 0.1958 \\
 - Challenges associated with programming a VST software synth
 
 
-
+Developing methods that allow for training loss to be computed on the audio output for the deep learning methods as opposed to the on the parameter values will be an 
 
 %\section{Related Work}
 %- Go over the three specific papers that SpiegeLib and the experiments are based on.
