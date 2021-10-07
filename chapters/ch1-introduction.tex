@@ -1,12 +1,29 @@
 \startfirstchapter{Introduction}
 \label{chapter:introduction}
-The use of sound synthesizers in the fields of music composition, production, and performance is widespread, but the task of programming a synthesizer is complex and requires a thorough understanding of technical details. It is not uncommon for a software synthesizer to have 30+ parameters displayed on a user interface (UI) and labelled using technical names \cite{rasmussen2018evaluating}. Manually programming sounds using such a large set of parameters is a daunting task. Synthesizer programming is further complicated by the fact that modifications to parameters are often not intuitively reflected in the end sonic result. This disconnect can be disruptive to the creative process. Automatic synthesizer programming (ASP) is the field of research focused on addressing these challenges in programming synthesizers.
+The use of sound synthesizers in the fields of music composition, production, and performance is widespread, but the task of programming a synthesizer is complex and requires a thorough understanding of technical details. It is not uncommon for a software synthesizer to have 30+ parameters displayed on a user interface (UI) and labelled using technical names \cite{rasmussen2018evaluating}. Programming a synthesizer involves the manual adjusting of this large set of parameters to achieve some goal sound, which may or may not be defined clearly beforehand. This is a daunting task for anyone, let alone a novice to the task. Synthesizer programming is further complicated by the fact that modifications to parameters are often not intuitively reflected in the end sonic result. This disconnect can be disruptive to the creative process.
 
-- Brief introduction to synthesizers in a musical context (Wendy Carlos, Forbidden Planet)?
-- Automatic synthesizer programming (introduced and formalized by Matthew Yee-King) - but research in the area dates back to the early 1970s.
+This thesis is focused on supporting the development of methods and applications that make synthesizer programming more accessible with the goal of enabling more people to be creative more often. The benefit of being able to express creatively on a regular basis has been proven \cite{conner2018everyday} and technology that enables individuals to experience themselves as creative in an area that was traditionally unavailable to them is empowering \cite{tavana2015democracy}. New synthesizers are constantly being developed and are now widely accessible on consumer devices including mobile phones. Developing methods that encourage the use of these synthesizers has the potential to lower the barrier of entry and support users in expressing in creative ways more regularly. Experienced synthesizer users have also identified synthesizer programming as challenging to learn and an impediment to the creative process of writing music \cite{krekovic2014intelligent}. 
 
+[Tie this into automatic synthesizer programming somehow now?]
+Technology derived from automatic synthesizer programming 
+
+Automatic synthesizer programming is the field of research focused on addressing these challenges in programming synthesizers. 
+
+Since the late 1970s a steady stream of work has contributed to the body of automatic synthesizer programming research, bolstered by developments in adjacent fields including digital signal processing, human computer interaction, artificial intelligence, and machine learning. As a result, the field of automatic synthesizer programming is an inherently interdisciplinary pursuit.
+
+% This is maybe a bit more like introduction material?
+% Synthesizers have become ubiquitous in audio production and entire genres of music have been developed around their use. Bebe and Louis Barron produced the first electronic film score for the movie "Forbidden Planet" in 1955 using synthetic sounds. Since then the use of synthesizers for movies and video games has also become common-place.
+
+- Where can this Laurie Spiegel quote fit in?
+"I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." - Laurie Spiegel \cite{hinkle2006women}
 
 \section{Motivation}
+% Is this maybe introduction material?
+The growing accessibility of hardware and software synthesizers has resulted in an unprecedented number of audio practitioners and hobbyists purchasing and desiring to learn how to program synthesizers. This is reinforced by the fact that there are currently 147 different videos courses available for sale on the Groove3 online education platform teaching synthesizer programming for various virtual instruments\footnote{\url{https://www.groove3.com/browse}}. In a recent study, users reported on the challenges associated with learning to user various synthesizers and a expressed a desire for improved user interaction methods \cite{krekovic2019insights}. The growth in interest in amongst musicians to learn to program synthesizers, along with desires for more intuitive ways to work with them points to the need for additional research in this area. This serves as motivation for the research conducted in this thesis.
+
+Maybe this should go above in introduction.
+[rmba conversations] \textit{et al.} identified that music producers often feel like the task of browsing for sounds using traditional methods is tedious and takes them out of the creative flow. Similarly, [krekovic] \textit{et al.} identified that synthesizer users felt like programming sounds in software synthesizer interfaces was complex and required time and effort. Users' in their study expressed
+
 % Can I add some context here for MIR, Intelligent Music Production, and such? Or does this go in a research context section? Still want to keep this chapter snappy.
 - Understand the field of automatic synthesizer programming,
 
@@ -64,8 +81,6 @@ What's my personal motivation for this research?
     \item Chapter \ref{chapter:synth-explore} outlines the design and development of a novel automatic synthesizer programming application that utilizes two dimensional visualization of sounds to support exploration of the synthesizer sound space. The application was developed with novice users in mind and is based on a set of design principles that are provided as a framework to support the design of assistive synthesizer programming tools.
     
 \end{itemize}
-
-% "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." - Laurie Spiegel \cite{hinkle2006women}
 
 % My main statement about the introduction is:
 % \textit{"keep it short and write it last".} The main features should be as follows:
