@@ -14,7 +14,13 @@ One of the main goals of this thesis is to support the field of automatic synthe
 An additional goal of this thesis is to explore and contribute to both the algorithmic and user interaction aspects of the synthesizer programming problem. Synthesizer programming is fundamentally a human computer interaction problem with solutions drawing heavily from technical fields including digital signal processing and artificial intelligence. In this thesis emphasis is placed both on the user interaction as well as the algorithmic aspects of the problem.  An evaluation of previous algorithmic approaches to inverse synthesis is provided and a novel approach presented. Additionally, a framework for developing novel synthesizer interactions is presented along with a new interface designed to support exploration.
 
 \section{Research Questions}
-The main challenges in synthesizer programming arise from the disconnect between synthesizer parameters and the perceived auditory output. The result of this disconnect is that synthesizers a difficult to use and cause impediments to the creative process of creating music and other audio endeavours. Therefore, the main research question is: How can designers of synthesizer programming interfaces build tools that enable more people to be more creative more often? Fundamental to answering this question
+The main challenges in synthesizer programming arise from the disconnect between synthesizer parameters and the perceived auditory output. The result of this disconnect is that synthesizers are difficult to learn, have a high-barrier to entry, and cause impediments to the creative process of creating music and producing audio. Therefore, the main research question that is being asked is: 
+
+\begin{quote}
+	How can designers of synthesizer programming interfaces build tools that enable more people to be more creative more often? 
+\end{quote}
+
+ Fundamental to answering this question is developing an understanding of the complex relationship between synthesizer parameter and the auditory result. Automatic synthesizer programming seeks to develop this understanding and bridge the conceptual gap between the parameters and the auditory output. This thesis is motivated by the main research question and takes steps towards answering it. More specific sub-questions that have motivated the work presented in this thesis are listed in the sections below.
 
 \subsection{Automatic Synthesizer Programming}
 What is the field of automatic synthesizer programming? What makes synthesizer programming so challenging and how do those challenges inform research focused on improving and automating it? A lot of previous work has been conducted in this field covering a large number of different approaches. How can we organize the body of previous work to help understand the problem and approaches that have been taken?
@@ -25,8 +31,8 @@ A substantial portion of previous work in automatic synthesizer programming has 
 \subsection{Representing Synthesized Sounds}
 Related to the inverse synthesis problem is the question of how to represent synthesized audio most effectively. A key component of developing automated synthesizer programming systems is being able to effectively answer the question: how similar is sound X to sound Y? How do we represent audio computationally and define a metric that can answer this question?
 
-\subsection{Generating Datasets}
-Also related to the inverse synthesis problem and more broadly applicable to 
+\subsection{Generating Synthesized Sounds}
+Datasets of synthesized audio and parameters are important for developing an understanding of the relationship between synthesizer parameters and the resulting audio, as well as for developing machine learning methods. The naïve approach is to uniformly sample the parameter space a particular synthesizer. Is this the best approach to generating sounds? The resulting sounds are often wild and do not represent sounds that a human would have programmed in a musical context. How can we generate sounds automatically that sound like a human would have programmed them?
 
 
 \subsection{Developing Supportive Tools}
@@ -51,7 +57,7 @@ How can one organize the body of previous work to help understand the problem an
 - Designing supportive tools
 -- How do we approach designing applications that support musicians and other synthesizer users in using synthesizers?
 
-\section{Contributions}
+\section{Summary of Contributions}
 % Can make this a bit tighter
 \begin{enumerate}
     \item Survey of the related work in automatic synthesizer programming and organizing from an interaction perspective
