@@ -1,66 +1,17 @@
 \startfirstchapter{Introduction}
 %! Simplify this!! Cut out the research context stuff I think or at least make things much tighter.
 \label{chapter:introduction}
-[Would be cool to say something about the THX sound here, that'd be a neat introduction]
-
-The sound synthesizer is a familiar tool for many musicians and audio practitioners working in music, film, video games, and other industries related to audio production. Despite their widespread use, the task of programming new sounds into a synthesizer is complex and requires a thorough understanding of sound design principles and technical details. It is not uncommon for a software synthesizer to have thirty or more parameters displayed on a user interface (UI) and labelled using technical names specific to a particular device \cite{rasmussen2018evaluating}. Synthesizer programming involves manually adjusting these parameters to achieve a desired sound. The task is further complicated by the fact that modifications to these parameters is often not intuitively reflected in the end sonic result.
+%[Would be cool to say something about the THX sound here, that'd be a neat introduction]
+The sound synthesizer is a familiar tool for many musicians and audio practitioners working in music, film, video games, and other industries related to audio production. Despite their widespread use, the task of programming new sounds into a synthesizer is complex and requires a thorough understanding of sound design principles and technical details. It is not uncommon for a software synthesizer to have thirty or more parameters displayed on a user interface and labelled using technical names specific to a particular device \cite{rasmussen2018evaluating}. Synthesizer programming involves manually adjusting these parameters to achieve a desired sound. The task is further complicated by the fact that modifications to these parameters is often not intuitively reflected in the end sonic result.
 The implication of this is that there is a large learning curve associated with becoming an effective synthesizer programmer, and even then the task can be disruptive to the creative process. 
 
-The central goal of this thesis is to support the development of methods that address the challenges of synthesizer programming. Such methods have the potential to make working with synthesizers more accessible and to enable more people to be creative more often. The benefits of engaging in the creative process on a regular basis has been proven \cite{conner2018everyday} and technology has the power to enable individuals to express themselves in domains that were previously unavailable to them \cite{tavana2015democracy}. New synthesizers are constantly being released and are now widely accessible on consumer devices including personal computers and mobile phones [cite?]. Developing methods that lower the barrier to entry and encourage the use of synthesizers can support users in engaging in creative endeavours more regularly. The potential benefit is not limited to novice users; experienced synthesizer users and other audio practitioners have also identified the challenges of synthesizer programming as being an impediment to their creative process and they also serve to benefit from research in this direction \cite{krekovic2014intelligent}. 
+The central goal of this thesis is to support the development of methods that address the challenges of synthesizer programming. Such methods have the potential to make working with synthesizers more accessible and to enable more individuals to be creative more often. The benefits of engaging in the creative process on a regular basis has been proven \cite{conner2018everyday} and music technology has the power to enable individuals to express themselves in domains that were previously unavailable to them \cite{tavana2015democracy}. Developing methods that lower the barrier to entry to use can support novices to engage in creative practices using synthesizers in ways that may have seemed unavailable to them in the past. The potential benefit is also not limited to novice users; experienced synthesizer users and other audio practitioners have identified the challenges of synthesizer programming as being an impediment to their creative process and they also serve to benefit from research in this direction \cite{krekovic2014intelligent}.
 
-[Add a sentence or two in here about what I actually present in this thesis]
-- Overview of the field of automatic synthesizer programming
-- Sharing is caring
-- Specific emphasis is placed on encouraging reproducible research and open sharing in the field. An evaluation of several recent approaches is provided in an open-source framework designed to facilitate sharing and open evaluation
+Automatic synthesizer programming is the field of research related to developing techniques and tools that address the challenges of synthesizer programming. It is inherently interdisciplinary in nature and draws from fields including digital signal processing, creativity support, music interaction, artificial intelligence, and machine learning. Work in automatic synthesizer programming dates back to the 1970s \cite{justice1979analytic} and a large body of research has followed, looking at a variety of approaches to improving and automating the task of synthesizer programming. One of the central focuses of automatic synthesizer programming has been \textit{sound matching}, or \textit{inverse synthesis}, which involves the prediction of synthesizer parameters to recreate a target sound as closely as possible \cite{horner1993machine}. A number of other methods have also been proposed such as using descriptive words \cite{seago2013new} or vocal imitations \cite{cartwright2014synthassist}. Despite the breadth of work on the topic, the task of automating synthesizer programming is a complex problem and is still an open question. The desires expressed by synthesizer users for improved methods also point to the need for further work in the field.
 
-\section{Research Context}
-\subsection{Music and Audio Production}
-I want to introduce MIR and IMP here.
-With the rise of personal computers there was a movement towards digital methods for producing, distributing, and consuming music in the 80s and 90s [cite?]. As computers became more powerful and consumers started to accumulate large collections of digital music, the need for improved methods for organizing and browsing these collection became apparent. Music information retrieval (MIR) is the field of study that was born out of the need to navigate these increasingly large collections of digital music [cite]. Simultaneously, many of the processing for recording and producing music were also being moved onto computers. The development of affordable computers that could run digital audio workstations (DAWs) along with a proliferation of companies developing audio production software has resulted in the decentralization of music production. Traditionally restricted only to those who could afford to work in expensive recording studios had access to high-quality recording equipment [cite for the record production text]. Affordable technology has enabled virtually anyone to write, record, and produce their own music; grammy award winning records are now being written and produced in bedrooms [find cite for eilish]. Despite this, and the unprecedented amount of audio software available to consumers, there is still a large learning curve associated with learning to use audio software. Intelligent music production (IMP) is a field of study related to MIR that has grown to address these challenges and focuses on creating improved user interactions and automatic aspects of the music production process \cite{de2017ten, moffat2019approaches}. 
+One of the main goals of this thesis is to support the field of automatic synthesizer programming and encourage continued research through collaboration, open datasets and evaluation, and reproducible research \cite{vandewalle2009reproducible}. An adjacent field of study, music information retrieval, [cite] has benefitted from benchmark tasks, open datasets, and evaluations including the music information retrieval exchange (MIREX) [cite]. Additionally, open source software that has supported research in MIR including Marsyas [cite] and Librosa [cite] have enabled the growth the of field. There are minimal examples in the field of automatic synthesizer programming of similar open evaluations, benchmark problems, or libraries for sharing of solutions. The open source software and datasets that are introduced as a component of this thesis are motivated by the impact of the contributions that open-source libraries and datasets have made to the field of MIR.
 
-\subsection{Automatic Synthesizer Programming}
-Audio synthesizers have had a similar trajectory thanks to the development of affordable digital and software methods. The Yamaha DX7, released in 1983 [fact check], was one of the first affordable digital synthesizers and went on to become one of the best sellinf synthesizers of all. It was also notoriously difficult to manually program and seven out of eight units that went in for service had their factory presets intact [cite - seago]. Similar to other audio production tools, the development of software synthesizers that could run on personal computers has lead to an increase in the availability of these devices as well as a desire to learn how to use them. There are over 500 different software synthesizers listed on the KVR website and 147 different videos courses available for sale on the Groove3 online education platform teaching synthesizer programming\footnote{\url{https://www.groove3.com/browse}}. This 
-
-
-Automatic synthesizer programming is the field of research centered around addressing the challenges with synthesizer programming. It is an inherently interdisciplinary topic, drawing from advancements from fields including digital signal processing, creativity support, music interaction, artificial intelligence, and machine learning.
-
-on the topic of inverse synthesis, also referred to a sound matching, which is focused on automatically finding parameters for a synthesizer to reproduce a target sound as closely as possible. Work was first published on this topic in the late 1970s \cite{justice1979analytic} and has grown in popularity in recent years in parallel with advancements in deep learning \cite{lecun2015deep}. The term automatic synthesizer programming was coined by Matthew Yee-King in 2008 and to refer to synthesizer sound matching \cite{yee2008synthbot}.
-
-The term automatic synthesizer programming was coined by Matthew Yee-King in the 
-
-% This is maybe a bit more like introduction material?
-% Synthesizers have become ubiquitous in audio production and entire genres of music have been developed around their use. Bebe and Louis Barron produced the first electronic film score for the movie "Forbidden Planet" in 1955 using synthetic sounds. Since then the use of synthesizers for movies and video games has also become common-place.
-
-- Where can this Laurie Spiegel quote fit in?
-"I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." - Laurie Spiegel \cite{hinkle2006women}
-
-% Is this maybe introduction material?
-- How can I keep this section more simple?
-
-The growing accessibility of hardware and software synthesizers has resulted in an unprecedented number of audio practitioners and hobbyists purchasing and desiring to learn how to program synthesizers. This is reinforced by the fact that there are currently 147 different videos courses available for sale on the Groove3 online education platform teaching synthesizer programming for various virtual instruments\footnote{\url{https://www.groove3.com/browse}}.
-
-
-In a recent study, users reported on the challenges associated with learning to user various synthesizers and a expressed a desire for improved user interaction methods \cite{krekovic2019insights}. The growth in interest in amongst musicians to learn to program synthesizers, along with desires for more intuitive ways to work with them points to the need for additional research in this area. This serves as motivation for the research conducted in this thesis.
-
-Maybe this should go above in introduction.
-[rmba conversations] \textit{et al.} identified that music producers often feel like the task of browsing for sounds using traditional methods is tedious and takes them out of the creative flow. Similarly, [krekovic] \textit{et al.} identified that synthesizer users felt like programming sounds in software synthesizer interfaces was complex and required time and effort. Users' in their study expressed
-
-% Can I add some context here for MIR, Intelligent Music Production, and such? Or does this go in a research context section? Still want to keep this chapter snappy.
-- Understand the field of automatic synthesizer programming,
-
-\subsubsection{Availability of Synthesizers}
-- Democratization of audio (What's that reference on GarageBand?) Something about the introduction of synthesizers, then the Yamaha DX7, which was notoriously difficult to program
-- Add in some statistics regarding modular synthesis, KVR, Groove3 -- to provide some context on current trends in synthesizer use and where things are at. 
-
-\subsubsection{Democratization of Sound}
-- Democratization of sound \cite{tavana2015democracy} -- GarageBand bit. Gateway DAW to more complicated software like Ableton Live. Gender aspect to this as well. "The feminist implication of GarageBand definitely encouraged a lot of my female friends to explore something that had previously seemed out of reach." "While it may have introduced a whole lot more people of all genders to an array of options for home recording and self-producing, an overwhelming majority of engineers in studios are still male." Indeed, recent estimates reveal that less than five percent of sound engineers and producers in the music business are women. (Maybe include Amandine's paper here?) 
-- Krekovi\'{c}'s study where a vast majority of users were male
-
-\subsubsection{Gateway Synthesizers}
-Enabling more people to be creative! 
-
-\subsection{Personal Motivation}
-What's my personal motivation for this research?
+An additional goal of this thesis is to explore and contribute to both the algorithmic and user interaction aspects of the synthesizer programming problem. Synthesizer programming is fundamentally a human computer interaction problem with solutions drawing heavily from technical fields including digital signal processing and artificial intelligence. In this thesis emphasis is placed both on the user interaction as well as the algorithmic aspects of the problem.  An evaluation of previous algorithmic approaches to inverse synthesis is provided and a novel approach presented. Additionally, a framework for developing novel synthesizer interactions is presented along with a new interface designed to support exploration.
 
 \section{Research Questions}
 - What is the field of automatic synthesizer programming? How can we organize the body of previous work to better understand the problem and approaches that are being taken?
@@ -151,3 +102,69 @@ What's my personal motivation for this research?
 % \section{User Interface Design}
 % \subsection{Synthesizer Programming}
 % Seago identified disconnect between the language of users and the language used in synthesizer interfaces \cite{seago2004critical}. Recent work focussed on synthesizer UIs \cite{rasmussen2018evaluating}. Krekovic in a 2019 study of 112 synthesizer users, reported most participants reported feeling like the process of modifying or creating new synthesizer patches was a challenging process and not intuitive \cite{krekovic2019insights}. A majority of users' felt like more intuitive interfaces was the area that would be most beneficial in helping them during the process of programming a synth. Users also felt that sound matching would be helpful. Krekovic identifies that relatively little research has been completed in the area of synthesizer user interfaces. This is reflective of recent research focussed on human computer interface and ui design for music applications \cite{pardo2019learning}\cite{knees2019intelligent}.
+
+
+%One of the main goals of this thesis is to organize the body of 
+%
+%
+%It is an inherently interdisciplinary topic, drawing from advancements in fields including digital signal processing, creativity support, music interaction, artificial intelligence, and machine learning. With the rise of personal computers and the internet there was a movement towards digital methods for producing, distributing, and consuming audio in the 80s and 90s [cite]. Audio production methods transitioned to software and a plethora of tools have been developed that have enabled everyday consumers to write and record music outside of large studios [cite]. There are currently over 500 individual software synthesizers available on the KVR online database of audio softare [footnote].
+
+
+
+
+
+
+
+%[Add a sentence or two in here about what I actually present in this thesis]
+%- Overview of the field of automatic synthesizer programming
+%- Sharing is caring
+%- Specific emphasis is placed on encouraging reproducible research and open sharing in the field. An evaluation of several recent approaches is provided in an open-source framework designed to facilitate sharing and open evaluation
+%
+%\section{Research Context}
+%\subsection{Music and Audio Production}
+%I want to introduce MIR and IMP here.
+%With the rise of personal computers there was a movement towards digital methods for producing, distributing, and consuming music in the 80s and 90s [cite?]. As computers became more powerful and consumers started to accumulate large collections of digital music, the need for improved methods for organizing and browsing these collection became apparent. Music information retrieval (MIR) is the field of study that was born out of the need to navigate these increasingly large collections of digital music [cite]. Simultaneously, many of the processing for recording and producing music were also being moved onto computers. The development of affordable computers that could run digital audio workstations (DAWs) along with a proliferation of companies developing audio production software has resulted in the decentralization of music production. Traditionally restricted only to those who could afford to work in expensive recording studios had access to high-quality recording equipment [cite for the record production text]. Affordable technology has enabled virtually anyone to write, record, and produce their own music; grammy award winning records are now being written and produced in bedrooms [find cite for eilish]. Despite this, and the unprecedented amount of audio software available to consumers, there is still a large learning curve associated with learning to use audio software. Intelligent music production (IMP) is a field of study related to MIR that has grown to address these challenges and focuses on creating improved user interactions and automatic aspects of the music production process \cite{de2017ten, moffat2019approaches}. 
+%
+%\subsection{Automatic Synthesizer Programming}
+%Audio synthesizers have had a similar trajectory thanks to the development of affordable digital and software methods. The Yamaha DX7, released in 1983 [fact check], was one of the first affordable digital synthesizers and went on to become one of the best sellinf synthesizers of all. It was also notoriously difficult to manually program and seven out of eight units that went in for service had their factory presets intact [cite - seago]. Similar to other audio production tools, the development of software synthesizers that could run on personal computers has lead to an increase in the availability of these devices as well as a desire to learn how to use them. There are over 500 different software synthesizers listed on the KVR website and 147 different videos courses available for sale on the Groove3 online education platform teaching synthesizer programming\footnote{\url{https://www.groove3.com/browse}}. This 
+%
+%
+%Automatic synthesizer programming is the field of research centered around addressing the challenges with synthesizer programming. It is an inherently interdisciplinary topic, drawing from advancements from fields including digital signal processing, creativity support, music interaction, artificial intelligence, and machine learning.
+%
+%on the topic of inverse synthesis, also referred to a sound matching, which is focused on automatically finding parameters for a synthesizer to reproduce a target sound as closely as possible. Work was first published on this topic in the late 1970s \cite{justice1979analytic} and has grown in popularity in recent years in parallel with advancements in deep learning \cite{lecun2015deep}. The term automatic synthesizer programming was coined by Matthew Yee-King in 2008 and to refer to synthesizer sound matching \cite{yee2008synthbot}.
+%
+%The term automatic synthesizer programming was coined by Matthew Yee-King in the 
+%
+%% This is maybe a bit more like introduction material?
+%% Synthesizers have become ubiquitous in audio production and entire genres of music have been developed around their use. Bebe and Louis Barron produced the first electronic film score for the movie "Forbidden Planet" in 1955 using synthetic sounds. Since then the use of synthesizers for movies and video games has also become common-place.
+%
+%- Where can this Laurie Spiegel quote fit in?
+%"I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." - Laurie Spiegel \cite{hinkle2006women}
+%
+%% Is this maybe introduction material?
+%- How can I keep this section more simple?
+%
+%The growing accessibility of hardware and software synthesizers has resulted in an unprecedented number of audio practitioners and hobbyists purchasing and desiring to learn how to program synthesizers. This is reinforced by the fact that there are currently 147 different videos courses available for sale on the Groove3 online education platform teaching synthesizer programming for various virtual instruments\footnote{\url{https://www.groove3.com/browse}}.
+%
+%
+%In a recent study, users reported on the challenges associated with learning to user various synthesizers and a expressed a desire for improved user interaction methods \cite{krekovic2019insights}. The growth in interest in amongst musicians to learn to program synthesizers, along with desires for more intuitive ways to work with them points to the need for additional research in this area. This serves as motivation for the research conducted in this thesis.
+%
+%Maybe this should go above in introduction.
+%[rmba conversations] \textit{et al.} identified that music producers often feel like the task of browsing for sounds using traditional methods is tedious and takes them out of the creative flow. Similarly, [krekovic] \textit{et al.} identified that synthesizer users felt like programming sounds in software synthesizer interfaces was complex and required time and effort. Users' in their study expressed
+%
+%% Can I add some context here for MIR, Intelligent Music Production, and such? Or does this go in a research context section? Still want to keep this chapter snappy.
+%- Understand the field of automatic synthesizer programming,
+%
+%\subsubsection{Availability of Synthesizers}
+%- Democratization of audio (What's that reference on GarageBand?) Something about the introduction of synthesizers, then the Yamaha DX7, which was notoriously difficult to program
+%- Add in some statistics regarding modular synthesis, KVR, Groove3 -- to provide some context on current trends in synthesizer use and where things are at. 
+%
+%\subsubsection{Democratization of Sound}
+%- Democratization of sound \cite{tavana2015democracy} -- GarageBand bit. Gateway DAW to more complicated software like Ableton Live. Gender aspect to this as well. "The feminist implication of GarageBand definitely encouraged a lot of my female friends to explore something that had previously seemed out of reach." "While it may have introduced a whole lot more people of all genders to an array of options for home recording and self-producing, an overwhelming majority of engineers in studios are still male." Indeed, recent estimates reveal that less than five percent of sound engineers and producers in the music business are women. (Maybe include Amandine's paper here?) 
+%- Krekovi\'{c}'s study where a vast majority of users were male
+%
+%\subsubsection{Gateway Synthesizers}
+%Enabling more people to be creative! 
+%
+%\subsection{Personal Motivation}
+%What's my personal motivation for this research?
