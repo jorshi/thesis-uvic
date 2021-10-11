@@ -20,7 +20,7 @@ The main challenges in synthesizer programming arise from the disconnect between
 	How can designers of synthesizer programming interfaces build tools that enable more people to be more creative more often? 
 \end{quote}
 
- Fundamental to answering this question is developing an understanding of the complex relationship between synthesizer parameter and the auditory result. Automatic synthesizer programming seeks to develop this understanding and bridge the conceptual gap between the parameters and the auditory output. This thesis is motivated by the main research question and takes steps towards answering it. More specific sub-questions that have motivated the work presented in this thesis are listed in the sections below.
+ Fundamental to answering this question is developing an understanding of the complex relationship between synthesizer parameter and the auditory result. Automatic synthesizer programming seeks to develop this understanding and bridge the conceptual gap between the parameters and the auditory output. This thesis is motivated by these research question and takes steps towards answering it. More specific sub-questions that have motivated the work presented in this thesis are listed in the sections below.
 
 \subsection{Automatic Synthesizer Programming}
 What is the field of automatic synthesizer programming? What makes synthesizer programming so challenging and how do those challenges inform research focused on improving and automating it? A lot of previous work has been conducted in this field covering a large number of different approaches. How can we organize the body of previous work to help understand the problem and approaches that have been taken?
@@ -32,44 +32,41 @@ A substantial portion of previous work in automatic synthesizer programming has 
 Related to the inverse synthesis problem is the question of how to represent synthesized audio most effectively. A key component of developing automated synthesizer programming systems is being able to effectively answer the question: how similar is sound X to sound Y? How do we represent audio computationally and define a metric that can answer this question?
 
 \subsection{Generating Synthesized Sounds}
-Datasets of synthesized audio and parameters are important for developing an understanding of the relationship between synthesizer parameters and the resulting audio, as well as for developing machine learning methods. The naïve approach is to uniformly sample the parameter space a particular synthesizer. Is this the best approach to generating sounds? The resulting sounds are often wild and do not represent sounds that a human would have programmed in a musical context. How can we generate sounds automatically that sound like a human would have programmed them?
-
+Datasets of synthesized audio and parameters are important for research on elucidating the relationship between synthesizer parameters and the resulting audio, as well as for developing machine learning methods for synthesizer programming. The naïve approach is to uniformly sample the parameter space a particular synthesizer. Is this the best approach to generating sounds? The resulting sounds are often wild and do not represent sounds that a human would have programmed in a musical context. How can we generate sounds automatically that sound like a human would have programmed them?
 
 \subsection{Developing Supportive Tools}
+More specific questions around the design and development of supportive tools for synthesizer programming tie more directly back to the main research question. How do we create effective and intuitive user interfaces to support synthesizer programming? To what extent should the tool automate the process of synthesizer programming? Should the goal be to make synthesizer programming easy? What interaction paradigms support creativity the best? Which algorithmic methods for automatic synthesizer programming support creativity the best?
 
 
-but other approaches have been proposed. What are the different user interaction approaches that have been explored? 
-
-How can one organize the body of previous work to help understand the problem and approaches that have been taken?
-
-\subsection{}
-
-
-- What is the field of automatic synthesizer programming? How can we organize the body of previous work to better understand the problem and approaches that are being taken?
--- Formalize the challenge of synthesizer programming and frame it as a human computer interaction problem. A survey of the approaches from a user interaction perspective is then provided.
-
-- Inverse synthesis research has dominated the landscape of previous work? How does these various techniques compare?
--- There are no standardized evaluation metrics or software libraries that support 
-
-- Understanding the synthesizer parameter space:
--- The connection between the parameters on a synthesizer 
-
-- Designing supportive tools
--- How do we approach designing applications that support musicians and other synthesizer users in using synthesizers?
+%but other approaches have been proposed. What are the different user interaction approaches that have been explored? 
+%
+%How can one organize the body of previous work to help understand the problem and approaches that have been taken?
+%
+%\subsection{}
+%
+%
+%- What is the field of automatic synthesizer programming? How can we organize the body of previous work to better understand the problem and approaches that are being taken?
+%-- Formalize the challenge of synthesizer programming and frame it as a human computer interaction problem. A survey of the approaches from a user interaction perspective is then provided.
+%
+%- Inverse synthesis research has dominated the landscape of previous work? How does these various techniques compare?
+%-- There are no standardized evaluation metrics or software libraries that support 
+%
+%- Understanding the synthesizer parameter space:
+%-- The connection between the parameters on a synthesizer 
+%
+%- Designing supportive tools
+%-- How do we approach designing applications that support musicians and other synthesizer users in using synthesizers?
 
 \section{Summary of Contributions}
 % Can make this a bit tighter
+
 \begin{enumerate}
-    \item Survey of the related work in automatic synthesizer programming and organizing from an interaction perspective
-    \item SpiegeLib, a software library designed to support the development and evaluation of inverse synthesis techniques.
-    \item Introduce a benchmark FM inverse synthesis problem using Dexed
-    \item Comparison of RNN, CNN, and GAs on benchmark problem
-    %\item Introduce a hybrid GA approach that uses a pre-trained deep learning model as a warm-start
-    \item A dataset of 1 billion synthesized sounds and parameters
-    \item Timbre and pitch synthesizer datasets using human-designed presetes
-    \item An open-source GPU-enabled modular synthesizer
-    \item Design framework for developing tools to support synthesizer programming
-    \item An interactive synthesizer sound exploration tool using two dimensional visualization of sounds based on sound similarity.
+    \item Survey and taxonomy of related work in automatic synthesizer programming from a user interaction perspective
+    \item An open source software library designed to support the development, sharing, and evaluation of automatic synthesizer programming techniques in a way that support reproducible research
+    \item An evaluation of several techniques for inverse synthesis conducted on a benchmark frequency modulation (FM) synthesizer dataset
+    \item Three open datasets, including one large-scale billion sound+parameter dataset, designed to support further research in synthesizer programming and large-scale deep learning training
+    \item An open-source GPU-enabled modular synthesizer for efficiently generating the billion sound dataset on the fly and for supporting efficient research on various synthesis algorithms
+    \item Design framework for developing tools to support synthesizer programming and an interactive synthesizer sound exploration tool using two dimensional visualization of sounds based on sound similarity.
 \end{enumerate}
 
 \section{Thesis Structure}
