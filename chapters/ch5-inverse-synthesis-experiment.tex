@@ -171,29 +171,33 @@ Initial experiments showed that even the reduced capacity CNN was prone to overf
 Where $\eta_i$ is the learning rate at training step $i$, $\eta_0$ is the initial learning rate, $\lambda$ is the decay rate, and $T$ is the decay steps. For this experiment $\eta_0=0.001$ and $T$ was set to be equivalent to 25 epochs. $\lambda=3$ for the MFCC CNN and $\lambda=4$ for the Mel-Spectrogram CNN.
 
 \subsection{Training Results}
-All the models were allowed to train until the early-stopping criteria was triggered. The 5-LSTM++ model trained for the most number of epochs (151 epochs), and the Conv5 model trained for the least (60 epochs). Models were trained on an NVIDIA RTX 2080 super GPU, training time ranged between X for the X model, and Y for the Y model. All training times are listed in appendix \ref{appendix:training-times}.
-
-Validation loss at each training epoch is shown in figure \ref{fig:training-loss} and plots for all models plotted against their respective training loss are provided in appendix \ref{appendix:training-loss}. These plots show a much smoother curve for all the LSTM models and the MLP compared to the convolutional networks. Even with the learning rate schedule the two full-sized Conv6 and Conv6 networks began to overfit before 50 epochs, and the Conv5 network shows quite severe signs of overfitting after 50 epochs. Overall, the LSTM model achieved the lowest validation loss, finishing the last epoch with an error of 0.0495.
-
+All the models were allowed to train until the early-stopping criteria was triggered. The number of training epochs ranged from 31 epochs for the Mel-LSTM to 133 epochs for the Mel-MLP.
+% Maybe include this?
+%Models were trained on an NVIDIA RTX 2080 super GPU, training time ranged between X for the X model, and Y for the Y model. All training times are listed in appendix \ref{appendix:training-times}.
+Validation loss at each training epoch is shown in figure \ref{fig:training-loss} and plots for all models plotted against their respective training loss are provided in appendix \ref{appendix:training-loss}. The MFCC-LSTM and MFCC-LSTM++ models achieved the lowest validation loss during training, $\approx 0.042$. All the MFCC versions of the models achieved better final validation loss values when compared their Mel-Spectrogram counterparts, although only by a small amount; the average final loss for MFCC models was 0.044 whereas the average final loss for the Mel models was 0.045.
 \begin{figure}[ht]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/inverse-synth/lstm-loss.png}
+        \includegraphics[width=\textwidth]{figures/inverse-synth/mfcc-model-loss.png }
+        \caption{MFCC Models}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/inverse-synth/conv-loss.png}
+        \includegraphics[width=\textwidth]{figures/inverse-synth/mel-model-loss.png}
+        \caption{Mel-Spectrogram Models}
     \end{subfigure}
-    \caption{Validation loss during training for all the deep learning models. Models are split into two separate figures for visibility: the MLP and LSTM models are on the left, and the CNN models are on the right.}
+    \caption{Validation loss during training for all the deep learning models.}
     \label{fig:training-loss}
 \end{figure}
 
 \section{Genetic Algorithms}
+\label{inverse-synth:ga}
+
 Two different GAs were used: a basic single-objective GA and a multi-objective NSGA III. The multi-ojective GA was derived from work conducted by Tatar \textit{et al.} \cite{tatar2016automatic} that used the algorithm to automatically tune the parameters of a Teenage Engineering OP-1\footnote{\url{https://teenage.engineering/products/op-1}} synthesizer. In the case of the GAs the $fitness$ is easily computed directly on the audio rendered from $Dexed$. During each iteration of the algorithm, individuals of the population (whose genotype are synthesizer parameters) are rendered using Dexed, and the phenotype is produced by generating an audio representation from the resulting audio.
 
 \subsection{Fitness}
-In the case of the basic GA the $fitness$ is computed as the mean absolute error (MAE) between 13-band MFCCs from the target and the individual. The MFCCs were calculated using a frame-size of 2048 samples and a hop-size of 1024 samples. MAE is calculated as follows, here $N$ is the number of features, $y$ is the target, and $\hat{y}$ is the predicted individual:
+In the case of the basic GA, the $fitness$ is computed as the mean absolute error (MAE) between 13-band MFCCs from the target and the individual. The MFCCs were calculated using a frame-size of 2048 samples and a hop-size of 1024 samples. MAE is calculated as follows, where $N$ is the number of features, $y$ is the target, and $\hat{y}$ is the predicted individual:
 
 \begin{equation}\label{equation:mae}
     \text{MAE} = \frac{\sum_{i \in N}{|y_i - \hat{y}_i|}}{N}
@@ -202,7 +206,11 @@ In the case of the basic GA the $fitness$ is computed as the mean absolute error
  Three different metrics were used for evaluating the $fitness$ of an individual for the NSGA-III algorithm, MAE between: 1) a 13-band MFCC, 2) magnitude spectrum from an FFT, and 3) a set of spectral features. The MFCCs were calculated using a frame-size of 2048 samples and hop size of 1024 samples. The FFT was calculated over the entire input audio, 1 second at 44,100 samples/second. For the spectral features, five different features were calculated: centroid, bandwidth, contrast across seven subbands, flatness, and rolloff. Each feature was calculated using a frame-size of 2048 samples and a hop-size of 1024 samples. The time series of audio features was summarized using the mean and variance. This resulted in a feature vector of size 22.
  
  \subsection{Generations}
- The quality of the result that can be produced by a GA is generally related to the amount of time that the algorithm is allowed to run for. While there is no guarantee that the optimal solution will be found, and the optimization may get stuck in a local minima, allowing the the algorithm to run for longer will give the GA a higher likelihood of converging on a quality solution. Tatar \textit{et al.} allowed their NSGA-III run for 5 hours on a 50-core computer, which lead to results that were competitive against human sound designers. The synthesizer programming task in their problem was much more complex than the problem presented in this experiment. Initial experiments showed both GAs were able to perform well when allowed to run for 100 generations with a population of 300 individuals. For the NSGA this took about 20 minutes on a late 2013 MacBook Pro. Although this time is much better than 5hrs, this still presented a limitation to the number of target examples that could be used for evaluation. Also, 20 minutes is still too long for the method to be practical in a music production context. A more severely constrained test was designed to see if the GAs still remained superior to the deep learning approaches. Each GA was allowed to run for only 25 generations using a population of 100 individuals. With these constraints the runtime was approximately 75 seconds for the NSGA-III and 41 seconds for the basic GA when predicting parameters for a 1 second long target audio.
+ The quality of the result that can be produced by a GA is generally related to the amount of time that the algorithm is allowed to run for. While there is no guarantee that the optimal solution will be found, and the optimization may get stuck in a local minima, allowing the the algorithm to run for longer gives a higher likelihood of finding a quality solution. Tatar \textit{et al.} allowed their NSGA-III run for 1000 generations, which took 5 hours on a 50-core computer. The results of their method where competitive with an experienced human sound designer. 
+ 
+ The synthesizer programming task in their problem was much more complex than the problem presented in this experiment. Initial experiments showed both GAs were able to perform well when allowed to run for 100 generations with a population of 300 individuals. For the NSGA this took about 20 minutes on a late-2013 MacBook Pro. Although this time is much better than 5hrs, this still limited the number of target examples that could be used for evaluation. 20 minutes is also a long time for application that is expected to be used in a music production context. 
+ 
+ To experiment with reducing the runtime of the GAs, a more severely constrained test was designed. Each GA was allowed to run for only 25 generations using a population of 100 individuals. These values were selected to significantly reduce the runtime and to validate whether competitive solutions could still be generated. With these constraints the runtime was approximately 75 seconds for the NSGA-III and 41 seconds for the basic GA when predicting parameters for a 1 second long target audio.
  
  \subsection{Mutation and Crossover}
  The remaining hyperparameters that control each GA are the rate of mutation and the rate of crossover. The rate of mutation sets the likelihood that a genotype is randomly modified. The rate of mutation was 30\% for the basic GA and 50\% for the NSGA-III. Rate of crossover set the likelihood that an individual is combined with another individual to create an new "child" individual. The rate of crossover for both GAs was set to 50\%.
@@ -221,54 +229,60 @@ In the case of the basic GA the $fitness$ is computed as the mean absolute error
 % \label{fig:nsga_fitness}
 % \end{center}
 % \end{figure}
+\subsection{Warm Start Genetic Algorithm}
+A novel hybrid method that combines the strengths of deep learning and genetic algorithms was developed for this experiment. Deep learning models front-load the computational  complexity during model training, which can take several minutes to several hours, however are comparatively fast during parameter prediction (less than 100ms for the models included in this experiment). However, deep learning approaches have yet to achieve the same accuracy and consistency as genetic algorithms for parameter estimation.
+
+The method proposed here leverages the inference speed of deep learning models to support the generation of the initial population for a NSGA-III. This gives the the genetic algorithm a head start during optimization instead of starting with a population of purely random solutions. Because of this, the method is called \textit{Warm-Start NSGA} or \textit{WS-NSGA} for short.
+
+To generate the initial population, parameters are first predicted using a pre-trained model. The MFCC-LSTM++ model was selected based on results presented in the following section. This produces a single individual for the population. Forty nine mutated versions of this individual are generated and added to the population. Finally, to add variation to the population another fifty random individuals are created. The algorithm is then run exactly the same as the regular NSGA, however now with only ten generations. This method takes approximately 30 seconds in total per prediction.
 
 \section{Evaluation}
 \label{sec:inverse-synth-eval}
 
-Evaluation was carried out by measuring the ability of each technique to accurately perform inverse synthesis on a dataset of testing sounds. A dataset with 250 examples was created for this purpose using the same technique for rendering sounds described earlier in this chapter (see \S\ref{sec:dataset-generation}). The same nine parameter subset of sounds were used for the test dataset; using sounds generated from this synthesizer configuration means that an exact match for inverse synthesizer is possible, which provides a known baseline for comparing each of the methods. Each of the 10 different techniques were were run on each of the 250 target test sounds and parameters estimated. The trained models for all the deep learning approaches were used for estimation and inference on a single target took $\approx 70$ms on Macbook Pro (no GPU).
+Evaluation was carried out by measuring the ability of each technique to accurately perform inverse synthesis on a set of 250 testing sounds. The same seven parameter subset of sounds were used for the test dataset, this means that an exact match for inverse synthesizer is possible, which provides a known baseline for comparing each of the methods. Each of the 11 different techniques were were run on each of the 250 target test sounds and parameters estimated. The trained models for all the deep learning approaches were used for estimation and inference on a single target took $\approx 70$ms on Macbook Pro. The GAs were each run on each of the 250 target sounds, which took $\approx 5$ hours using the NSGA-III and $\approx 3$ hours with the basic GA, and $\approx 5$ hours using the WS-NSGA. 
 
-The GAs had no training stage, however, are much more computationally expensive during the prediction stage. The two GAs were each run on each of the 250 target sounds, which took $\approx 5$ hours using the NSGA-III and $\approx 3$ hours with the basic GA. Figure \ref{fig:nsga-error-generations} shows an example of how the fitness values for the three objectives are optimized over consecutive generations. These figures illustrate how performance can vary significantly from target to target, both examples started with populations that contained individuals with relatively high error with respect to the objectives, the search for target 35 successfully found a solution with minimal error for all objectives, however the search for target 5 was only able to find a solution that resulted in low error for one of the objectives.
+%Figure \ref{fig:nsga-error-generations} shows an example of how the fitness values for the three objectives are optimized over consecutive generations. These figures illustrate how performance can vary significantly from target to target, both examples started with populations that contained individuals with relatively high error with respect to the objectives, the search for target 35 successfully found a solution with minimal error for all objectives, however the search for target 5 was only able to find a solution that resulted in low error for one of the objectives.
+%
+%\begin{figure}[ht]
+%    \centering
+%    \begin{subfigure}[b]{0.49\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth]{figures/inverse-synth/nsga_plot_5.png}
+%        \caption{Target 5}
+%    \end{subfigure}
+%    \begin{subfigure}[b]{0.49\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth]{figures/inverse-synth/nsga_plot_35.png}
+%        \caption{Target 35}
+%    \end{subfigure}
+%    \caption{Plots showing the minimum fitness values for each objective in the NSGA-III over generations during prediction for two examples from the testing dataset. Error for each objective was normalized using the maximum minimum fitness achieved over all testing trials.
+%    % The left plot shows an example where the best individual in the population at the beginning of the search had high error with respect to the objectives, an example was found that improved the spectral error quite drastically, however the MFCC and FFT error remained high. The right plot shows an example where the algorithm was able to find an example that significantly improved all objectives.
+%    }
+%    \label{fig:nsga-error-generations}
+%\end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/inverse-synth/nsga_plot_5.png}
-        \caption{Target 5}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/inverse-synth/nsga_plot_35.png}
-        \caption{Target 35}
-    \end{subfigure}
-    \caption{Plots showing the minimum fitness values for each objective in the NSGA-III over generations during prediction for two examples from the testing dataset. Error for each objective was normalized using the maximum minimum fitness achieved over all testing trials.
-    % The left plot shows an example where the best individual in the population at the beginning of the search had high error with respect to the objectives, an example was found that improved the spectral error quite drastically, however the MFCC and FFT error remained high. The right plot shows an example where the algorithm was able to find an example that significantly improved all objectives.
-    }
-    \label{fig:nsga-error-generations}
-\end{figure}
-
-Predicted audio was rendered using Dexed and the the resulting audio and parameter pairs were saved for evaluation. The results were evaluated quantitatively using three different metrics: 1) MFCC MAE,  2) Log Spectral Distance (LSD), 3) Parameter MAE. The first two metrics evaluate on the audio produced by rendering the estimated parameters whereas the third metric evaluates the accuracy of the parameters themselves. In the case of inverse synthesis we are most interesting in evaluating how closely an estimated synthesizer patch can reproduce a target sound, which would be evaluated by the auditory metrics best. The parameter metric provides insight into how each technique is selecting parameters and helps to elucidate the strengths and weaknesses of each approach. Each metric is described in more detail below and all the results are summarized in table \ref{tbl:objective_resuls} and in box plots shown in figure \ref{fig:eval-boxplot}.
+Predicted audio was rendered using Dexed and the the resulting audio and parameter pairs were saved for evaluation. The results were evaluated quantitatively using three different metrics: 1) MFCC MAE,  2) Log Spectral Distance (LSD), 3) Parameter MAE. The first two metrics are calculated on the audio directly and the the third on the predicted parameters. Each metric is described in more detail below and all the results are summarized in table \ref{tbl:objective_resuls} and in box plots shown in figure \ref{fig:eval-boxplot}.
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{r|ccc}
+\begin{tabular}{l|ccc}
 \toprule
 % {} & \multicolumn{2}{c}{MFCC MAE} & \multicolumn{2}{c}{LSD} & \multicolumn{2}{c}{Parameter MAR} \\
 {} & MFCC & LSD & Parameter \\
 \midrule
-MLP      &       $8.3 \pm 7.8$ &     $87.6 \pm 13.8$ &  $0.188 \pm 0.048$ \\
+MFCC-MLP    &       $5.9 \pm      6.8$ &     $83.2 \pm    12.0$ &     $0.1615 \pm    0.0521$ \\
+MFCC-LSTM   &       $4.0 \pm      4.9$ &     $80.1 \pm     9.1$ &     $0.1515 \pm    0.0579$ \\
+MFCC-LSTM++ &       $4.1 \pm      3.9$ &     $79.9 \pm    10.2$ &     $0.1483 \pm    0.0552$ \\
+MFCC-CNN    &       $4.5 \pm      4.7$ &     $81.5 \pm    10.0$ &     $\mathbf{0.1501 \pm    0.0547}$ \\
 \midrule
-LSTM     &       $6.6 \pm 4.7$ &     $84.8 \pm 11.8$ &  $\mathbf{0.171 \pm 0.053}$ \\
-5-LSTM++ &       $7.2 \pm 5.2$ &     $87.2 \pm 11.0$ &  $0.173 \pm 0.051$ \\
-LSTM++   &       $6.8 \pm 5.8$ &     $85.8 \pm 11.2$ &  $0.172 \pm 0.051$ \\
+Mel-MLP     &       $6.7 \pm      7.1$ &     $83.1 \pm    13.2$ &     $0.1686 \pm    0.0499$ \\
+Mel-LSTM    &       $4.7 \pm      5.2$ &     $80.4 \pm    11.3$ &     $0.1524 \pm    0.0565$ \\
+Mel-LSTM++  &       $4.8 \pm      4.8$ &     $81.4 \pm     9.7$ &     $0.1513 \pm    0.0536$ \\
+Mel-CNN    &       $5.5 \pm      6.1$ &     $81.5 \pm    10.9$ &     $0.1569 \pm    0.0526$ \\
 \midrule
-Conv6    &       $8.2 \pm 8.0$ &     $87.5 \pm 13.3$ &  $0.189 \pm 0.052$ \\
-Conv6s   &       $8.6 \pm 7.9$ &     $87.9 \pm 12.8$ &  $0.181 \pm 0.054$ \\
-Conv5    &      $11.4 \pm 9.9$ &     $91.4 \pm 19.4$ &  $0.203 \pm 0.065$ \\
-Conv5s   &       $7.3 \pm 6.3$ &     $86.1 \pm 12.4$ &  $0.180 \pm 0.052$ \\
-\midrule
-GA       &       $4.9 \pm 3.2$ &     $83.1 \pm 12.3$ &  $0.281 \pm 0.085$ \\
-NSGA     &       $\mathbf{2.0 \pm 2.2}$ &     $\mathbf{73.2 \pm 17.9}$ &  $0.243 \pm 0.080$ \\
+GA          &       $4.0 \pm      3.0$ &     $81.2 \pm    11.3$ &     $0.2400 \pm    0.0881$ \\
+NSGA        &       $1.4 \pm      2.5$ &     $\mathbf{72.5 \pm    27.3}$ &     $0.2120 \pm    0.0897$ \\
+WS-NSGA     &       $\mathbf{1.3 \pm      1.8}$ &     $72.6 \pm    23.4$ &     $0.1511 \pm    0.0604$ \\
 \bottomrule
 \end{tabular}
 \caption{Summary of quantitative results for inverse synthesis evaluation. The values in bold are the scores with the lowest mean for that metric.}
@@ -300,7 +314,7 @@ NSGA     &       $\mathbf{2.0 \pm 2.2}$ &     $\mathbf{73.2 \pm 17.9}$ &  $0.243
 \end{figure}
 
 \subsection{MFCC Error}
-The MFCC error is calculated by computing the mean absolute error between MFCCs from a target audio and a prediction. Yee-King \textit{et al.} \cite{yee2018automatic} also used MFCCs to evaluate the quality of predicted sounds, however they used the euclidian distance between MFCCs as opposed to MAE. The MAE was used here as it showed results in a range that was easier compare. It also provides an interesting comparison to the Log Spectral Distance that was also included. [Appendex X shows results for MFCC evaluation using the Euclidian Distance]. For this evaluation, MFCCs were caclulated using a frame size of 2048 and a hop-size of 512. Figure \ref{fig:mfcc-mae} shows a boxplot graph comparing all the techniques using this metric, ordered by the mean. There is quite high variance for all of the techniques and quite a few outliers with high error, even for the best techniques. However, based on the mean error, both the GAs performed the best and the NSGA was overall the best technique. Out of the deep learning models the LSTM models all performed the best, with the LSTM performing the best followed by the LSTM++.
+The MFCC error is calculated by computing the mean absolute error between MFCCs from a target audio and a prediction. Yee-King \textit{et al.} \cite{yee2018automatic} also used MFCCs to evaluate the quality of predicted sounds, however they used the euclidian distance between MFCCs as opposed to MAE. The MAE was used here as it showed results in a range that was easier compare. For this evaluation, MFCCs were caclulated using a frame size of 2048 and a hop-size of 512. Figure \ref{fig:mfcc-mae} shows a boxplot graph comparing all the techniques using this metric, ordered by the mean. There is quite high variance for all of the techniques and quite a few outliers with high error, even for the best techniques. However, based on the mean error, the GAs performed the best and the WS-NSGA was overall the best technique. Out of the deep learning models the LSTM models all performed the best, with the two LSTM based methods using MFCCs as input performed the best.
 
 \subsection{Log Spectral Distance}
 The log spectral distance (LSD) is a distance metric that is calculated between to power spectrums to quantify difference. It was used by Masuda and Saito as a fitness objective in a genetic algorithm for inverse synthesis \cite{masudo2021quality}. This metric is included to add more depth to the audio evaluation. Masuda and Saito identified a the limitations with calculating error between synthesized sounds using MFCC, particularly with the ability of MFCC to capture specific frequency information as opposed to just the shape of the spectral envelope. LSD provides a more robust evaluation on the spectrograms of the results.  LSD is calculated as:
@@ -309,14 +323,14 @@ The log spectral distance (LSD) is a distance metric that is calculated between 
     LSD(P, \hat{P}) = \sqrt{\sum_{\omega}10\text{log}_{10}\left( \frac{P(\omega)}{\hat{P}(\omega)} \right)^2}
 \end{equation}
 
-Where $P$ is a target power spectrum, $\hat{P}$ is the power spectrum of a predicted sound, and $\omega$ is a frequency bin. Power spectrums were calculated using a STFT with an FFT size of 1024 samples and a hop-size of 512 samples. The average value of LSD over frames is used as the final evaluation metric in this evaluation. Lower values for LSD indicate a closer match. Figure \ref{fig:lsd} shows a boxplot graph comparing the results of this evaluation. Again, the variance is quite high among all the techniques. Based on the mean LSD, the ranking of each of the techniques is almost identical to the results obtained from the MFCC evaluation, except that the Conv6 model is now ranked higher than the MLP model. The NSGA algorithm is again ranked most highly based on this metric and has several outliers with smaller distances.
+Where $P$ is a target power spectrum, $\hat{P}$ is the power spectrum of a predicted sound, and $\omega$ is a frequency bin. Power spectrums were calculated using a STFT with an FFT size of 1024 samples and a hop-size of 512 samples. The average value of LSD over frames is used as the final evaluation metric in this evaluation. Lower values for LSD indicate a closer match. Figure \ref{fig:lsd} shows a boxplot graph comparing the results of this evaluation. Again, the variance is quite high among all the techniques. Based on the mean LSD the regular NSGA-III approach performed the best, followed closely by the WS-NSGA. The LSTM++ MFCC actually outperformed the basic GA based on this evaluation.
 
 \subsection{Parameter Error}
-This metric measures the mean absolute error (MAE) between the parameter values from a target and a prediction. In related work, Barkan \textit{et al.} included this metric to evaluate the distance between target and estimated synthesizer parameters, it is include here for the same reason. Figure \ref{fig:param-mse} shows a boxplot graph comparing the results of this evaluation. In terms of mean parameter accuracy across testing dataset, all the deep learning models outperformed both of the GAs. All the LSTM based models were in the top three models, with the LSTM performing overal the best. These results highlight an important aspect regarding synthesizer programming: poor parameter reconstruction does not necessarily mean poor auditory results.
+This metric measures the mean absolute error (MAE) between the parameter values from a target and a prediction. In related work, Barkan \textit{et al.} included this metric to evaluate the distance between target and estimated synthesizer parameters, it is include here for the same reason and to highlight the relationship between the auditory space and parameter space. Figure \ref{fig:param-mse} shows a boxplot graph comparing the results of this evaluation. In terms of mean parameter accuracy across testing dataset, all the deep learning models outperformed the NSGA and GA. Interestingly the MFCC-LSTM++ model performed the best out of all the methods, even the WS-NSGA, which used the MFCC-LSTM++ as a starting point. This means that the WS-NSGA in general found parameters that were different from the target parameters, but resulted in more similar audio matches. These results highlight an important aspect regarding synthesizer programming: poor parameter reconstruction does not necessarily mean poor auditory results.
 
-In addition to calculating the MAE over all nine parameters for each target-prediction pair, the absolute error between individual parameters was calculated. This metrics provides insight into how each technique handled the various parameters, as well as specific aspects of the synthesizer programming task. The average was taken over all the different methods for each parameter to give insight into how challenging each parameter was to estimate for this task. 
+In addition to calculating the MAE over all seven parameters for each target-prediction pair, the absolute error between individual parameters was calculated. This metrics provides insight into how each technique handled the various parameters, as well as specific aspects of the synthesizer programming task. The average was taken over all the different methods for each parameter to give insight into how challenging each parameter was to estimate.
 
-The frequency and tuning parameters affect the distribution of the harmonics in the frequency domain, whereas the envelope generator is related to the temporal aspect of the sound and how the frequencies evolve over time. Results for the six parameters related to the envelope generator are shown in table \ref{tbl:param_eval_eg}, and results for the three parameter related to the frequency of operator two are shown in table \ref{tbl:param_eval_osc}. 
+The frequency parameters affect the distribution of the harmonics in the frequency domain, whereas the envelope generator is related to the temporal aspect of the sound and how the frequencies evolve over time. Results for the five parameters related to the envelope generator are shown in table \ref{tbl:param_eval_eg}, and results for the two parameter related to the frequency of operator two are shown in table \ref{tbl:param_eval_osc}. 
 
 For the EG, the parameter that each of the methods was able to estimate was the rate of the second stage of the envelope (EG Rate 2). The NSGA III received the lowest parameter error for the EG rate 2 parameter, 0.0097, however scored quite poorly on the remained of the parameters. The parameters of the EG were taken together and averaged for each method, the 5-LSTM++ model performed the best overall on estimating parameters for the EG with an error 0f 0.1328. Turning to the parameters controlling the frequency of the second operator, the coarse tuning parameter was by far the easiest parameter for each of the methods to estimate. Interestingly the MLP model was the best performing approach for both the individual coarse parameter estimation (error of 0.0678) as well when looking at tuning the frequency of the second operator as whole with an error of 0.1881. Looking at the mean across all the results for the parameters for the EG compared to the operator frequency show that overall the techniques were able to correctly select the EG parameters (average error of 0.1577) over the frequency parameters (average error of 0.1958).
 
