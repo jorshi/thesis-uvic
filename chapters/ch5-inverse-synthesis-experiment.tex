@@ -345,51 +345,57 @@ For the EG, the parameter that each of the methods was able to estimate was the 
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{r|ccc|ccc|c}
+\begin{tabular}{l|ccc|cc|c}
 \toprule
-{} & \multicolumn{3}{c}{EG Rate} & \multicolumn{3}{c}{EG Level} & {} \\
-{} & 2 & 3 & 4 & 2 & 3 & 4 & Mean \\
+{} & \multicolumn{3}{c}{EG Rate} & \multicolumn{2}{c}{EG Level} & {} \\
+{} & 1 & 2 & 3 & 2 & 3 & Mean \\
 \midrule
-MLP      &     0.0310 &     0.1847 &     0.1988 &      0.1580 &      0.1437 &      0.2379 &   0.1590 \\
-LSTM     &     0.0183 &     0.1458 &     0.1923 &      0.1086 &      0.1160 &      0.2429 &   0.1373 \\
-5-LSTM++ &     0.0216 &     0.1464 &     0.1782 &      0.0979 &      0.1134 &      0.2395 &   0.1328 \\
-LSTM++   &     0.0223 &     0.1555 &     0.1788 &      0.1217 &      0.1057 &      0.2245 &   0.1348 \\
-Conv6    &     0.0325 &     0.1837 &     0.1773 &      0.1167 &      0.1421 &      0.2296 &   0.1470 \\
-Conv6s   &     0.0291 &     0.1587 &     0.1588 &      0.1303 &      0.1094 &      0.2308 &   0.1362 \\
-Conv5    &     0.0494 &     0.2176 &     0.1973 &      0.1467 &      0.1330 &      0.2384 &   0.1637 \\
-Conv5s   &     0.0255 &     0.1618 &     0.1515 &      0.1181 &      0.1076 &      0.2357 &   0.1334 \\
-GA       &     0.0330 &     0.2983 &     0.2712 &      0.2254 &      0.2173 &      0.3321 &   0.2295 \\
-NSGA     &     0.0097 &     0.2515 &     0.2853 &      0.1839 &      0.1839 &      0.3048 &   0.2032 \\
+MFCC-MLP    &     0.0279 &     0.1048 &     0.2443 &      0.1859 &      0.2072 &   0.1540 \\
+MFCC-LSTM   &     0.0129 &     0.0544 &     0.2082 &      0.1643 &      0.1920 &   0.1264 \\
+MFCC-LSTM++ &     0.0156 &     0.0533 &     0.2304 &      0.1670 &      0.1929 &   0.1318 \\
+MFCC-CNN    &     0.0200 &     0.0621 &     0.2202 &      0.1825 &      0.1911 &   0.1352 \\
 \midrule
-Mean  &     0.0272 &     0.1904 &     0.1990 &      0.1407 &      0.1372 &      0.2516 &   0.1577 \\
+Mel-MLP     &     0.0379 &     0.1053 &     0.2618 &      0.2036 &      0.1982 &   0.1614 \\
+Mel-LSTM    &     0.0190 &     0.0626 &     0.2163 &      0.1811 &      0.1870 &   0.1332 \\
+Mel-LSTM++  &     0.0195 &     0.0607 &     0.2241 &      0.1848 &      0.1896 &   0.1357 \\
+Mel-CNN     &     0.0203 &     0.0735 &     0.2322 &      0.2023 &      0.1998 &   0.1456 \\
+\midrule
+GA          &     0.0326 &     0.1786 &     0.3196 &      0.2125 &      0.2812 &   0.2049 \\
+NSGA        &     0.0095 &     0.0834 &     0.2982 &      0.2464 &      0.2221 &   0.1719 \\
+WS-NSGA     &     0.0095 &     0.0455 &     0.2283 &      0.1712 &      0.1850 &   0.1279 \\
+\midrule
+Mean        &     0.0204 &     0.0804 &     0.2440 &      0.1911 &      0.2042 &   0.1480 \\
 \bottomrule
 \end{tabular}
-\caption{Results from sound matching evaluation}
+\caption{Absolute error on envelope generator parameters, averaged over all test items}
 \label{tbl:param_eval_eg}
 \end{table}
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{r|ccc|c}
+\begin{tabular}{l|cc|c}
 \toprule
-{} & \multicolumn{3}{c}{Operator 2 Frequency} & {} \\
-{} & Coarse & Fine & Detune & Mean \\
+{} & \multicolumn{2}{c}{Operator 2 Frequency} & {} \\
+{} & Coarse & Fine & Mean \\
 \midrule
-MLP      &    0.0678 &  0.2390 &      0.2576 & 0.1881 \\
-LSTM     &    0.0718 &  0.2368 &      0.2573 & 0.1886 \\
-5-LSTM++ &    0.0723 &  0.2464 &      0.2563 & 0.1917 \\
-LSTM++   &    0.0707 &  0.2328 &      0.2612 & 0.1882 \\
-Conv6    &    0.0779 &  0.2364 &      0.2592 & 0.1912 \\
-Conv6s   &    0.0773 &  0.2533 &      0.2529 & 0.1945 \\
-Conv5    &    0.0815 &  0.2379 &      0.2555 & 0.1917 \\
-Conv5s   &    0.0704 &  0.2400 &      0.2622 & 0.1909 \\
-GA       &    0.0911 &  0.2793 &      0.3656 & 0.2454 \\
-NSGA     &    0.0728 &  0.2344 &      0.2555 & 0.1876 \\
+MFCC-MLP    &    0.0680 &  0.2193 & 0.1437 \\
+MFCC-LSTM   &    0.0620 &  0.2061 & 0.1341 \\
+MFCC-LSTM++ &    0.0599 &  0.1817 & 0.1208 \\
+MFCC-CNN    &    0.0661 &  0.1945 & 0.1303 \\
 \midrule
-Mean     &    0.0754 &  0.2436 &      0.2683 & 0.1958 \\
+Mel-MLP     &    0.0747 &  0.2042 & 0.1394 \\
+Mel-LSTM    &    0.0605 &  0.2146 & 0.1376 \\
+Mel-LSTM++  &    0.0619 &  0.1835 & 0.1227 \\
+Mel-CNN     &    0.0678 &  0.2223 & 0.1451 \\
+\midrule
+GA          &    0.0971 &  0.2622 & 0.1796 \\
+NSGA        &    0.0688 &  0.2196 & 0.1442 \\
+WS-NSGA     &    0.0619 &  0.2014 & 0.1317 \\
+\midrule
+Mean        &    0.0681 &  0.2100 & 0.1390 \\
 \bottomrule
 \end{tabular}
-\caption{Results from sound matching evaluation}
+\caption{Absolute error on operator two frequency parameters, averaged over all test items}
 \label{tbl:param_eval_osc}
 \end{table}
 
