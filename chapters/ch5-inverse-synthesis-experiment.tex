@@ -473,7 +473,11 @@ The last research question, \textbf{RQ3}, sought to elucidate how the models res
 \section{Conclusion}
 This chapter presented an experiment that compared several different approaches for performing inverse synthesis using an VST emulation of the Yamaha DX7 synthesizer called Dexed. A subset of seven parameters from Dexed was used for this experiment, which turned Dexed from a complex 6-operator FM synthesizer into a relatively simple 2-operator FM synthesizer; this configuration was capable of producing a wide variety of different evolving timbres and provided a benchmark inverse synthesis task for comparing approaches. Eleven different approaches, including eight deep learning models and two genetic algorithm, and a hybrid approach, were evaluated on a test set of sounds. Within the deep learning models, recurrent models were compared to a convolutional model and a baseline fully-connected model. Each of deep learning models were compared using both MFCCs and Mel-Spectrograms for input.
 
-Previous work has shown that genetic algorithms perform best in terms of match accuracy, but suffer from long computation time. Deep learning models are fast during prediction time, but have not been as accurate at inverse synthesis as the genetic algorithms. A hybrid approach was introduced in this chapter that used a pre-trained LSTM++ model during the generation of the initial population for a multi-objective genetic algorithm, a NSGA-III. The resulting method, called warm-start NSGA, or WS-NSGA was able to achieve similar results in terms of auditory accuracy as the NSGA in 40\% of the time. These results show the potential for combining deep learning and genetic algorithms for the inverse synthesis problem.
+Previous work has shown that genetic algorithms perform best in terms of match accuracy, but suffer from long computation time. Deep learning models are fast during prediction, but are not as accurate at inverse synthesis as the multi-objective genetic algorithms. A hybrid approach was introduced in this chapter that used a pre-trained LSTM++ model during the generation of the initial population for a multi-objective genetic algorithm, a NSGA-III. The resulting method, called warm-start NSGA, or WS-NSGA was able to achieve similar results in terms of auditory accuracy as the NSGA in 40\% of the time. These results show the potential for combining deep learning and genetic algorithms for the inverse synthesis problem.
+
+- say something about the complexity of the parameter space and how that relates to the auditory space. 
+
+
 
 
 

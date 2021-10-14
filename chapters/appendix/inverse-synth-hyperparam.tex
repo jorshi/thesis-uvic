@@ -1,0 +1,20 @@
+\chapter{Model Hyperparameters}
+\label{appendix:hyperparams}
+
+\begin{table}[h]
+\caption{Training Hyperparameters}
+\centering
+\begin{tabular}{l|l|l|l}
+Model       & Batch Size & $\eta$ & $\eta$ Decay Rate \\
+\toprule
+MFCC-MLP    & 64         & 0.0005                & 0                        \\
+MFCC-LSTM   & 128        & 0.001                 & 0                        \\
+MFCC-LSTM++ & 64         & 0.001                 & 0                        \\
+MFCC-CNN    & 32         & 0.001                 & 3                        \\
+Mel-MLP     & 32         & 0.00005               & 0                        \\
+Mel-LSTM    & 32         & 0.0005                & 0                        \\
+Mel-LSTM++  & 32         & 0.001                 & 0                        \\
+Mel-CNN     & 64         & 0.001                 & 4                        \\
+\bottomrule
+\end{tabular}
+\end{table}
