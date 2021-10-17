@@ -23,7 +23,7 @@ However, there are few examples of similar shared resources and collaboration in
 
 
 \section{Research Questions}
-The main challenges in synthesizer programming arise from the disconnect between synthesizer parameters and the associated auditory output. The result of this disconnect is that synthesizers are difficult to use, have a high-barrier to entry, impede the creative process of creating music and producing audio. The main purpose of this thesis is to address these challenges. The main research question is:
+The main challenges in synthesizer programming arise from the disconnect between synthesizer parameters and the associated auditory output. The result of this disconnect is that synthesizers are difficult to use, have a high-barrier to entry, and impede the creative process of creating music and producing audio. The purpose of this thesis is to address these challenges. The main research question is:
 
 \begin{quote}
 	How can designers of synthesizer programming interfaces build tools that enable more people to be more creative more often? 
@@ -32,19 +32,19 @@ The main challenges in synthesizer programming arise from the disconnect between
 Fundamental to answering this question is developing an understanding of the complex relationship between synthesizer parameters and the associated auditory result. Automatic synthesizer programming seeks to develop this understanding and bridge the conceptual gap between synthesizer parameters and the associated auditory output. More specific sub-questions that have motivated the work presented in this thesis are listed in the sections below.
 
 \subsection{Automatic Synthesizer Programming}
-What is the field of automatic synthesizer programming? What makes synthesizer programming so challenging and how do those challenges inform research focused on improving and automating it? A lot of previous work has been conducted in this field covering a large number of different approaches. How can we organize the body of previous work to help understand the problem and approaches that have been taken?
+What is the field of automatic synthesizer programming? What makes synthesizer programming so challenging and how do those challenges inform research focused on improving and automating it? A significant amount of previous work has been conducted in this field covering a large number of different approaches. How can we organize the body of previous work to help understand the problem and the approaches that have been taken?
 
 \subsection{Inverse Synthesis}
 A substantial portion of previous work in automatic synthesizer programming has focused on algorithmic techniques for inverse synthesis. Many early approaches used evolutionary programming and more recent techniques use deep learning. How do evolutionary approaches compare to deep learning? What are the strengths and weaknesses of each of these approaches? What types of deep learning models are best suited for inverse synthesis? How can we support open evaluation and reproducibility of these approaches?
 
 \subsection{Representing Synthesized Sounds}
-A key component of developing automated synthesizer programming systems is being able to effectively answer the question: how similar is sound X to sound Y? How do we represent audio computationally and define a metric that can help in answering this question?
+A key component of developing automated synthesizer programming systems is being able to effectively answer the question: how similar is sound X to sound Y? How do we represent audio computationally and how do we define a metric that can help in answering this question?
 
 \subsection{Generating Synthesized Sounds}
-Datasets of synthesized audio and associated parameters are important for research on understanding the relationship between synthesizer parameters and the resulting audio, as well as for developing machine learning methods for synthesizer programming. The simplistic approach is to uniformly sample the parameters of a particular synthesizer. Is this the best approach to generating parameter selections? The associated sounds in many cases do not represent sounds that a human would have programmed in a musical context. How can we sample synthesizer parameters to generate sounds that sound like a human would have programmed them?
+Datasets of synthesized audio and associated parameters are important for research on understanding the relationship between synthesizer parameters and the resulting audio, as well as for development of machine learning methods for synthesizer programming. The simplistic approach is to uniformly sample the parameters of a particular synthesizer. However, is uniformly sampling parameters the best approach to generating parameter selections? The associated sounds in many cases do not represent sounds that a human would have programmed in a musical context. How can we sample synthesizer parameters to generate sounds that sound as if a human programmed them?
 
 \subsection{Developing Supportive Tools}
-How do we create effective and intuitive user interfaces to support synthesizer programming? To what extent should the tool automate the process of synthesizer programming? What interaction paradigms support creativity the best? Which algorithmic methods for automatic synthesizer programming support creativity the best?
+How do we create effective and intuitive user interfaces to support synthesizer programming? To what extent should the tool automate the process of synthesizer programming? What interaction paradigms best support creativity? Which algorithmic methods for automatic synthesizer programming can best support creativity?
 
 
 %but other approaches have been proposed. What are the different user interaction approaches that have been explored? 
@@ -67,27 +67,27 @@ How do we create effective and intuitive user interfaces to support synthesizer 
 %-- How do we approach designing applications that support musicians and other synthesizer users in using synthesizers?
 
 \section{Summary of Contributions}
-The main contributions of this thesis are:
+The main contributions of this thesis are the following:
 
 \begin{enumerate}
-    \item A survey and taxonomy of related work in automatic synthesizer programming from a user interaction perspective
-    \item An open source software library designed to support the development, sharing, and evaluation of automatic synthesizer programming techniques
+    \item A survey and taxonomy of related work in automatic synthesizer programming from a user interaction perspective.
+    \item An open source software library designed to support the development, sharing, and evaluation of automatic synthesizer programming techniques.
     \item An evaluation of several techniques for inverse synthesis conducted on a benchmark frequency modulation (FM) synthesis task
-    \item A novel inverse synthesis technique that combines deep learning and a multi-objective genetic algorithm
-    \item Three open datasets, including one large-scale billion sound+parameter dataset designed to support further research in synthesizer programming and deep learning training / pre-training
-    \item An open-source GPU-enabled modular synthesizer for efficiently generating the billion sound dataset on-the-fly and for supporting efficient research on synthesis algorithms
-    \item A design framework for developing tools to support synthesizer programming
+    \item A novel inverse synthesis technique that combines deep learning and a multi-objective genetic algorithm.
+    \item Three open datasets, including one large-scale billion sound+parameter dataset designed to support further research in synthesizer programming and deep learning training / pre-training.
+    \item An open-source GPU-enabled modular synthesizer for efficiently generating the billion sound dataset on-the-fly and for supporting efficient research on synthesis algorithms.
+    \item A design framework for developing tools to support synthesizer programming.
     \item A prototype automatic synthesizer programming tool designed to support exploration using two dimensional visualization of sounds based on sound similarity.
 \end{enumerate}
 
 \section{Thesis Structure}
 \begin{itemize}
-    \item Chapter \ref{chapter:background} provides background information and a historical context for audio synthesizers. The challenges and opportunities associated with synthesizer programming are outlined.
-    \item Chapter \ref{chapter:asp-background} contains an overview of the field of automatic synthesizer programming. Synthesizer programming is framed as a human computer interaction problem and the various different interaction paradigms and algorithmic techniques that have been proposed in previous work is reviewed.
+    \item Chapter \ref{chapter:background} provides background information and historical context for audio synthesizers. The challenges and opportunities associated with synthesizer programming are outlined.
+    \item Chapter \ref{chapter:asp-background} contains an overview of the field of automatic synthesizer programming. Synthesizer programming is framed as a human computer interaction problem and the various  interaction paradigms and algorithmic techniques proposed in previous work is reviewed.
     \item Chapter \ref{chapter:spiegelib} describes a software library the author has created to support research in automatic synthesizer programming and to serve as a repository for sharing and comparing approaches. This library was used for the experiments discussed in chapter \ref{chapter:inverse_synth_experiment}.
-    \item Chapter \ref{chapter:inverse_synth_experiment} describes an inverse synthesis experiment that was conducted to compare some of the recent approaches presented in the literature. Several deep learning models and genetic algorithms were compared on a baseline FM synthesis problem. A novel hybrid approach is also proposed.
+    \item Chapter \ref{chapter:inverse_synth_experiment} describes an inverse synthesis experiment that compares recent approaches as presented in the literature. Several deep learning models and genetic algorithms were compared on a baseline FM synthesis problem. A novel hybrid approach is also proposed.
     \item Chapter \ref{chapter:torchsynth} introduces a large-scale synthesizer dataset and a GPU-accelerated modular synthesizer called torchsynth that were designed to support further research in automatic synthesizer programming.
-    \item Chapter \ref{chapter:synth-explore} outlines a novel automatic synthesizer programming application that utilizes two dimensional visualization of sounds to support exploration of synthesizer sounds. The application was developed with novice users in mind and is based on a set of design principles proposed as a framework to support the design of assistive synthesizer programming tools.
+    \item Chapter \ref{chapter:synth-explore} outlines a novel automatic synthesizer programming application that utilizes two-dimensional visualization of sounds to support exploration of synthesizer sounds. The application was developed with novice users in mind and is based on a set of design principles proposed as a framework to support the design of assistive synthesizer programming tools.
 \end{itemize}
 
 % My main statement about the introduction is:
