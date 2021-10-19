@@ -3,7 +3,7 @@
 \chapter{SpiegeLib: A framework for automatic synthesizer research}
 \label{chapter:spiegelib}
 
-This chapter introduces SpiegeLib, a software framework for automatic synthesizer research that I developed under the supervision of my supervisors and published at the 148th Audio Engineering Society (AES) Convention in 2020 \cite{shier2020spiegelib}. SpiegeLib is an open-source software library written in the Python programming language with the goal of promoting collaboration and reproducibility in automatic synthesizer research. The development of the library was based on work published by Yee-King et al. \cite{yee2018automatic} that explored automatic synthesizer programming of a VST FM synthesizer using deep learning methods. In their work they focused on the inverse synthesis problem which has the goal of finding synthesizer parameters to match a target sound, also referred to as sound matching. SpiegeLib is designed to support research in inverse synthesizer and provide a platform for sharing and evaluating methods.
+This chapter introduces SpiegeLib, a software framework for automatic synthesizer research that was developed by the author and published at the 148th Audio Engineering Society (AES) Convention in 2020 \cite{shier2020spiegelib}. SpiegeLib is an open-source software library written in the Python programming language with the goal of promoting collaboration and reproducibility in automatic synthesizer research. The development of the library was based on work published by Yee-King et al. \cite{yee2018automatic} that explored automatic synthesizer programming of a VST FM synthesizer using deep learning methods. In their work they focused on the inverse synthesis problem which has the goal of finding synthesizer parameters to match a target sound, also referred to as sound matching. SpiegeLib is designed to support research in inverse synthesizer and provide a platform for sharing and evaluating methods.
 
 Vandewalle et al. argue that reproducibility in computational science research increases the impact of a work and they provide a framework for evaluating the quality of reproducibility \cite{vandewalle2009reproducible}. The aim of \mintinline{python}{spiegelib} is to provide a platform for researchers of automatic synthesizer programming to develop, test, and share implementations in a way that promotes reproducibility at the highest level. \mintinline{python}{spiegelib} stands for Synthesizer Programming with Intelligent Exploration, Generation, and Evaluation Library. The name \mintinline{python}{spiegelib} was chosen to pay homage to Laurie Spiegel, an early pioneer in electronic music composition. Laurie Spiegel is known for utilizing synthesizers and software to automate certain aspects of the music composition process. Her philosophy for using technology in music serves as a motivation for the \mintinline{python}{spiegelib} software library: "I automate whatever can be automated to be freer to focus on those aspects of music that can't be automated. The challenge is to figure out which is which." \cite{hinkle2006women}
 
@@ -114,10 +114,10 @@ Objective evaluation of results can be carried out by measuring error between au
 Functionality for conducting subjective evaluation of results is provided in the \mintinline{python}{BasicSubjective} class. This class accepts a set of audio files and runs a locally hosted server that generates a simple web interface for listening to and ranking audio files in terms of similarity or preference. For sound matching experiments, audio targets can be passed in along with a set of predictions for each target, and a sound similarity test will be generated with options for randomizing the ordering of targets and predictions. Results can then be saved as a JSON file.
 %TODO: Add in a visual of this? What did we use to create this?
 
-\subsection{Helper Classes}
-- What other classes are available in SpiegeLib that we should comment on?
+% \subsection{Helper Classes}
+% - What other classes are available in SpiegeLib that we should comment on?
 
-mintinline{python}{SoundMatch} is a functional class that uses an estimator to predict synthesizer parameter settings for an implementation of \mintinline{python}{SynthBase} in order to match a target sound.
+% mintinline{python}{SoundMatch} is a functional class that uses an estimator to predict synthesizer parameter settings for an implementation of \mintinline{python}{SynthBase} in order to match a target sound.
 
 
 \section{Future Work and Conclusion}
