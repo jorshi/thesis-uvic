@@ -136,7 +136,7 @@ Ideally the loss would be calculated on audio produced by Dexed using the estima
 
 Models were trained using an $Adam$ optimizer \cite{kingma2014adam} and hyperparameters for each model were optimized using a  Tree-structured Parzen Estimator (TPE), which has been shown to be an effective method for hyperparameter selection \cite{bergstra2011algorithms}. Early stopping was used during training for all models, this halted training if the validation loss stopped decreasing for over ten epochs.
 
-The following subsections describe each of the models that were included in this experiment. To find specific details on the implementation of each model see appendix \ref{appendix:spiegelib_models} and for details on the hyperparameters used for training each model see [ADD THIS APPENDIX].
+The following subsections describe each of the models that were included in this experiment. To find specific details on the implementation of each model see appendix \ref{appendix:spiegelib_models} and for details on the hyperparameters used for training each model see appendix \ref{appendix:hyperparams}.
 
 % Maybe not important
 %This is a natural way to approach the problem considering the continuous nature of the parameters exposed by a given synthesizer, and this is the approach taken by Yee-King \textit{et al.}. Conversely, Barkan \textit{et al.} framed the inverse synthesis problem as a classification problem by dividing each parameter into 16 classes, which meant that there would be $n*16$ classes, where $n$ is the number of parameters. Quantizing the parameter space into 16 discrete values per parameter 
