@@ -1,24 +1,29 @@
 \begin{table*}[t]
 \centering\small
 \begin{threeparttable}
-	\caption{Algorithms currently implemented as classes in \mintinline{python}{spiegelib}}
+	\caption{Algorithms currently implemented in \mintinline{python}{spiegelib}}
 	\label{table:spiegel_algorithms}
-	\begin{tabular}{|c|c|c|}
+	\def\arraystretch{1.125}
+	\begin{tabular}{|l|l|l|}
 	\hline
 	\multicolumn{3}{|c|}{\textbf{Algorithms in \mintinline{python}{spiegelib}}} \\
 	\hline
 	\hline
-	\textbf{Feature Extraction} & \textbf{Deep Learning Estimators} & \textbf{Optimization Estimators} \\
+	\textbf{Audio Representations} & \textbf{Deep Learning Estimators} & \textbf{Search Estimators} \\
 	\hline
 	FFT 		& MLP \cite{yee2018automatic} 		& Basic GA   			\\
-	STFT 		& LSTM \cite{yee2018automatic} 		& NSGA III \cite{tatar2016automatic}				\\\cline{3-3}
-	MFCC		& LSTM++ \cite{yee2018automatic} 	& \textbf{Objective Evaluation} 	\\\cline{3-3}
-	Spectral\tnote{1}	& Conv6 \cite{barkan2019inversynth} 	& MFCC Evaluation 		\\
+	STFT 		& LSTM/LSTM++ \cite{yee2018automatic} 		& NSGA III \cite{tatar2016automatic}				\\\cline{3-3}
+	Mel-Spectrogram		& Conv6/5 \cite{barkan2019inversynth} 	& \textbf{Objective Evaluation} 	\\\cline{3-3}
+	MFCC	& Conv6s/5s\tnote{2} 	& MFCC Error \cite{yee2018automatic} 		\\\cline{2-2}
+	Spectral\tnote{1} & \textbf{Hybrid Estimators} & LSD \cite{masudo2021quality} \\\cline{2-2}
+	& WS-NSGA\tnote{3} & Parameter Error \cite{barkan2019inversynth} \\
 	\hline
 	\end{tabular}
 	\begin{tablenotes}[para, flushleft]
 			\footnotesize
-			\item[1] Spectral bandwidth, centroid, contrast, flatness, and rolloff.
+			\item[1] Spectral bandwidth, centroid, contrast, flatness, and rolloff.\\
+			\item[2] Derivatives of the models from \cite{barkan2019inversynth} with reduced capacity \\
+			\item[3] Warm-start NSGA. A novel approach that uses a pre-trained deep learning model with a NSGA-III. Introduced in chapter \ref{chapter:inverse_synth_experiment} of this thesis.
 	\end{tablenotes}
 \end{threeparttable}
 \end{table*}
